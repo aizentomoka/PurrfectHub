@@ -1,0 +1,2 @@
+class RescuedCat < ApplicationRecord
+end
