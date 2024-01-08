@@ -1,56 +1,44 @@
 Rails.application.routes.draw do
+    
+  root to: "homes#top"
+  get "home/about"=>"homes#about"
   
-# 顧客用
-# URL /customers/sign_in ...
-devise_for :users, controllers: {
-  registrations: "public/registrations",
-  sessions: 'public/sessions'
-}
-
-# 管理者用
-# URL /admin/sign_in ...
-devise_for :admin, skip: [:registrations, :passwords] ,controllers: {
-  sessions: "admin/sessions"
-}
-  
-  
-  
-  
-  
-  
-  namespace :admin do
-    get 'rescued_cats/index'
-    get 'rescued_cats/show'
-  end
-  namespace :admin do
-    get 'diaries/index'
-    get 'diaries/show'
-  end
-  namespace :admin do
-    get 'users/index'
-    get 'users/show'
-    get 'users/edit'
-  end
-  namespace :public do
-    get 'rescued_cats/new'
-    get 'rescued_cats/index'
-    get 'rescued_cats/show'
-    get 'rescued_cats/edit'
-  end
-  namespace :public do
-    get 'diaries/new'
-    get 'diaries/index'
-    get 'diaries/show'
-    get 'diaries/edit'
-  end
-  namespace :public do
-    get 'cats/new'
-    get 'cats/index'
-    get 'cats/show'
-    get 'cats/edit'
-  end
-  get 'homes/top'
-  get 'homes/about'
-
+  # 管理者用
+  # URL /admin/sign_in ...
+  devise_for :admin, skip: [:registrations, :passwords] ,controllers: {
+    sessions: "admin/sessions"
+  }
+    
+    namespace :admin do
+      resources :users, only: [:index, :show, :edit, :update]
+      resources :diaries, only: [:index, :show]
+      resources :rescued_cats, only: [:index, :show]
+     
+    end
+    
+   
+   
+    
+    # 顧客用
+  # URL /customers/sign_in ...
+  devise_for :users, controllers: {
+    registrations: "public/registrations",
+    sessions: 'public/sessions'
+  }
+    
+     scope module: :public do
+     
+      get 'users/mypage' => 'users#show', as: 'mypage'
+      get 'users/confirm_withdraw' => 'users#confirm_withdraw'
+      patch 'users/withdraw' => 'users#withdraw'
+      resources :users, only: [:index, :edit, :update]
+      resources :cats, only: [:new, :create, :index, :update, :show, :edit] 
+      resources :diaries
+      resources :rescued_cats
+    
+      
+    end
+    
+ 
   # For details on the DSL available within this file, see https://guides.rubyonrails.org/routing.html
 end
