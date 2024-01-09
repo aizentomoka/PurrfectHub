@@ -37,7 +37,7 @@ Rails.application.routes.draw do
      
       get 'users/confirm_withdraw' => 'users#confirm_withdraw'
       patch 'users/withdraw' => 'users#withdraw'
-      resources :users, only: [:index, :show, :edit, :update]
+      resources :users, only: [:show, :edit, :update]
       resources :cats, only: [:new, :create, :index, :update, :show, :edit] 
       resources :diaries
       resources :rescued_cats

@@ -7,54 +7,33 @@
       </button>
       <div class="collapse navbar-collapse" id="navbarNavDropdown">
         <ul class="navbar-nav ml-auto">
-        <% if user_signed_in? %>
-          <li>
-            <%= link_to root_path,class: 'nav-link text-light' do %>
-              <i class="fas fa-home"></i> Top
-            <% end %>
-          </li>
-          <li>
-            <%=  link_to diaries_path,class: 'nav-link text-light' do %>
-              <i class="fas fa-users"></i> Diaries
-            <% end %>
-          </li>
-          <li>
-            <%=  link_to rescued_cats_path ,class: 'nav-link text-light' do %>
-              <i class="fas fa-book-open"></i> 里親募集
-            <% end %>
-          </li>
-          <li>
-            <%= link_to destroy_user_session_path, method: :delete,class: 'nav-link text-light' do %>
-              <i class="fas fa-sign-out-alt"></i> Log out
-            <% end %>
-          </li>
-        <% else %>
-       　  <li>
-            <%= link_to users_guest_sign_in_path, method: :post, class: 'nav-link text-light' do %>
-              <i class="fas fa-home"></i> Guest Log in
-            <% end %>
-          </li>
-          <li>
-            <%= link_to root_path,class: 'nav-link text-light' do %>
-              <i class="fas fa-home"></i> Top
-            <% end %>
-          </li>
-          <li>
-            <%= link_to home_about_path,class: 'nav-link text-light' do %>
-              <i class="fas fa-link"></i> About
-            <% end %>
-          </li>
-          <li>
-            <%= link_to new_user_registration_path,class: 'nav-link text-light' do %>
-              <i class="fas fa-user-plus"></i> Sign up
-            <% end %>
-          </li>
-          <li>
-            <%= link_to new_user_session_path ,class: 'nav-link text-light' do %>
-              <i class="fas fa-sign-in-alt"></i> Log in
-            <% end %>
-          </li>
-        <% end %>
+          
+        
+                  <% if admin_signed_in? %>
+                　<!--admin側ログイン後のheaderを返す-->
+                      <%= link_to root_path, class: "btn btn-outline-light rounded-pill ml-2" do %>トップ<% end %>
+                      <%= link_to admin_users_path, class: "btn btn-outline-light rounded-pill ml-2" do %>会員一覧<% end %>
+                      <%= link_to admin_diaries_path, class: "btn btn-outline-light rounded-pill ml-2" do %>みんなの日記<% end %>
+                      <%= link_to admin_rescued_cats_path, class: "btn btn-outline-light rounded-pill ml-2" do %>里親募集<% end %>
+                      <%= link_to destroy_admin_session_path, method: :delete, class: "btn btn-outline-light rounded-pill ml-2" do %>ログアウト<% end %>
+                  <% elsif user_signed_in? %>
+              　　  <!--userログイン後のheaderを返す  -->
+                      <%= link_to root_path, class: "btn btn-outline-light rounded-pill ml-2" do %>トップ<% end %>
+                      <%= link_to home_about_path, class: "btn btn-outline-light rounded-pill ml-2" do %>アバウト<% end %>
+                      <%= link_to rescued_cats_path, class: "btn btn-outline-light rounded-pill ml-2" do %>里親募集 <% end %>
+                      <%= link_to diaries_path, class: "btn btn-outline-light rounded-pill ml-2" do %>みんなの日記 <% end %>
+                      <%= link_to user_path(current_user), class: "btn btn-outline-light rounded-pill ml-2" do %>マイページ <i class="fa-solid fa-user"></i><% end %>
+                      <%= link_to destroy_user_session_path, method: :delete, class: "btn btn-outline-light rounded-pill ml-2" do %>ログアウト<% end %>
+                  <% else %>
+               　　 <!--ログインしていない時に表示するheaderのメニューを記載-->
+                      <%= link_to root_path, class: "btn btn-outline-light rounded-pill ml-2" do %>トップ<% end %>
+                      <%= link_to home_about_path, class: "btn btn-outline-light rounded-pill ml-2" do %>アバウト<% end %>
+                      <%= link_to rescued_cats_path, class: "btn btn-outline-light rounded-pill ml-2" do %>里親募集 <% end %>
+                      <%= link_to diaries_path, class: "btn btn-outline-light rounded-pill ml-2" do %>みんなの日記 <% end %>
+                      <%= link_to new_user_registration_path, class: "btn btn-outline-light rounded-pill ml-2" do %>新規会員登録 <% end %>
+                      <%= link_to new_user_session_path, class: "btn btn-outline-light rounded-pill ml-2" do %>ログイン<% end %>
+                      <%= link_to users_guest_sign_in_path, method: :post, class: "btn btn-outline-light rounded-pill ml-2" do %>ゲストログイン<% end %>
+                  <% end %>
         </ul>
       </div>
     </div>

@@ -1,2 +1,20 @@
-<h1>Public::Users#confirm_withdraw</h1>
-<p>Find me in app/views/public/users/confirm_withdraw.html.erb</p>
+<div class="container">
+  <div class="row main-row">
+    <div class="col-12 mx-auto">
+     <h3 class="p-3 text-center "><strong>本当に退会しますか？</strong></h3>
+      
+      <div class="mt-5 text-center">
+        <h5>退会すると、会員登録情報や</h5>
+        <h5>これまでの購入履歴が見れなくなります。</h5>
+        <h5>退会する場合は、「退会する」をクリックしてください。</h5>
+      </div>
+        
+      <div class="mt-5 text-center">  
+        <%= link_to "いいえ", user_path(current_user), :class => "btn btn-info ms-3" %>
+        <%= link_to "退会する", users_withdraw_path, method: :patch, :class => "btn btn-danger ms-3", data: { confirm: "本当に退会しますか？" }  %>
+      </div>
+    
+
+    </div>
+  </div>
+</div>

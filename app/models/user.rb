@@ -3,13 +3,19 @@ class User < ApplicationRecord
   # :confirmable, :lockable, :timeoutable, :trackable and :omniauthable
   devise :database_authenticatable, :registerable,
          :recoverable, :rememberable, :validatable
+  
+  has_many :cats, dependent: :destroy
+  has_many :diaries, dependent: :destroy
+   
+  def active_for_authentication?
+    super && (is_active == true)
+  end
+       
          
-         
-         
-
-
+  GUEST_MEMBER_EMAIL = "guest@example.com" 
+  
   def self.guest
-    find_or_create_by!(email: 'guest@example.com') do |user|
+    find_or_create_by!(email: GUEST_MEMBER_EMAIL) do |user|
       user.password = SecureRandom.urlsafe_base64
       user.nickname = "ゲスト"
       user.id = 2222222222
@@ -25,7 +31,11 @@ class User < ApplicationRecord
     end
   end
 
-  
+   def guest_user?
+    email == GUEST_MEMBER_EMAIL
+   end
+
+
 
 
 
