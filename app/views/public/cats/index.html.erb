@@ -1,1 +1,14 @@
 <h1>My Cats</h1>
+
+
+ 
+<% @cats.each do |cat| %>
+<div>
+  <%= link_to cat_path(cat.id) do %>
+    <%= image_tag cat.get_image, size: "200x200" %>
+  <% end %>
+  <p>名前：<%= cat.name %></p>
+  <p>性別：<%= cat.sex %></p>
+  <p>誕生日：<%= cat.birthday %></p>
+</div>
+<% end %>

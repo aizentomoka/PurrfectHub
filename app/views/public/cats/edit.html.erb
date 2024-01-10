@@ -1,2 +1,21 @@
-<h1>Public::Cats#edit</h1>
-<p>Find me in app/views/public/cats/edit.html.erb</p>
+<h1>My Cat 編集</h1>
+
+
+<%= form_with model: @cat do |f| %>
+  <h4>画像</h4>
+  <%= f.file_field :image, accept: "image/*" %>
+  <h4>name</h4>
+  <%= f.text_field :name %>
+  <h4>性別</h4>
+  <%= f.text_field :sex %>
+  <h4>誕生日</h4>
+  <%= f.date_select(
+        :birth_date,
+        use_month_numbers: true,
+        start_year: 1990,
+        end_year: (Time.now.year),
+        default: Date.new(1990, 1, 1),
+        date_separator: '/') %>
+        
+  <%= f.submit '変更保存' %>
+<% end %>
