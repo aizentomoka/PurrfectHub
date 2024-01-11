@@ -1,2 +1,44 @@
-<h1>Public::RescuedCats#index</h1>
-<p>Find me in app/views/public/rescued_cats/index.html.erb</p>
+<h1>里親募集一覧</h1>
+<% @rescued_cats.each do |rescued_cat| %>
+
+  
+   <% if rescued_cat.images.attached? %>
+      <% rescued_cat.images.each do |image| %>
+        <%= image_tag image, size: "200x200" %>
+      <% end %>
+   <% end %>
+
+   <%= link_to rescued_cat_path(rescued_cat.id) do %>
+    <p><%= rescued_cat.title %></p>
+   <% end %>
+   
+   <% if rescued_cat.name %>
+     <p>名前：<%= rescued_cat.name %></p>
+   <% else %>
+     <p>名前：</p>
+   <% end %>
+   <p>性別：<%= rescued_cat.sex %></p>
+    
+   <% if rescued_cat.age %>
+   <p>年齢：<%= rescued_cat.age %> 才</p>
+ 　<% else %>
+   <p>年齢：不明</p>
+   <% end %>
+   <p>ワクチン</p>
+   <%= rescued_cat.vaccine %>
+   <p>去勢/避妊手術</p>
+    <% if rescued_cat.is_castration %>
+      <p>手術済</p>
+    <% else %>
+      <p>未手術</p>
+    <% end %>
+    
+    <p>譲渡先</p>
+    <% if rescued_cat.is_completion %>
+      <p>譲渡先決定！</p>
+    <% else %>
+      <p>募集中</p>
+    <% end %>
+
+
+<% end %>
