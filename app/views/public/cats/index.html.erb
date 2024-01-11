@@ -9,6 +9,10 @@
   <% end %>
   <p>名前：<%= cat.name %></p>
   <p>性別：<%= cat.sex %></p>
-  <p>誕生日：<%= cat.birthday %></p>
+  <% if cat.birthday %>
+ 　 <p>誕生日：<%= cat.birthday.strftime("%Y/%-m/%-d") %></p>
+　<% else %>
+ 　 <p>誕生日：未設定</p>
+　<% end %>
 </div>
 <% end %>
