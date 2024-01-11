@@ -6,6 +6,7 @@ class User < ApplicationRecord
   
   has_many :cats, dependent: :destroy
   has_many :diaries, dependent: :destroy
+  has_many :rescued_cats, dependent: :destroy
    
   def active_for_authentication?
     super && (is_active == true)

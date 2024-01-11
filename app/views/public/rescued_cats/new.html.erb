@@ -1,2 +1,29 @@
-<h1>Public::RescuedCats#new</h1>
-<p>Find me in app/views/public/rescued_cats/new.html.erb</p>
+<h1>里親募集</h1>
+
+<%= form_with model: @rescued_cat, multipart: true do |f| %>
+
+  <h4>画像</h4>
+   <%= f.file_field :images, multiple: true %>
+  <h4>タイトル</h4>
+  <%= f.text_field :title %>
+  <h4>本文</h4>
+  <%= f.text_area :body %>
+  <h4>名前</h4>
+   <%= f.text_field :name, autofocus: true %>
+  <h4>年齢</h4>
+  <%= f.text_field :age, autofocus: true  %>
+  <h4>性別</h4>
+  <%= f.text_field :sex, autofocus: true, placeholder:"オスorメス"  %>
+  <h4>ワクチン</h4>
+  <%= f.text_field :vaccine, autofocus: true , placeholder:"接種済みワクチンまたは未接種と記入してください。" %>
+  <h4>去勢手術</h4>
+   <%= f.radio_button :is_castration, "true" %>
+   <%= f.label :is_castration_true, "去勢済み" %>
+   <%= f.radio_button :is_castration, "false" %>
+   <%= f.label :is_castration_false, "未去勢" %>
+
+
+ 
+  <%= f.submit '登録' %>
+  
+<% end %>

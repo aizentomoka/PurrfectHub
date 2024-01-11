@@ -34,7 +34,7 @@ class Public::DiariesController < ApplicationController
      if @diary.update(diary_params)
         redirect_to diary_path(@diary)
      else
-        render :edit_diary_path
+        render :edit
      end
   end 
   

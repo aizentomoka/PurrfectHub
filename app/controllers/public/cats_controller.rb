@@ -32,7 +32,7 @@ class Public::CatsController < ApplicationController
      if @cat.update(cat_params)
         redirect_to cat_path(@cat)
      else
-        render :edit_cat_path
+        render :edit
      end
   end 
 
