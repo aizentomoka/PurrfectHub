@@ -11,7 +11,7 @@
         
       <div class="mt-5 text-center">  
         <%= link_to "いいえ", user_path(current_user), :class => "btn btn-info ms-3" %>
-        <%= link_to "退会する", users_withdraw_path, method: :patch, :class => "btn btn-danger ms-3", data: { confirm: "本当に退会しますか？" }  %>
+        <%= link_to "退会する", diary_path, method: :delete, :class => "btn btn-danger ms-3", data: { confirm: "本当に退会しますか？" }  %>
       </div>
     
 

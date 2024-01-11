@@ -20,20 +20,35 @@ class Public::DiariesController < ApplicationController
 
   def show
     @diary = Diary.find(params[:id])
+    @cats = current_user.cats
   end
 
   def edit
     @diary = Diary.find(params[:id])
+    @cats = current_user.cats
   end
   
   def update
      @diary = Diary.find(params[:id])
+     @cats = current_user.cats
      if @diary.update(diary_params)
         redirect_to diary_path(@diary)
      else
         render :edit_diary_path
      end
   end 
+  
+  
+  def destroy
+    diary = Diary.find(params[:id])
+    diary.destroy
+    redirect_to diaries_path
+  end
+  
+  
+  
+  
+  
   
   private
 

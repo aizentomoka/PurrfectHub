@@ -1,2 +1,22 @@
-<h1>Public::Diaries#show</h1>
-<p>Find me in app/views/public/diaries/show.html.erb</p>
+<h1><%= @diary.cat.name %>の日記</h1>
+
+
+
+ <% if @diary.images.attached? %>
+      <% @diary.images.each do |image| %>
+        <%= image_tag image, size: "200x200" %>
+      <% end %>
+ <% end %>
+ 
+ 
+  <p><%= @diary.title %></p>
+   
+   
+  <p>本文</p>
+   <%= @diary.body %>
+   
+  <p>体重</p>
+   <%= @diary.weight %>
+   
+ <%= link_to "編集する", edit_diary_path(@diary), class: "btn btn-sm btn-info" %>
+ <%= link_to "削除", diary_path(@diary.id), method: :delete, class: "btn btn-danger", "data-confirm" => "本当に削除しますか？" %>
