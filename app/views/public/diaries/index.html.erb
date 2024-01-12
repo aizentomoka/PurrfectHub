@@ -18,6 +18,9 @@
   　
    <p>体重</p>
    <%= diary.weight %>
-
+   
+ 
+ <p>コメント件数：<%= diary.diary_comments.count %></p>
+ <p><%= render 'public/diaries/favorite', diary: diary %></p>
 
 <% end %>

@@ -17,6 +17,29 @@
    
   <p>体重</p>
    <%= @diary.weight %>
-   
- <%= link_to "編集する", edit_diary_path(@diary), class: "btn btn-sm btn-info" %>
- <%= link_to "削除", diary_path(@diary.id), method: :delete, class: "btn btn-danger", "data-confirm" => "本当に削除しますか？" %>
+  
+  <%= render 'public/diaries/favorite', diary: @diary %>
+  
+  <p>コメント件数：<%= @diary.diary_comments.count %></p>
+  <% @diary.diary_comments.each do |diary_comment| %>
+    <%= diary_comment.user.nickname %>
+    <%= diary_comment.created_at.strftime('%Y/%m/%d') %><%= diary_comment.comment %>
+    <% if diary_comment.user == current_user %>
+      <%= link_to "削除", diary_diary_comment_path(diary_comment.diary, diary_comment), method: :delete %>
+    <% end %>
+  <% end %>
+
+<div>
+  <%= form_with model: [@diary, @diary_comment] do |f| %>
+    <%= f.text_area :comment, rows: '5', placeholder: "コメントをここに" %>
+    <%= f.submit "送信する" %>
+  <% end %>
+</div>
+  
+  
+  
+  
+  <% if @diary.user == current_user %> 
+    <%= link_to "編集する", edit_diary_path(@diary), class: "btn btn-sm btn-info" %>
+    <%= link_to "削除", diary_path(@diary.id), method: :delete, class: "btn btn-danger", "data-confirm" => "本当に削除しますか？" %>
+  <% end %>

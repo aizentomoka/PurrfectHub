@@ -5,8 +5,21 @@ class User < ApplicationRecord
          :recoverable, :rememberable, :validatable
   
   has_many :cats, dependent: :destroy
+  
   has_many :diaries, dependent: :destroy
+  has_many :diary_comments, dependent: :destroy
+  has_many :favorites, dependent: :destroy
+  
   has_many :rescued_cats, dependent: :destroy
+  has_many :rescued_cat_comments, dependent: :destroy
+  
+  
+  
+  
+  
+  
+  
+  
    
   def active_for_authentication?
     super && (is_active == true)

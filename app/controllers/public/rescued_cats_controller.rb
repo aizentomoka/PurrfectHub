@@ -17,6 +17,7 @@ class Public::RescuedCatsController < ApplicationController
 
   def show
     @rescued_cat = RescuedCat.find(params[:id])
+    @rescued_cat_comment = RescuedCatComment.new
 
   end
 
