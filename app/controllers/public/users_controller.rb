@@ -23,11 +23,11 @@ class Public::UsersController < ApplicationController
   
   
   
-  
+  # 退会確認画面
   def confirm_withdraw
   end
   
-  
+  # 退会機能
   def withdraw
     @user = User.find(current_user.id)
     @user.update(is_active: false)
@@ -36,7 +36,13 @@ class Public::UsersController < ApplicationController
     redirect_to root_path
   end
   
-  
+  # いいねした投稿一覧
+  def favorites 
+    @user = User.find(params[:id])
+    favorites = Favorite.where(user_id: @user.id).pluck(:diary_id)
+    @favorite_diaries = Diary.find(favorites)
+    @diary = Diary.find(params[:id])
+  end
   
   
   

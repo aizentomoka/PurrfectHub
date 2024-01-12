@@ -1,0 +1,19 @@
+<table class="table">
+        <tbody>
+          <% @favorite_diaries.each do |diary| %>
+          <tr>
+            <td>
+             <% if diary.images.attached? %>
+              <%= image_tag diary.images.first, size: "200x200" %>
+             <% end %>
+            </td>
+            <td>
+              <%= link_to diary.title, diary_path(diary) %>
+            </td>
+            <td>
+              <%= link_to diary.user.nickname, diaries_path %>
+            </td>
+          </tr>
+          <% end %>
+        </tbody>
+      </table>

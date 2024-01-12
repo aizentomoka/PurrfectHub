@@ -33,11 +33,15 @@ Rails.application.routes.draw do
     sessions: 'public/sessions'
   }
     
-     scope module: :public do
+    scope module: :public do
      
       get 'users/confirm_withdraw' => 'users#confirm_withdraw'
       patch 'users/withdraw' => 'users#withdraw'
-      resources :users, only: [:show, :edit, :update]
+      resources :users, only: [:show, :edit, :update] do
+         member do
+           get :favorites 
+         end
+      end
       resources :cats, only: [:new, :create, :index, :update, :show, :edit] 
       resources :diaries do
          resource :favorite, only: [:create, :destroy, :index]
@@ -46,11 +50,12 @@ Rails.application.routes.draw do
       
       
       resources :rescued_cats do
+         resource :bookmark, only: [:create, :destroy, :index]
          resources :rescued_cat_comments, only: [:create, :destroy]
       end
    
-    end
-    
+      
+    end 
  
  
   # For details on the DSL available within this file, see https://guides.rubyonrails.org/routing.html

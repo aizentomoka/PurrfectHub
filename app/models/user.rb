@@ -12,6 +12,7 @@ class User < ApplicationRecord
   
   has_many :rescued_cats, dependent: :destroy
   has_many :rescued_cat_comments, dependent: :destroy
+  has_many :bookmarks, dependent: :destroy
   
   
   
