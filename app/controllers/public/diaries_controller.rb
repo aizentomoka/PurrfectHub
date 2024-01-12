@@ -1,4 +1,5 @@
 class Public::DiariesController < ApplicationController
+  
   def new
     @diary = Diary.new
     @cats = current_user.cats
@@ -8,13 +9,19 @@ class Public::DiariesController < ApplicationController
     @diary = Diary.new(diary_params)
     @diary.user_id = current_user.id
     @diary.save
-    redirect_to diaries_path
+    redirect_to diaries_user_path(@diary)
   end
   
   def index
-    @user = current_user
-    @diaries = @user.diaries
-    
+     if params[:latest]
+      @diaries = Diary.latest   #新着順
+     elsif params[:old]
+       @diaries = Diary.old   #古い順
+     elsif params[:most_favorited]   #人気順
+       @diaries = Diary.most_favorited
+     else
+       @diaries = Diary.all
+     end
   end
 
 

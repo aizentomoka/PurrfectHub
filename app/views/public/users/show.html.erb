@@ -12,6 +12,8 @@
         
              
               <table class="table table-bordered">
+                
+                  <%= image_tag @user.get_profile_image(100,100) %>
                  <tr>
                   <th>ニックネーム</th>
                   <td><%= @user.nickname%></td>

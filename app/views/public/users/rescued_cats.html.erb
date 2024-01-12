@@ -1,13 +1,6 @@
 <h1>里親募集一覧</h1>
 <% @rescued_cats.each do |rescued_cat| %>
 
-  
-   <%= image_tag rescued_cat.user.get_profile_image(100,100) %>
-   <%= link_to my_page_user_path(rescued_cat.user) do %>
-     <p><%= rescued_cat.user.nickname %></p>
-   <% end %>
-  
-  
    <% if rescued_cat.images.attached? %>
      <%= image_tag rescued_cat.images.first, size: "200x200" %>
    <% end %>

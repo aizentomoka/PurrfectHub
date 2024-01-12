@@ -11,7 +11,7 @@
               <%= link_to diary.title, diary_path(diary) %>
             </td>
             <td>
-              <%= link_to diary.user.nickname, diaries_path %>
+              <%= link_to diary.user.nickname, diaries_user_path(diary.user) %>
             </td>
           </tr>
           <% end %>

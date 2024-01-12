@@ -1,16 +1,9 @@
 <h1>日記一覧</h1>
 
-<%= link_to '新着順', diaries_path(latest: "true") %>
-<%= link_to '古い順', diaries_path(old: "true") %>
-<%= link_to 'いいね順', diaries_path(most_favorited: "true") %>
+
  
 <% @diaries.each do |diary| %>
 
-   <%= image_tag diary.user.get_profile_image(100,100) %>
-   <%= link_to my_page_user_path(diary.user.id) do %>
-    <p><%= diary.user.nickname %></p>
-   <% end %>
-  
   
    <% if diary.images.attached? %>
      <%= image_tag diary.images.first, size: "200x200" %>
@@ -20,6 +13,9 @@
     <p><%= diary.title %></p>
    <% end %>
    
+  　
+   <p>体重</p>
+   <%= diary.weight %>
    
  
  <p>コメント件数：<%= diary.diary_comments.count %></p>

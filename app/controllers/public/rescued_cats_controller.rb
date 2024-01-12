@@ -7,12 +7,11 @@ class Public::RescuedCatsController < ApplicationController
     @rescued_cat = RescuedCat.new(rescued_cat_params)
     @rescued_cat.user_id = current_user.id
     @rescued_cat.save
-    redirect_to rescued_cats_path
+    redirect_to rescued_cats_user_path(@rescued_cat)
   end
   
   def index
-    @user = current_user
-    @rescued_cats = @user.rescued_cats
+    @rescued_cats = RescuedCat.all
   end
 
   def show

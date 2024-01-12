@@ -7,11 +7,15 @@
                </div>
           </div>
       <div class="row mt-1 justify-content-center">    
-          <%= form_with model:@user, do |f| %>
+          <%= form_with model:@user do |f| %>
             
             
             
            <table class="table-borderless mt-5">
+                 <tr>
+                 <td></td>         
+                 <td><%= f.file_field :profile_image, placeholder: "プロフィール画像", accept: "image/*" %></td>
+                 </tr>
                  <tr>
                   <td class="py-2">ニックネーム</td>
                   <td class="py-2"><%= f.text_field :nickname %></td>

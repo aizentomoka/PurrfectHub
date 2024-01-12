@@ -40,6 +40,9 @@ Rails.application.routes.draw do
       resources :users, only: [:show, :edit, :update] do
          member do
            get :favorites 
+           get :diaries
+           get :rescued_cats
+           get :my_page
          end
       end
       resources :cats, only: [:new, :create, :index, :update, :show, :edit] 

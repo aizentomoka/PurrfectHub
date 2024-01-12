@@ -1,6 +1,10 @@
 <h1><%= @diary.cat.name %>の日記</h1>
 
 
+ <%= image_tag @diary.user.get_profile_image(100,100) %>
+ <%= link_to my_page_user_path(@diary.user.id) do %>
+    <p><%= @diary.user.nickname %></p>
+ <% end %>
 
  <% if @diary.images.attached? %>
       <% @diary.images.each do |image| %>

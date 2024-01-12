@@ -1,6 +1,6 @@
 class Public::UsersController < ApplicationController
   
-  before_action :ensure_guest_user, only: [:edit]
+  before_action :ensure_guest_user, only: [:edit, :confirm_withdraw]
   
   
   def show
@@ -44,7 +44,18 @@ class Public::UsersController < ApplicationController
     @diary = Diary.find(params[:id])
   end
   
+  def diaries
+    @user = current_user
+    @diaries = @user.diaries
+  end
   
+  def rescued_cats
+    @user = current_user
+    @rescued_cats = @user.rescued_cats
+  end
+  
+  def my_page
+  end
   
    private
    
@@ -59,7 +70,7 @@ class Public::UsersController < ApplicationController
    private
   
    def user_params
-      params.require(:user).permit(:nickname, :last_name, :first_name, :last_name_kana, :first_name_kana, :post_code, :address, :telephone_number, :email)
+      params.require(:user).permit(:nickname, :last_name, :first_name, :last_name_kana, :first_name_kana, :post_code, :address, :telephone_number, :email, :profile_image)
    end
   
 end
