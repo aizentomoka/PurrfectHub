@@ -1,0 +1,22 @@
+<div class="container mt-5">
+<h3>日記コメント一覧</h3>
+<table class="table mt-3">
+  <tr>
+    <th class="col-2">ニックネーム</th>
+    <th class="col-8">コメント</th>
+    <th class="col-1"></th>
+    <th class="col-1"></th>
+  </tr>
+<% @diary_comments.each do |diary_comment| %>
+  <tr>
+    <td class="col-2"><%= @users.find(diary_comment.user_id).nickname %></td>
+    <td class="col-8"><%= diary_comment.comment %></td>
+    <td class="col-1"><%= diary_comment.created_at.strftime('%Y/%m/%d') %></td>
+    <td class="col-1">
+    <%= link_to '削除', admin_destroy_diary_comment_path(diary_comment), method: :delete, data: { confirm: '本当に削除しますか?' },class: "btn btn-sm btn-danger" %>
+    </td>
+  </tr>
+<% end %>
+</table>
+
+</div>

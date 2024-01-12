@@ -45,6 +45,13 @@
                 </table>
            
                 <div class="col-4 ">
-                <h4>登録情報   <%= link_to "編集する", edit_user_path(current_user), class: "btn btn-sm btn-info" %></h4>
-             </div> 
-        
+                <% unless @user.guest_user? %>
+                    <h4>登録情報   <%= link_to "編集する", edit_user_path(current_user), class: "btn btn-sm btn-info" %></h4>
+                <% else %>
+                    <h4></h4>
+                <% end %>
+                </div> 
+                
+                
+     </div>            
+  </div>       

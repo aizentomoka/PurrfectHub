@@ -17,9 +17,14 @@ Rails.application.routes.draw do
   }
     
     namespace :admin do
+      
       resources :users, only: [:index, :show, :edit, :update]
-      resources :diaries, only: [:index, :show]
-      resources :rescued_cats, only: [:index, :show]
+      resources :diaries, only: [:index, :destroy] do
+        resources :diary_comments, only: [:index, :destroy]
+      end
+      resources :rescued_cats, only: [:index, :destroy] do
+        resources :rescued_cat_comments, only: [:index, :destroy]
+      end
      
     end
     
@@ -47,13 +52,11 @@ Rails.application.routes.draw do
       end
       resources :cats, only: [:new, :create, :index, :update, :show, :edit] 
       resources :diaries do
-         resource :favorite, only: [:create, :destroy, :index]
+         resource :favorite, only: [:create, :destroy]
          resources :diary_comments, only: [:create, :destroy]
       end
-      
-      
       resources :rescued_cats do
-         resource :bookmark, only: [:create, :destroy, :index]
+         resource :bookmark, only: [:create, :destroy]
          resources :rescued_cat_comments, only: [:create, :destroy]
       end
    

@@ -1,2 +1,29 @@
-<h1>Admin::RescuedCats#index</h1>
-<p>Find me in app/views/admin/rescued_cats/index.html.erb</p>
+<h1>里親募集一覧</h1>
+<% @rescued_cats.each do |rescued_cat| %>
+
+  
+   <%= image_tag rescued_cat.user.get_profile_image(100,100) %>
+   <%= link_to my_page_user_path(rescued_cat.user) do %>
+     <p><%= rescued_cat.user.nickname %></p>
+   <% end %>
+  
+  
+   <% if rescued_cat.images.attached? %>
+     <%= image_tag rescued_cat.images.first, size: "200x200" %>
+   <% end %>
+
+   
+    <p><%= rescued_cat.title %></p>
+    <p><%= rescued_cat.body %></p>
+   
+  
+    <p>譲渡先</p>
+    <% if rescued_cat.is_completion %>
+      <p>譲渡先決定！</p>
+    <% else %>
+      <p>募集中</p>
+    <% end %>
+    
+  <%= link_to "削除", admin_rescued_cat_path(rescued_cat.id), method: :delete, class: "btn btn-danger", "data-confirm" => "本当に削除しますか？" %>
+
+<% end %>

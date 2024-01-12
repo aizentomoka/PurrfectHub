@@ -1,2 +1,28 @@
-<h1>Admin::Diaries#index</h1>
-<p>Find me in app/views/admin/diaries/index.html.erb</p>
+<h1>日記一覧</h1>
+
+<%= link_to '新着順', admin_diaries_path(latest: "true") %>
+<%= link_to '古い順', admin_diaries_path(old: "true") %>
+<%= link_to 'いいね順', admin_diaries_path(most_favorited: "true") %>
+ 
+<% @diaries.each do |diary| %>
+
+   <%= image_tag diary.user.get_profile_image(100,100) %>
+   <%= link_to admin_user_path(diary.user.id) do %>
+    <p><%= diary.user.nickname %></p>
+   <% end %>
+  
+  
+   <% if diary.images.attached? %>
+     <%= image_tag diary.images.first, size: "200x200" %>
+   <% end %>
+
+   
+    <p><%= diary.title %></p>
+    <p><%= diary.body %></p>
+ 
+ <p>コメント：<%= diary.diary_comments.count %>件</p>
+ <i class="fa-solid fa-heart like-btn" ><%= diary.favorites.count %>件</i>
+ 
+  <%= link_to "削除", admin_diary_path(diary.id), method: :delete, class: "btn btn-danger", "data-confirm" => "本当に削除しますか？" %>
+
+<% end %>

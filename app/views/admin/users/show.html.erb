@@ -1,2 +1,54 @@
-<h1>Admin::Users#show</h1>
-<p>Find me in app/views/admin/users/show.html.erb</p>
+ <div class="font-weight-bold w-25 text-center ml-5"></div>
+     <div class="row mt-3 mx-auto">
+       <div class="col-6 mx-auto">
+        <h4>登録情報</h4>
+     
+            <table class="table table-bordered">
+                 <tr>
+                  <th>ニックネーム</th>
+                  <td><%= @user.nickname %></td>
+                </tr>
+                <tr>
+                  <th>氏名</th>
+                  <td><%= @user.last_name %><%= @user.first_name %></td>
+                </tr>
+                <tr>
+                  <th>カナ</th>
+                  <td><%= @user.last_name_kana %><%= @user.first_name_kana %></td>
+                </tr>
+                <tr>
+                  <th>郵便番号</th>
+                  <td><%= @user.post_code %></td>
+                </tr>
+                <tr>
+                  <th>住所</th>
+                  <td><%= @user.address %></td>
+                </tr>
+                <tr>
+                  <th>電話番号</th>
+                  <td><%= @user.telephone_number %></td>
+                </tr>
+                <tr>
+                  <th>メールアドレス</th>
+                  <td><%= @user.email %></td>
+                </tr>
+                 <tr>
+                  <th>会員ステータス</th>
+                  <td>
+                      <% if @user.is_active %>
+                        <span class="text-success">有効</span>
+                      <% else %>
+                        <span class="text-secondary">退会</span>
+                      <% end %>
+                  </td>
+                </tr>
+                </table>
+        
+        
+        
+        <%= link_to "編集する", edit_admin_user_path(@user), class: "btn btn-sm btn-success" %>
+        
+        
+
+    </div>
+  </div>
