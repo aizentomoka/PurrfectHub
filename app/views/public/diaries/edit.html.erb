@@ -7,7 +7,9 @@
   <%= f.collection_select :cat_id, @cats, :id, :name, prompt: '選択してください' %>
 
   <h4>画像</h4>
-   <%= f.file_field :images, multiple: true %>
+  <%= f.file_field :images, multiple: true %>
+  <%= f.label :tags, "タグ(“/”で複数個登録できます)"  %>
+  <%= f.text_field :name, value: @diary.tags.pluck(:name).join('/') %>
   <h4>タイトル</h4>
   <%= f.text_field :title %>
   <h4>本文</h4>

@@ -8,8 +8,10 @@ class Public::DiariesController < ApplicationController
   def create
     @diary = Diary.new(diary_params)
     @diary.user_id = current_user.id
+    input_tags = tag_params[:name].split('/')  # tag_paramsをsplitメソッドを用いて配列に変換
+    @diary.create_tags(input_tags)  # create_tagsはtopic.rbにメソッドを記載
     @diary.save
-    redirect_to diaries_user_path(@diary)
+    redirect_to diary_path(@diary)
   end
   
   def index
@@ -40,7 +42,9 @@ class Public::DiariesController < ApplicationController
      @diary = Diary.find(params[:id])
      @cats = current_user.cats
      if @diary.update(diary_params)
-        redirect_to diary_path(@diary)
+        input_tags = tag_params[:name].split('/')
+        @diary.update_tags(input_tags) # udpate_tagsはtopic.rbに記述している
+        redirect_to request.referer
      else
         render :edit
      end
@@ -64,4 +68,7 @@ class Public::DiariesController < ApplicationController
     params.require(:diary).permit(:cat_id, :user_id, :title, :body, :weight, images: [])
   end
   
+  def tag_params 
+      params.require(:diary).permit(:name)
+  end
 end

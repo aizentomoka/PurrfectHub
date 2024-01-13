@@ -19,10 +19,7 @@ class Public::UsersController < ApplicationController
       render :edit_user_path
     end
   end 
-  
-  
-  
-  
+
   # 退会確認画面
   def confirm_withdraw
   end
@@ -36,7 +33,7 @@ class Public::UsersController < ApplicationController
     redirect_to root_path
   end
   
-  # いいねした投稿一覧
+  # いいねした日記一覧
   def favorites 
     @user = User.find(params[:id])
     favorites = Favorite.where(user_id: @user.id).pluck(:diary_id)
@@ -44,21 +41,48 @@ class Public::UsersController < ApplicationController
     @diary = Diary.find(params[:id])
   end
   
+  # ブックマークした里親募集一覧
+  def bookmarks 
+    @user = User.find(params[:id])
+    bookmarks = Bookmark.where(user_id: @user.id).pluck(:rescued_cat_id)
+    @bookmark_rescued_cats = RescuedCat.find(bookmarks)
+    @rescued_cat = RescuedCat.find(params[:id])
+  end
+  
+  # ログインユーザーの日記一覧
   def diaries
     @user = current_user
     @diaries = @user.diaries
   end
   
+   # ログインユーザーの里親募集一覧
   def rescued_cats
     @user = current_user
     @rescued_cats = @user.rescued_cats
   end
   
+  # ログインユーザーのマイページ
   def my_page
   end
   
-   private
-   
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  private
    
    def ensure_guest_user
     @user = User.find(params[:id])
@@ -67,7 +91,7 @@ class Public::UsersController < ApplicationController
     end
    end  
   
-   private
+  
   
    def user_params
       params.require(:user).permit(:nickname, :last_name, :first_name, :last_name_kana, :first_name_kana, :post_code, :address, :telephone_number, :email, :profile_image)

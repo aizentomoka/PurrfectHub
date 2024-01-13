@@ -1,4 +1,4 @@
-<h1>日記</h1>
+<h1>日記投稿</h1>
 
 
 
@@ -8,7 +8,9 @@
   <%= f.collection_select :cat_id, @cats, :id, :name, prompt: '選択してください' %>
 
   <h4>画像</h4>
-   <%= f.file_field :images, multiple: true %>
+  <%= f.file_field :images, multiple: true %>
+  <%= f.label :name, "タグ(“/”で複数個登録できます)" %>
+  <%= f.text_field :name, autofocus: true, placeholder:"三毛猫/保護猫"%>
   <h4>タイトル</h4>
   <%= f.text_field :title, autofocus: true %>
   <h4>本文</h4>

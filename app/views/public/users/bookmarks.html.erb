@@ -1,0 +1,21 @@
+<table class="table">
+        <tbody>
+          <% @bookmark_rescued_cats.each do |rescued_cat| %>
+          <tr>
+            <td>
+             <% if rescued_cat.images.attached? %>
+              <%= image_tag rescued_cat.images.first, size: "200x200" %>
+             <% end %>
+            </td>
+            <!--投稿詳細へのリンク-->
+            <td>
+              <%= link_to rescued_cat.title, rescued_cat_path(rescued_cat) %> 
+            </td>
+            <!--投稿ユーザーの里親募集一覧へのリンク-->
+            <td>
+              <%= link_to rescued_cat.user.nickname, rescued_cats_user_path(rescued_cat.user) %> 
+            </td>
+          </tr>
+          <% end %>
+        </tbody>
+      </table>

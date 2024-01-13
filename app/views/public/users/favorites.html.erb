@@ -7,9 +7,11 @@
               <%= image_tag diary.images.first, size: "200x200" %>
              <% end %>
             </td>
+            <!--投稿詳細へのリンク-->
             <td>
               <%= link_to diary.title, diary_path(diary) %>
             </td>
+            <!--投稿ユーザーの日記一覧へのリンク-->
             <td>
               <%= link_to diary.user.nickname, diaries_user_path(diary.user) %>
             </td>
