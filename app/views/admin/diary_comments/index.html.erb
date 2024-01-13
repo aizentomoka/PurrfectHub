@@ -13,7 +13,7 @@
     <td class="col-8"><%= diary_comment.comment %></td>
     <td class="col-1"><%= diary_comment.created_at.strftime('%Y/%m/%d') %></td>
     <td class="col-1">
-    <%= link_to '削除', admin_destroy_diary_comment_path(diary_comment), method: :delete, data: { confirm: '本当に削除しますか?' },class: "btn btn-sm btn-danger" %>
+     <%= link_to "削除", admin_diary_diary_comment_path(diary_comment.diary, diary_comment), method: :delete, data: { confirm: '本当に削除しますか?' },class: "btn btn-sm btn-danger" %>
     </td>
   </tr>
 <% end %>

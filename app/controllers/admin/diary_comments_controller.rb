@@ -8,12 +8,8 @@ class Admin::DiaryCommentsController < ApplicationController
  
   def destroy
     DiaryComment.find(params[:id]).destroy
-    redirect_to admin_diary_comments_path
+    redirect_to admin_diary_diary_comments_path
   end
-
-
-
-
 
 
   private
