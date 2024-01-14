@@ -1,8 +1,6 @@
-<h1>里親募集一覧</h1>
-<%= form_with url: search_rescued_cats_path, local: true, method: :get do |f| %>
-    <%= f.text_field :keyword %>
-    <%= f.submit "検索" %>
-<% end %>
+<h2>検索結果 "<%= @keyword %>"</h2>
+
+
 
 <% @rescued_cats.each do |rescued_cat| %>
 
@@ -16,9 +14,9 @@
    <% if rescued_cat.images.attached? %>
      <%= image_tag rescued_cat.images.first, size: "200x200" %>
    <% end %>
-
-   <p><%= render 'public/rescued_cats/label', rescued_cat: rescued_cat %></p>
-
+   
+   <%= render 'public/rescued_cats/label', rescued_cat: rescued_cat %>
+   
    <%= link_to rescued_cat_path(rescued_cat.id) do %>
     <p><%= rescued_cat.title %></p>
    <% end %>

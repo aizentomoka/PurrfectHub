@@ -1,4 +1,14 @@
 <h1>日記一覧</h1>
+<!--キーワード検索-->
+<%= form_with url: search_diaries_path, local: true, method: :get do |f| %>
+    <%= f.text_field :keyword %>
+    <%= f.submit "検索" %>
+<% end %>
+<!--タグ検索-->
+<%= form_with url: tag_search_diaries_path, local: true, method: :get do |f| %>
+    <%= f.text_field :name %>
+    <%= f.submit "タグ検索" %>
+<% end %>
 
 <%= link_to '新着順', diaries_path(latest: "true") %>
 <%= link_to '古い順', diaries_path(old: "true") %>
@@ -20,7 +30,8 @@
     <p><%= diary.title %></p>
    <% end %>
    
-   
+   <p><%= render 'public/diaries/tag', diary: diary %></p> 
+  
  
  <p>コメント件数：<%= diary.diary_comments.count %></p>
  <p><%= render 'public/diaries/favorite', diary: diary %></p>

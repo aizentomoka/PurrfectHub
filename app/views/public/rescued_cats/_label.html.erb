@@ -1,0 +1,5 @@
+<% rescued_cat.labels.each do |label| %>
+      <%= link_to label_search_rescued_cats_path(name: label.name), method: :get do %>
+      <span><i class="fa-solid fa-tag"></i><%= label.name %></span>
+      <% end %>
+ <% end %>

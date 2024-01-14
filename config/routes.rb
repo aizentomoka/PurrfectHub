@@ -55,10 +55,18 @@ Rails.application.routes.draw do
       resources :diaries do
          resource :favorite, only: [:create, :destroy]
          resources :diary_comments, only: [:create, :destroy]
+          collection do
+            get 'search'
+            get 'tag_search'
+          end
       end
       resources :rescued_cats do
          resource :bookmark, only: [:create, :destroy]
          resources :rescued_cat_comments, only: [:create, :destroy]
+         collection do
+            get 'search'
+            get 'label_search'
+         end
       end
    
       

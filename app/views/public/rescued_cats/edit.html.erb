@@ -1,9 +1,11 @@
-<h1>里親募集</h1>
+<h1>里親募集編集</h1>
 
 <%= form_with model: @rescued_cat, multipart: true do |f| %>
 
   <h4>画像</h4>
-   <%= f.file_field :images, multiple: true %>
+  <%= f.file_field :images, multiple: true %>
+  <h4>ラベル(“/”で複数個登録できます)</h4>
+  <%= f.text_field :labels, value: @rescued_cat.labels.pluck(:label_name).join('/') %>
   <h4>タイトル</h4>
   <%= f.text_field :title %>
   <h4>本文</h4>
@@ -30,7 +32,6 @@
     
 
  
-  <%= f.submit '登録' %>
-  
+  <%= f.submit '変更保存' %>
 <% end %>
 

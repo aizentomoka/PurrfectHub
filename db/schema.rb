@@ -10,7 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 2024_01_13_082157) do
+ActiveRecord::Schema.define(version: 2024_01_14_070200) do
 
   create_table "active_storage_attachments", force: :cascade do |t|
     t.string "name", null: false
@@ -93,6 +93,21 @@ ActiveRecord::Schema.define(version: 2024_01_13_082157) do
     t.datetime "updated_at", precision: 6, null: false
   end
 
+  create_table "labelings", force: :cascade do |t|
+    t.integer "rescued_cat_id", null: false
+    t.integer "label_id", null: false
+    t.datetime "created_at", precision: 6, null: false
+    t.datetime "updated_at", precision: 6, null: false
+    t.index ["label_id"], name: "index_labelings_on_label_id"
+    t.index ["rescued_cat_id"], name: "index_labelings_on_rescued_cat_id"
+  end
+
+  create_table "labels", force: :cascade do |t|
+    t.string "name"
+    t.datetime "created_at", precision: 6, null: false
+    t.datetime "updated_at", precision: 6, null: false
+  end
+
   create_table "rescued_cat_comments", force: :cascade do |t|
     t.text "comment"
     t.integer "user_id"
@@ -153,6 +168,8 @@ ActiveRecord::Schema.define(version: 2024_01_13_082157) do
 
   add_foreign_key "active_storage_attachments", "active_storage_blobs", column: "blob_id"
   add_foreign_key "active_storage_variant_records", "active_storage_blobs", column: "blob_id"
+  add_foreign_key "labelings", "labels"
+  add_foreign_key "labelings", "rescued_cats"
   add_foreign_key "taggings", "diaries"
   add_foreign_key "taggings", "tags"
 end

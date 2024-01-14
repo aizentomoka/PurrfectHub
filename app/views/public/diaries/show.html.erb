@@ -12,11 +12,7 @@
       <% end %>
  <% end %>
   
-  <p>
-    <% @diary.tags.each do |tag| %>
-    <span><%= tag.name %></span>
-    <% end %>
-  </p>
+  <p><%= render 'public/diaries/tag', diary: @diary %></p> 
   
   
   <p><%= @diary.title %></p>

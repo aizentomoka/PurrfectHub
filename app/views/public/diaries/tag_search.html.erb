@@ -1,0 +1,27 @@
+<h2>検索結果 "<%= @tag_name %>"</h2>
+ 
+  <% @diaries.each do |diary| %>
+
+   <%= image_tag diary.user.get_profile_image(100,100) %>
+   <%= link_to my_page_user_path(diary.user.id) do %>
+    <p><%= diary.user.nickname %></p>
+   <% end %>
+  
+  
+   <% if diary.images.attached? %>
+     <%= image_tag diary.images.first, size: "200x200" %>
+   <% end %>
+    
+   <%= render 'public/diaries/tag', diary: diary %>
+ 
+    
+   <%= link_to diary_path(diary.id) do %>
+    <p><%= diary.title %></p>
+   <% end %>
+   
+   
+ 
+ <p>コメント件数：<%= diary.diary_comments.count %></p>
+ <p><%= render 'public/diaries/favorite', diary: diary %></p>
+
+<% end %>

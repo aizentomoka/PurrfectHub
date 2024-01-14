@@ -57,9 +57,21 @@ class Public::DiariesController < ApplicationController
     redirect_to diaries_path
   end
   
+  # 検索機能
+  def search
+    if params[:keyword].present?
+      @diaries = Diary.where('body LIKE ?', "%#{params[:keyword]}%")
+      @keyword = params[:keyword]
+    else
+      @diaries = Diary.all
+    end
+  end
   
-  
-  
+  # タグ検索機能
+  def tag_search
+     @tag_name = params[:name]
+     @diaries = Diary.joins(:tags).where(tags: { name: @tag_name })
+  end 
   
   
   private

@@ -1,0 +1,5 @@
+ <% diary.tags.each do |tag| %>
+      <%= link_to tag_search_diaries_path(name: tag.name), method: :get do %>
+      <span><i class="fa-solid fa-tag"></i><%= tag.name %></span>
+      <% end %>
+ <% end %>
