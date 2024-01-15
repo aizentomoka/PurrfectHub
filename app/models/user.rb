@@ -28,6 +28,16 @@ class User < ApplicationRecord
   has_many :chats
   has_many :rooms, through: :user_rooms
   
+ validates :nickname, length: {maximum: 10}
+ validates :first_name, presence: true
+ validates :last_name, presence: true
+ validates :first_name_kana, presence: true
+ validates :last_name_kana, presence: true
+ validates :post_code, presence: true
+ validates :address, presence: true
+ validates :telephone_number, presence: true
+
+  
   def get_profile_image(width, height)
     unless profile_image.attached?
       file_path = Rails.root.join('app/assets/images/no_profile_image.jpg')

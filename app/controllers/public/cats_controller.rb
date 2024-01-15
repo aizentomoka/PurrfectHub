@@ -1,5 +1,5 @@
 class Public::CatsController < ApplicationController
-  
+  before_action :ensure_guest_user, only: [:new, :create, :edit]
   
   def new
     @cat = Cat.new
@@ -8,8 +8,13 @@ class Public::CatsController < ApplicationController
   def create
     @cat = Cat.new(cat_params)
     @cat.user_id = current_user.id
-    @cat.save
-    redirect_to cats_path
+    if @cat.save
+      flash[:notice] = "登録に成功しました。"
+      redirect_to cats_path
+    else
+      flash.now[:alert] = "登録に失敗しました。"   
+      render :new
+    end
   end
  
  
@@ -37,8 +42,16 @@ class Public::CatsController < ApplicationController
   end 
 
   
-   private
-
+  private
+  
+  def ensure_guest_user
+    @user = User.find(params[:id])
+    if @user.guest_user?
+      flash.now[:alert] = "会員登録が必要です。"
+      redirect_to root_path
+    end
+  end  
+  
   def cat_params
     params.require(:cat).permit(:user_id, :name, :sex, :birthday, :image)
   end

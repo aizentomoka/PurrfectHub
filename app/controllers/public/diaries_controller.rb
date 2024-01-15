@@ -1,4 +1,5 @@
 class Public::DiariesController < ApplicationController
+  before_action :ensure_guest_user, only: [:new, :create, :edit, :destroy]
   
   def new
     @diary = Diary.new
@@ -10,8 +11,13 @@ class Public::DiariesController < ApplicationController
     @diary.user_id = current_user.id
     input_tags = tag_params[:name].split('/')  # tag_paramsをsplitメソッドを用いて配列に変換
     @diary.create_tags(input_tags)  # create_tagsはtopic.rbにメソッドを記載
-    @diary.save
-    redirect_to diary_path(@diary)
+    if @diary.save
+      flash[:notice] = "投稿に成功しました。"
+      redirect_to diary_path(@diary)
+    else
+      flash.now[:alert] = "投稿に失敗しました。" 
+      render :new
+    end
   end
   
   def index
@@ -44,8 +50,10 @@ class Public::DiariesController < ApplicationController
      if @diary.update(diary_params)
         input_tags = tag_params[:name].split('/')
         @diary.update_tags(input_tags) # udpate_tagsはtopic.rbに記述している
+        flash[:notice] = "編集に成功しました。"
         redirect_to request.referer
      else
+        flash.now[:alert] = "投稿に失敗しました。" 
         render :edit
      end
   end 
@@ -54,6 +62,7 @@ class Public::DiariesController < ApplicationController
   def destroy
     diary = Diary.find(params[:id])
     diary.destroy
+    flash[:notice] = "投稿を削除しました。"
     redirect_to diaries_path
   end
   
@@ -75,6 +84,15 @@ class Public::DiariesController < ApplicationController
   
   
   private
+  
+  
+  def ensure_guest_user
+    @user = User.find(params[:id])
+    if @user.guest_user?
+      flash.now[:alert] = "会員登録が必要です。"
+      redirect_to root_path
+    end
+  end  
 
   def diary_params
     params.require(:diary).permit(:cat_id, :user_id, :title, :body, :weight, images: [])

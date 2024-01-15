@@ -4,8 +4,10 @@ class Cat < ApplicationRecord
  belongs_to :user
  has_many :diaries, dependent: :destroy
     
-    
-   
+ validates :name, length: {maximum: 20}, presence: true
+ validates :sex, presence: true
+ 
+ 
   def get_image
     unless image.attached?
       file_path = Rails.root.join('app/assets/images/no_image.jpg')

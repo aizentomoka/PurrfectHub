@@ -19,7 +19,10 @@ class Diary < ApplicationRecord
  scope :most_favorited, -> { includes(:favorited_users)
    .sort_by { |x| x.favorited_users.includes(:favorites).size }.reverse } #most_favorited = いいね順(多い順)
  
- 
+ validates :title, length: {maximum: 30}, presence: true
+ validates :body, length: {maximum: 3000}, presence: true
+ validates :weight, length: {in: 1..30},
+
  
  
   def favorited_by?(user)
