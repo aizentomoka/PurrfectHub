@@ -52,6 +52,6 @@
     
    
     <p>コメント件数：<%= rescued_cat.rescued_cat_comments.count %></p>
-    <p><%= render 'public/rescued_cats/bookmark', rescued_cat: rescued_cat %></p>
+    <p><%= render 'public/rescued_cats/bookmark', rescued_cat: rescued_cat, current_user: current_user %></p>
 
 <% end %>

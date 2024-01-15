@@ -21,7 +21,7 @@ class Diary < ApplicationRecord
  
  validates :title, length: {maximum: 30}, presence: true
  validates :body, length: {maximum: 3000}, presence: true
- validates :weight, length: {in: 1..30},
+ validates :weight, length: {in: 1..30}
 
  
  

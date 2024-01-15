@@ -1,5 +1,5 @@
 class Public::BookmarksController < ApplicationController
-
+  
   def create
     rescued_cat = RescuedCat.find(params[:rescued_cat_id])
     bookmark = current_user.bookmarks.new(rescued_cat_id: rescued_cat.id)
@@ -14,9 +14,5 @@ class Public::BookmarksController < ApplicationController
    redirect_to request.referer
   end
   
-  
-  def index
-  end
-    
-    
+
 end

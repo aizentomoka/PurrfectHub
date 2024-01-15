@@ -1,5 +1,4 @@
 class Public::UsersController < ApplicationController
-  
   before_action :ensure_guest_user, only: [:edit, :confirm_withdraw]
   
   

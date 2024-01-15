@@ -1,5 +1,5 @@
 class Public::RescuedCatsController < ApplicationController
-  before_action :ensure_guest_user, only: [:new, :create, :edit, :destroy]
+  before_action :ensure_guest_user, only: [:new, :edit, :destroy]
   
   def new
     @rescued_cat = RescuedCat.new
@@ -79,16 +79,8 @@ class Public::RescuedCatsController < ApplicationController
   
   
   
-  private
-  
-  def ensure_guest_user
-    @user = User.find(params[:id])
-    if @user.guest_user?
-      flash.now[:alert] = "会員登録が必要です。"
-      redirect_to root_path
-    end
-  end  
- 
+   private
+
   def rescued_cat_params
     params.require(:rescued_cat).permit(:user_id, :title, :body, :name, :sex, :age, :vaccine, :is_completion, :is_castration, images: [])
   end
@@ -96,4 +88,12 @@ class Public::RescuedCatsController < ApplicationController
   def label_params 
       params.require(:rescued_cat).permit(:name)
   end
+  
+   def ensure_guest_user
+    if current_user.email == "guest@example.com"
+      flash.now[:alert] = "会員登録が必要です。"
+      redirect_to root_path
+    end
+   end  
+
 end

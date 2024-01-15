@@ -1,5 +1,6 @@
 class Public::DiariesController < ApplicationController
-  before_action :ensure_guest_user, only: [:new, :create, :edit, :destroy]
+  before_action :authenticate_user!, except: [:index, :show]
+  before_action :ensure_guest_user, only: [:new, :edit, :destroy]
   
   def new
     @diary = Diary.new
@@ -86,14 +87,7 @@ class Public::DiariesController < ApplicationController
   private
   
   
-  def ensure_guest_user
-    @user = User.find(params[:id])
-    if @user.guest_user?
-      flash.now[:alert] = "会員登録が必要です。"
-      redirect_to root_path
-    end
-  end  
-
+ 
   def diary_params
     params.require(:diary).permit(:cat_id, :user_id, :title, :body, :weight, images: [])
   end
@@ -101,4 +95,13 @@ class Public::DiariesController < ApplicationController
   def tag_params 
       params.require(:diary).permit(:name)
   end
+ 
+  def ensure_guest_user
+    @user = User.find(params[:id])
+    if @user.guest_user?
+      flash.now[:alert] = "ゲストユーザーはプロフィール編集画面へ遷移できません。"
+      redirect_to root_path
+    end
+  end  
+  
 end

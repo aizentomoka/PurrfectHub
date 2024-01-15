@@ -16,8 +16,8 @@ class RescuedCat < ApplicationRecord
  validates :body, length: {maximum: 3000}, presence: true
  validates :vaccine, length: {maximum: 100}, presence: true
 
- 
   def bookmarked_by?(user)
+    return false if user.nil?
     bookmarks.exists?(user_id: user.id)
   end
 

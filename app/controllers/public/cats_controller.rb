@@ -44,16 +44,14 @@ class Public::CatsController < ApplicationController
   
   private
   
-  def ensure_guest_user
-    @user = User.find(params[:id])
-    if @user.guest_user?
-      flash.now[:alert] = "会員登録が必要です。"
-      redirect_to root_path
-    end
-  end  
-  
   def cat_params
     params.require(:cat).permit(:user_id, :name, :sex, :birthday, :image)
   end
   
+  def ensure_guest_user
+    if current_user.email == "guest@example.com"
+      flash.now[:alert] = "会員登録が必要です。"
+      redirect_to root_path
+    end
+  end   
 end
