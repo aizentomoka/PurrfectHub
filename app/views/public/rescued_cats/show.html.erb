@@ -6,6 +6,8 @@
      <p><%= @rescued_cat.user.nickname %></p>
    <% end %>
   
+    <%= render 'public/relationships/follow_btn', user: current_user %>
+  
    <% if @rescued_cat.images.attached? %>
       <% @rescued_cat.images.each do |image| %>
         <%= image_tag image, size: "200x200" %>

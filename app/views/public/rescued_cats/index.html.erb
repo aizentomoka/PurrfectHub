@@ -12,7 +12,6 @@
      <p><%= rescued_cat.user.nickname %></p>
    <% end %>
   
-  
    <% if rescued_cat.images.attached? %>
      <%= image_tag rescued_cat.images.first, size: "200x200" %>
    <% end %>

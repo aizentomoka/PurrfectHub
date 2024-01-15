@@ -23,7 +23,11 @@ class Public::RescuedCatsController < ApplicationController
   end
 
   def edit
-    @rescued_cat = RescuedCat.find(params[:id])
+   @rescued_cat = RescuedCat.find(params[:id])
+  # @label_names = @rescued_cat.labels.pluck(:name).join('/')
+  # puts "Tag Names: #{@tag_names}"
+  # @label_names = @rescued_cat.labels.pluck(:name).join('/')
+  # @label_names = @rescued_cat.label_name
   end
   
   

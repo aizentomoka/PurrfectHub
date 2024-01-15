@@ -1,5 +1,8 @@
 Rails.application.routes.draw do
     
+  namespace :public do
+    get 'chats/show'
+  end
   root to: "homes#top"
   get "home/about"=>"homes#about"
   
@@ -19,9 +22,11 @@ Rails.application.routes.draw do
     namespace :admin do
       
       resources :users, only: [:index, :show, :edit, :update]
+      
       resources :diaries, only: [:index, :destroy] do
         resources :diary_comments, only: [:index, :destroy]
       end
+      
       resources :rescued_cats, only: [:index, :destroy] do
         resources :rescued_cat_comments, only: [:index, :destroy]
       end
@@ -42,6 +47,7 @@ Rails.application.routes.draw do
      
       get 'users/confirm_withdraw' => 'users#confirm_withdraw'
       patch 'users/withdraw' => 'users#withdraw'
+      
       resources :users, only: [:show, :edit, :update] do
          member do
            get :favorites 
@@ -49,9 +55,14 @@ Rails.application.routes.draw do
            get :diaries
            get :rescued_cats
            get :my_page
+           get :follows, :followers
          end
+           resource :relationships, only: [:create, :destroy]
       end
+      
+      resources :chats, only: [:show, :create]
       resources :cats, only: [:new, :create, :index, :update, :show, :edit] 
+      
       resources :diaries do
          resource :favorite, only: [:create, :destroy]
          resources :diary_comments, only: [:create, :destroy]
@@ -60,6 +71,7 @@ Rails.application.routes.draw do
             get 'tag_search'
           end
       end
+      
       resources :rescued_cats do
          resource :bookmark, only: [:create, :destroy]
          resources :rescued_cat_comments, only: [:create, :destroy]

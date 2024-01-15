@@ -6,6 +6,8 @@
     <p><%= @diary.user.nickname %></p>
  <% end %>
 
+ <%= render 'public/relationships/follow_btn', user: current_user %>
+
  <% if @diary.images.attached? %>
       <% @diary.images.each do |image| %>
         <%= image_tag image, size: "200x200" %>
