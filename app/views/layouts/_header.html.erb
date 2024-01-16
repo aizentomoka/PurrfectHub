@@ -1,41 +1,41 @@
-<header>
-  <nav class="navbar navbar-expand-lg navbar-dark bg-dark">
-    <div class="container">
-      <a class="navbar-brand" href="/"><span>PurfectHub</span></a>
-      <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarNavDropdown" aria-controls="navbarNavDropdown" aria-expanded="false" aria-label="Toggle navigation">
-        <span class="navbar-toggler-icon"></span>
-      </button>
-      <div class="collapse navbar-collapse" id="navbarNavDropdown">
-        <ul class="navbar-nav ml-auto">
-          
-        
+ <header class="py-3 mb-1 border-bottom">
+    <div class="container d-flex  justify-content-center">
+      <form class="col-8 col-lg-auto mb-3 mb-lg-0">
+          <a class="navbar" href="/"><span><%= image_tag 'logo2.jpg', size: "300x70" %></span></a>
+      </form>
+    </div>
+  </header>
+
+  <nav class="py-1 bg-body-tertiary border-bottom sticky-top">
+    <div class="container d-flex flex-wrap justify-content-center ">
+      <ul class="nav me-auto">
+
                   <% if admin_signed_in? %>
                 　<!--admin側ログイン後のheaderを返す-->
-                      <%= link_to root_path, class: "btn btn-outline-light rounded-pill ml-2" do %>トップ<% end %>
-                      <%= link_to admin_users_path, class: "btn btn-outline-light rounded-pill ml-2" do %>会員一覧<% end %>
-                      <%= link_to admin_diaries_path, class: "btn btn-outline-light rounded-pill ml-2" do %>みんなの日記<% end %>
-                      <%= link_to admin_rescued_cats_path, class: "btn btn-outline-light rounded-pill ml-2" do %>里親募集<% end %>
-                      <%= link_to destroy_admin_session_path, method: :delete, class: "btn btn-outline-light rounded-pill ml-2" do %>ログアウト<% end %>
+                      <%= link_to root_path, class: "nav-link link-body-emphasis px-2 active" do %>トップ<% end %>
+                      <%= link_to admin_users_path, class: " ml-2" do %>会員一覧<% end %>
+                      <%= link_to admin_diaries_path, class: " ml-2" do %>みんなの日記<% end %>
+                      <%= link_to admin_rescued_cats_path, class: "b ml-2" do %>里親募集<% end %>
+                      <%= link_to destroy_admin_session_path, method: :delete, class: " ml-2" do %>ログアウト<% end %>
                   <% elsif user_signed_in? %>
               　　  <!--userログイン後のheaderを返す  -->
-                      <%= link_to root_path, class: "btn btn-outline-light rounded-pill ml-2" do %>トップ<% end %>
-                      <%= link_to home_about_path, class: "btn btn-outline-light rounded-pill ml-2" do %>アバウト<% end %>
-                      <%= link_to rescued_cats_path, class: "btn btn-outline-light rounded-pill ml-2" do %>里親募集 <% end %>
-                      <%= link_to diaries_path, class: "btn btn-outline-light rounded-pill ml-2" do %>みんなの日記 <% end %>
-                      <%= link_to user_path(current_user), class: "btn btn-outline-light rounded-pill ml-2" do %>マイページ <i class="fa-solid fa-user"></i><% end %>
-                      <%= link_to destroy_user_session_path, method: :delete, class: "btn btn-outline-light rounded-pill ml-2" do %>ログアウト<% end %>
+                      <%= link_to root_path, class: " ml-2" do %>トップ<% end %>
+                      <%= link_to home_about_path, class: " ml-2" do %>アバウト<% end %>
+                      <%= link_to rescued_cats_path, class: " ml-2" do %>里親募集 <% end %>
+                      <%= link_to diaries_path, class: " ml-2" do %>みんなの日記 <% end %>
+                      <%= link_to user_path(current_user), class: " ml-2" do %>マイページ <i class="fa-solid fa-user"></i><% end %>
+                      <%= link_to destroy_user_session_path, method: :delete, class: "btn btn-outline-light ml-2" do %>ログアウト<% end %>
                   <% else %>
                　　 <!--ログインしていない時に表示するheaderのメニューを記載-->
-                      <%= link_to root_path, class: "btn btn-outline-light rounded-pill ml-2" do %>トップ<% end %>
-                      <%= link_to home_about_path, class: "btn btn-outline-light rounded-pill ml-2" do %>アバウト<% end %>
-                      <%= link_to rescued_cats_path, class: "btn btn-outline-light rounded-pill ml-2" do %>里親募集 <% end %>
-                      <%= link_to diaries_path, class: "btn btn-outline-light rounded-pill ml-2" do %>みんなの日記 <% end %>
-                      <%= link_to new_user_registration_path, class: "btn btn-outline-light rounded-pill ml-2" do %>新規会員登録 <% end %>
-                      <%= link_to new_user_session_path, class: "btn btn-outline-light rounded-pill ml-2" do %>ログイン<% end %>
-                      <%= link_to users_guest_sign_in_path, method: :post, class: "btn btn-outline-light rounded-pill ml-2" do %>ゲストログイン<% end %>
+                 <li> <%= link_to root_path, class: "nav-link link-body-emphasis px-2 active" do %>トップ<% end %> </li>
+                      <%= link_to home_about_path, class: "nav-link link-body-emphasis px-2 active" do %>アバウト<% end %>
+                      <%= link_to rescued_cats_path, class: "nav-link link-body-emphasis px-2 active" do %>里親募集 <% end %>
+                      <%= link_to diaries_path, class: "nav-link link-body-emphasis px-2 active" do %>みんなの日記 <% end %>
+                      <%= link_to new_user_registration_path, class: "nav-link link-body-emphasis px-2 active" do %>新規会員登録 <% end %>
+                      <%= link_to new_user_session_path, class: "nav-link link-body-emphasis px-2 active" do %>ログイン<% end %>
+                      <%= link_to users_guest_sign_in_path, method: :post, class: "nav-link link-body-emphasis px-2 active" do %>ゲストログイン<% end %>
                   <% end %>
-        </ul>
-      </div>
+      </ul>
     </div>
   </nav>
-</header>
+  

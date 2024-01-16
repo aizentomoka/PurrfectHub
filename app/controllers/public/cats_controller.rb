@@ -51,7 +51,7 @@ class Public::CatsController < ApplicationController
   def ensure_guest_user
     if current_user.email == "guest@example.com"
       flash.now[:alert] = "会員登録が必要です。"
-      redirect_to root_path
+      redirect_to request.referer
     end
   end   
 end

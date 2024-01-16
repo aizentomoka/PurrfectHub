@@ -15,10 +15,9 @@ class Public::RelationshipsController < ApplicationController
   private
   
   def ensure_guest_user
-    @user = User.find(params[:id])
-    if @user.guest_user?
-      flash.now[:alert] = "ゲストユーザーはプロフィール編集画面へ遷移できません。"
-      redirect_to root_path
+    if current_user.email == "guest@example.com"
+      flash[:alert] = "会員登録が必要です。"
+      redirect_to request.referer  
     end
   end  
   
