@@ -1,4 +1,4 @@
-<h1><%= @diary.cat.name %>の日記</h1>
+<h1><%= @diary.title %></h1>
 
 
  <%= image_tag @diary.user.get_profile_image(100,100) %>
@@ -16,8 +16,6 @@
   
   <p><%= render 'public/diaries/tag', diary: @diary %></p> 
   
-  
-  <p><%= @diary.title %></p>
   
    
   <p>本文</p>

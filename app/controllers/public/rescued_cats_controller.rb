@@ -31,17 +31,12 @@ class Public::RescuedCatsController < ApplicationController
 
   def edit
    @rescued_cat = RescuedCat.find(params[:id])
-  # @label_names = @rescued_cat.labels.pluck(:name).join('/')
-  # puts "Tag Names: #{@tag_names}"
-  # @label_names = @rescued_cat.labels.pluck(:name).join('/')
-  # @label_names = @rescued_cat.label_name
   end
-  
   
   def update
      @rescued_cat = RescuedCat.find(params[:id])
      if @rescued_cat.update(rescued_cat_params)
-        input_labels = label_params[:name].split('/')
+        input_labels = params[:rescued_cat][:label_name].split('/')
         @rescued_cat.update_labels(input_labels) # udpate_labelsはrescued_cat.rbに記述している
         flash[:notice] = "編集に成功しました。"
         redirect_to request.referer
@@ -92,7 +87,7 @@ class Public::RescuedCatsController < ApplicationController
    def ensure_guest_user
     if current_user.email == "guest@example.com"
       flash.now[:alert] = "会員登録が必要です。"
-      redirect_to root_path
+      redirect_to request.referer  
     end
    end  
 

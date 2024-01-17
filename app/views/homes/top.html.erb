@@ -1,2 +1,34 @@
-<h1>Homes#top</h1>
-<p>Find me in app/views/homes/top.html.erb</p>
+<h3>Purrfect Hubへようこそ！</h3>
+<h8>Purrfect Hub（パーフェクトハブ）は猫好きのための里親募集・日記投稿のできるコミュニティサイトです。</h8>
+
+
+   
+ <% @diaries.each do |diary| %>
+    <div class = "container">
+      <div class="diaries">
+           <% if diary.images.attached? %>
+             <%= link_to diary_path(diary.id) do %>
+                <%= image_tag diary.images.first, size: "300x200" %>
+             <% end %>
+           <% end %>
+           <div class = "title">
+             <p><%= diary.title %></p>
+           </div>
+           <div class = "c-fix">
+             <p><%= diary.user.nickname %>さんの投稿</p>
+             <div
+               <i class="fa-regular fa-comment"></i><%= diary.diary_comments.count %> 
+               <i class="fa-solid fa-heart"></i><%= diary.favorites.count %>
+             </div>
+           </div>
+      </div>
+    </div>
+
+
+
+
+ <% end %>
+    <div class="ml-auto">
+       <%= link_to "みんなの日記を見る>", diaries_path %>
+    </div>     
+

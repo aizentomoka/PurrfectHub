@@ -97,8 +97,7 @@ class Public::DiariesController < ApplicationController
   end
  
   def ensure_guest_user
-    @user = User.find(params[:id])
-    if @user.guest_user?
+    if current_user.guest_user?
       flash.now[:alert] = "ゲストユーザーはプロフィール編集画面へ遷移できません。"
       redirect_to root_path
     end

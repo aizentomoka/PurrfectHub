@@ -77,7 +77,7 @@ ActiveRecord::Schema.define(version: 2024_01_15_024012) do
   end
 
   create_table "diaries", force: :cascade do |t|
-    t.integer "cat_id", null: false
+    t.integer "cat_id"
     t.integer "user_id", null: false
     t.string "title", null: false
     t.text "body", null: false

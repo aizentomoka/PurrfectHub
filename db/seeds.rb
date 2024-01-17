@@ -31,7 +31,6 @@ end
   Cat.create!(
     user_id: "#{n + 1}",
     name: "ねこたろう#{n + 1}号",
-    birthday: ,
     sex: "オス",
   )
 end

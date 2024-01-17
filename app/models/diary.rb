@@ -6,7 +6,7 @@ class Diary < ApplicationRecord
  
 
  belongs_to :user
- belongs_to :cat
+ belongs_to :cat, optional: true
  
  has_many :diary_comments, dependent: :destroy
  has_many :favorites, dependent: :destroy
