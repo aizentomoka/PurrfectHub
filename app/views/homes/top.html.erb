@@ -1,34 +1,122 @@
-<h3>Purrfect Hubへようこそ！</h3>
-<h8>Purrfect Hub（パーフェクトハブ）は猫好きのための里親募集・日記投稿のできるコミュニティサイトです。</h8>
+<div class="container mt-4">
+    <div class="row">
+        <div class="col-12 text-center">
+            <h3>Purrfect Hubへようこそ！</h3>
+            <p class="lead">Purrfect Hub（パーフェクトハブ）は猫好きのための里親募集・日記投稿のできるコミュニティサイトです。</p>
+        </div>
+    </div>
+　　<h3>里親募集中！</h3>
+    <div class="row mt-4">
+        
+        <% @rescued_cats.each do |rescued_cat| %>
+            <div class="col-md-3 mb-4">
+                <div class="card">
+                   
+                        <div class="card-header text-center">
+                          <%= link_to rescued_cat_path(rescued_cat.id) do %>
+                            <p class="card-title"><%= rescued_cat.title %></p>
+                          <% end %>
+                        </div>
+                    
 
+                    <% if rescued_cat.images.attached? %>
+                        <%= link_to rescued_cat_path(rescued_cat.id) do %>
+                            <%= image_tag rescued_cat.images.first, class: "card-img-top", alt: "Cat Image" %>
+                        <% end %>
+                    <% end %>
 
-   
- <% @diaries.each do |diary| %>
-    <div class = "container">
-      <div class="diaries">
-           <% if diary.images.attached? %>
-             <%= link_to diary_path(diary.id) do %>
-                <%= image_tag diary.images.first, size: "300x200" %>
-             <% end %>
-           <% end %>
-           <div class = "title">
-             <p><%= diary.title %></p>
-           </div>
-           <div class = "c-fix">
-             <p><%= diary.user.nickname %>さんの投稿</p>
-             <div
-               <i class="fa-regular fa-comment"></i><%= diary.diary_comments.count %> 
-               <i class="fa-solid fa-heart"></i><%= diary.favorites.count %>
-             </div>
-           </div>
-      </div>
+                    <div class="card-body">
+                        <p><%= render 'public/rescued_cats/label', rescued_cat: rescued_cat %></p>
+
+                        <% if rescued_cat.name.present? %>
+                            <p>名前：<%= rescued_cat.name %></p>
+                        <% else %>
+                            <p>名前：</p>
+                        <% end %>
+
+                        <p>性別：<%= rescued_cat.sex %></p>
+                    </div>
+                </div>
+            </div>
+        <% end %>
+        <div class="col-12 text-center mt-4">
+            <%= link_to "保護猫をさがす➡", rescued_cats_path, class: "btn btn-secondary" %>
+        </div>
     </div>
 
 
-
-
- <% end %>
-    <div class="ml-auto">
-       <%= link_to "みんなの日記を見る>", diaries_path %>
-    </div>     
-
+    
+      <div class="row mt-4">
+            <div class="col-3 md-4 question">
+                <div class="text-center h4">おなやみ相談コーナー</div>
+             　　   <% @diary_questions.each do |diary| %>
+                    <div class="card mb-4">
+                        <div class="card-body">
+                            <h6 class="card-title"><%= diary.title %></h5>
+                            <h8 class="card-body"><%= diary.body %></h8>
+                            <p class="card-text"><%= diary.user.nickname %>さんの投稿</p>
+                        </div>
+                        <div class="card-footer d-flex justify-content-between align-items-center">
+                            <div class="iine">
+                                <p><i class="far fa-comment"></i><%= diary.diary_comments.count %></p>
+                                <p><i class="fas fa-heart"></i><%= diary.favorites.count %></p>
+                            </div>
+                            <div class="ml-auto">
+                                <%= link_to "詳細を見る➡", diary_path(diary.id), class: "btn btn-primary" %>
+                            </div>
+                        </div>
+                    </div>
+                    <% end %>
+                    <div class="ml-auto">
+                        <%= link_to "みんなのお悩み相談➡", tag_search_diaries_path(name: "おなやみ"), method: :get ,class: "btn btn-secondary" %>
+                    </div>      
+                    
+                </div>
+                
+                
+               <div class="col-md-6 diaries">
+               　 <div class="text-center h3">注目の日記</div>
+                    <% @diaries.each do |diary| %>
+                    <div class="card mb-4">
+                        <% if diary.images.attached? %>
+                       　　 <%= link_to diary_path(diary.id) do %>
+                        　　　<%= image_tag diary.images.first, class: "card-img-top", alt: "Diary Image" %>
+                        　　<% end %>
+                        <% end %>
+                        <div class="card-body">
+                            <h5 class="card-title"><%= diary.title %></h5>
+                            <p class="card-text"><%= diary.user.nickname %>さんの投稿</p>
+                        </div>
+                        <div class="card-footer d-flex ml-1">
+                                <p><i class="far fa-comment"></i><%= diary.diary_comments.count %></p>
+                                <p><i class="fas fa-heart"></i><%= diary.favorites.count %></p>
+                        </div>
+                    </div>
+                    <% end %>
+                    <div class="text-center mt-3">
+                        <%= link_to "みんなの日記を見る➡", diaries_path, class: "btn btn-secondary" %>
+                    </div>
+            </div>
+            
+                <div class="col-3 md-4 question">
+                    <div class="text-center h4">新しい投稿</div>
+                 　　    <%@newdiaries.each do |diary| %>
+                        <div class="card mb-4">
+                            <% if diary.images.attached? %>
+                           　　 <%= link_to diary_path(diary.id) do %>
+                            　　　<%= image_tag diary.images.first, class: "card-img-top", alt: "Diary Image" %>
+                            　　<% end %>
+                            <% end %>
+                            <div class="card-body">
+                                <h6 class="card-title"><%= diary.title %></h5>
+                                <p class="card-text"><%= diary.user.nickname %>さんの投稿</p>
+                            </div>
+                            <div class="card-footer d-flex ml-1">
+                                    <p><i class="far fa-comment"></i><%= diary.diary_comments.count %></p>
+                                    <p><i class="fas fa-heart"></i><%= diary.favorites.count %></p>
+                            </div>
+                        </div>
+                        <% end %>
+                </div>
+    </div>
+</div>

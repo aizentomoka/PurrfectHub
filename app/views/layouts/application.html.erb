@@ -5,14 +5,23 @@
     <meta name="viewport" content="width=device-width,initial-scale=1">
     <%= csrf_meta_tags %>
     <%= csp_meta_tag %>
-    
-    
+
     <script src="https://kit.fontawesome.com/2b1770b765.js" crossorigin="anonymous"></script>
     <%= stylesheet_pack_tag 'application', media: 'all', 'data-turbolinks-track': 'reload' %>
     <%= javascript_pack_tag 'application', 'data-turbolinks-track': 'reload' %>
+    <link href="https://fonts.googleapis.com/css2?family=Kosugi+Maru&display=swap" rel="stylesheet">
   </head>
 
+  <style>
+ body {
+   font-family: 'Kosugi Maru', sans-serif; 
+   }
+  </style>
+
+
  <body>
+    
+   
   <%= render 'layouts/header' %>
 
   <main class= "py-3" style="background-color: #eae1bd;">

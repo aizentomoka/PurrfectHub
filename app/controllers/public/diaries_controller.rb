@@ -8,6 +8,7 @@ class Public::DiariesController < ApplicationController
   end
   
   def create
+    @cats = current_user.cats
     @diary = Diary.new(diary_params)
     @diary.user_id = current_user.id
     input_tags = tag_params[:name].split('/')  # tag_paramsをsplitメソッドを用いて配列に変換
@@ -36,7 +37,6 @@ class Public::DiariesController < ApplicationController
 
   def show
     @diary = Diary.find(params[:id])
-    @cats = current_user.cats
     @diary_comment = DiaryComment.new
   end
 
