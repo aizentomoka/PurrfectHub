@@ -5,7 +5,7 @@
             <p class="lead">Purrfect Hub（パーフェクトハブ）は猫好きのための里親募集・日記投稿のできるコミュニティサイトです。</p>
         </div>
     </div>
-　　<h3>里親募集中！</h3>
+  <h3>里親募集中！</h3>
     <div class="row mt-4">
         
         <% @rescued_cats.each do |rescued_cat| %>
@@ -21,7 +21,7 @@
 
                     <% if rescued_cat.images.attached? %>
                         <%= link_to rescued_cat_path(rescued_cat.id) do %>
-                            <%= image_tag rescued_cat.images.first, class: "card-img-top", alt: "Cat Image" %>
+                            <%= image_tag rescued_cat.images.first, class: "card-img-top", alt: "Cat Image", size: "100x200" %>
                         <% end %>
                     <% end %>
 
@@ -49,7 +49,7 @@
       <div class="row mt-4">
             <div class="col-3 md-4 question">
                 <div class="text-center h4">おなやみ相談コーナー</div>
-             　　   <% @diary_questions.each do |diary| %>
+                    <% @diary_questions.each do |diary| %>
                     <div class="card mb-4">
                         <div class="card-body">
                             <h6 class="card-title"><%= diary.title %></h5>
@@ -75,13 +75,13 @@
                 
                 
                <div class="col-md-6 diaries">
-               　 <div class="text-center h3">注目の日記</div>
+                   <div class="text-center h3">注目の日記</div>
                     <% @diaries.each do |diary| %>
                     <div class="card mb-4">
                         <% if diary.images.attached? %>
-                       　　 <%= link_to diary_path(diary.id) do %>
-                        　　　<%= image_tag diary.images.first, class: "card-img-top", alt: "Diary Image" %>
-                        　　<% end %>
+                           <%= link_to diary_path(diary.id) do %>
+                              <%= image_tag diary.images.first, class: "card-img-top", alt: "Diary Image" %>
+                           <% end %>
                         <% end %>
                         <div class="card-body">
                             <h5 class="card-title"><%= diary.title %></h5>
@@ -100,12 +100,12 @@
             
                 <div class="col-3 md-4 question">
                     <div class="text-center h4">新しい投稿</div>
-                 　　    <%@newdiaries.each do |diary| %>
+                       <%@newdiaries.each do |diary| %>
                         <div class="card mb-4">
                             <% if diary.images.attached? %>
-                           　　 <%= link_to diary_path(diary.id) do %>
-                            　　　<%= image_tag diary.images.first, class: "card-img-top", alt: "Diary Image" %>
-                            　　<% end %>
+                                <%= link_to diary_path(diary.id) do %>
+                                  <%= image_tag diary.images.first, class: "card-img-top", alt: "Diary Image", size: "100x200" %>
+                                <% end %>
                             <% end %>
                             <div class="card-body">
                                 <h6 class="card-title"><%= diary.title %></h5>

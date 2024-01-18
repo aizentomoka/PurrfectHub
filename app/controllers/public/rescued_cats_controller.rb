@@ -20,7 +20,7 @@ class Public::RescuedCatsController < ApplicationController
   end
   
   def index
-    @rescued_cats = RescuedCat.all
+    @rescued_cats = RescuedCat.page(params[:page]).order(created_at: :desc)
   end
 
   def show
@@ -57,10 +57,10 @@ class Public::RescuedCatsController < ApplicationController
   # 検索機能
   def search
     if params[:keyword].present?
-      @rescued_cats = RescuedCat.where('body LIKE ?', "%#{params[:keyword]}%")
+      @rescued_cats = RescuedCat.where('body LIKE ?', "%#{params[:keyword]}%").page(params[:page]).order(created_at: :desc)
       @keyword = params[:keyword]
     else
-      @rescued_cats = RescuedCat.all
+      @rescued_cats = RescuedCat.page(params[:page])
     end
   end
   
@@ -68,7 +68,7 @@ class Public::RescuedCatsController < ApplicationController
   # ラベル検索機能
   def label_search
      @label_name = params[:name]
-     @rescued_cats = RescuedCat.joins(:labels).where(labels: { name: @label_name })
+     @rescued_cats = RescuedCat.joins(:labels).where(labels: { name: @label_name }).page(params[:page]).order(created_at: :desc)
   end 
   
   
