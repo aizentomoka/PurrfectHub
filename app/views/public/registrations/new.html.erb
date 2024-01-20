@@ -1,7 +1,7 @@
  <div class="container" style="margin-bottom: 50px;">
   <div class="row">
-    <div class="col mt-4">
-      <h3 class="col-3 mt-2 text-center" style="background-color:#faf0e6;">新規会員登録</h3>
+    <div class="col mt-4 ">
+      <h3 class=" mt-2 text-center justify-content-center">新規会員登録</h3>
       <%= form_with model: @user, url:user_registration_path, method: :post, class: 'new_user' do |f| %>
         <%= render "public/shared/error_messages", resource: resource %>
         <table class="table　borderless mt-5" style="display:inline-block;">

@@ -1,21 +1,13 @@
-<table class="table">
-        <tbody>
-          <% @favorite_diaries.each do |diary| %>
-          <tr>
-            <td>
-             <% if diary.images.attached? %>
-              <%= image_tag diary.images.first, size: "200x200" %>
-             <% end %>
-            </td>
-            <!--投稿詳細へのリンク-->
-            <td>
-              <%= link_to diary.title, diary_path(diary) %>
-            </td>
-            <!--投稿ユーザーの日記一覧へのリンク-->
-            <td>
-              <%= link_to diary.user.nickname, diaries_user_path(diary.user) %>
-            </td>
-          </tr>
-          <% end %>
-        </tbody>
-      </table>
+<div class="container mt-5">
+
+  <h1 class="text-ccenter">いいねした日記</h1>
+
+    
+    <%= render 'public/diaries/diaries', diary: @diaries %>
+   
+     <div class="row justify-content-center">
+       <div class="col-4">
+         <%= paginate @diaries %>
+       </div>
+     </div>
+</div>

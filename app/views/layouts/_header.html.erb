@@ -31,7 +31,7 @@
                       <%= link_to home_about_path, class: "btn btn-outline-dark m-1" do %><i class="fa-regular fa-circle-question"></i> アバウト<% end %>
                       <%= link_to rescued_cats_path, class: "btn btn-outline-dark m-1" do %><i class="fa-solid fa-paw"></i> 里親募集 <% end %>
                       <%= link_to diaries_path, class: "btn btn-outline-dark m-1" do %><i class="fa-solid fa-book-open"></i> みんなの日記 <% end %>
-                      <%= link_to user_path(current_user), class: "btn btn-outline-dark m-1" do %><i class="fa-solid fa-user"></i> マイページ<% end %>
+                      <%= link_to my_page_user_path(current_user), class: "btn btn-outline-dark m-1" do %><i class="fa-solid fa-user"></i> マイページ<% end %>
                       <%= link_to destroy_user_session_path, method: :delete, class: "btn btn-outline-dark m-1" do %><i class="fa-solid fa-person-running"></i> ログアウト<% end %>
                   <% else %>
                   <!--ログインしていない時に表示するheaderのメニューを記載-->

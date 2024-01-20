@@ -1,5 +1,5 @@
 class Public::UsersController < ApplicationController
-  before_action :ensure_guest_user, only: [:edit, :confirm_withdraw]
+  before_action :ensure_guest_user, only: [:edit, :withdraw]
   
   
   def show
@@ -38,28 +38,28 @@ class Public::UsersController < ApplicationController
   def favorites 
     @user = User.find(params[:id])
     favorites = Favorite.where(user_id: @user.id).pluck(:diary_id)
-    @favorite_diaries = Diary.find(favorites)
-    @diary = Diary.find(params[:id])
+    @diaries = Diary.where(id: favorites).page(params[:page]).order(created_at: :desc)
+    @favorite_diaries = @diaries
   end
   
   # ブックマークした里親募集一覧
   def bookmarks 
     @user = User.find(params[:id])
     bookmarks = Bookmark.where(user_id: @user.id).pluck(:rescued_cat_id)
-    @bookmark_rescued_cats = RescuedCat.find(bookmarks)
-    @rescued_cat = RescuedCat.find(params[:id])
+    @rescued_cats = RescuedCat.where(id: bookmarks).page(params[:page]).order(created_at: :desc)
+    @bookmark_rescued_cats = @rescued_cats
   end
   
   # ログインユーザーの日記一覧
   def diaries
     @user = current_user
-    @diaries = @user.diaries
+    @diaries = @user.diaries.page(params[:page]).order(created_at: :desc)
   end
   
    # ログインユーザーの里親募集一覧
   def rescued_cats
     @user = current_user
-    @rescued_cats = @user.rescued_cats
+    @rescued_cats = @user.rescued_cats.page(params[:page]).order(created_at: :desc)
   end
   
   # ログインユーザーのマイページ
@@ -78,7 +78,7 @@ class Public::UsersController < ApplicationController
   # フォロワー一覧
   def followers
     user = User.find(params[:id])
-    @user = user.follower_users
+    @users = user.follower_users
   end
   
  
@@ -99,5 +99,8 @@ class Public::UsersController < ApplicationController
    def user_params
       params.require(:user).permit(:nickname, :last_name, :first_name, :last_name_kana, :first_name_kana, :post_code, :address, :telephone_number, :email, :profile_image)
    end
+  
+  
+  
   
 end

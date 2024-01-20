@@ -1,37 +1,9 @@
 <div class="container mt-5">
 
-  <h1 class="mb-4"><%= @keyword %>の日記</h1>
+  <h1 class="text-ccenter"><%= @keyword %>の日記</h1>
 
     
-    <div class="row">
-       <% @diaries.each do |diary| %>
-         <div class="col-md-3 mb-4">
-           <div class="card">
-             <div class="card-header text-center">
-               <%= link_to diary_path(diary.id), class: "card-title" do %>
-                 <%= diary.title %>
-               <% end %>
-             </div>
-   
-             <% if diary.images.attached? %>
-               <%= link_to diary_path(diary.id) do %>
-                 <%= image_tag diary.images.first, class: "card-img-top", alt: "Cat Image", size: "100x200" %>
-               <% end %>
-             <% end %>
-   
-             <div class="card-body">
-               <p><%= render 'public/diaries/tag', diary: diary %></p>
-               <%= link_to my_page_user_path(diary.user.id) do %>
-                 <%= image_tag diary.user.get_profile_image(100,100), class: "mr-3 rounded-circle" %>
-               <% end %>   
-               <p><%= diary.user.nickname %></p>
-               <p><i class="far fa-comment"></i> <%= diary.diary_comments.count %></p>
-               <p><%= render 'public/diaries/favorite', diary: diary %></p>
-             </div>
-           </div>
-         </div>
-       <% end %>
-     </div>
+    <%= render 'public/diaries/diaries', diary: @diary %>
    
      <div class="row justify-content-center">
        <div class="col-4">

@@ -1,0 +1,33 @@
+<div class="row">
+    <% @rescued_cats.each do |rescued_cat| %>
+      <div class="col-md-3 mb-4">
+        <div class="card">
+          <div class="card-header text-center">
+            <%= link_to rescued_cat_path(rescued_cat.id) do %>
+              <p class="card-title"><%= rescued_cat.title %></p>
+            <% end %>
+          </div>
+
+          <% if rescued_cat.images.attached? %>
+            <%= link_to rescued_cat_path(rescued_cat.id) do %>
+              <%= image_tag rescued_cat.images.first, class: "card-img-top", alt: "Cat Image", size: "100x200" %>
+            <% end %>
+          <% end %>
+
+          <div class="card-body">
+            <p><%= render 'public/rescued_cats/label', rescued_cat: rescued_cat %></p>
+            <% if rescued_cat.name.present? %>
+              <p>名前：<%= rescued_cat.name %></p>
+            <% else %>
+              <p>名前：</p>
+            <% end %>
+            <p>性別：<%= rescued_cat.sex %></p>
+            <p><i class="far fa-comment"></i> <%= rescued_cat.rescued_cat_comments.count %></p>
+            <p><%= render 'public/rescued_cats/bookmark', rescued_cat: rescued_cat, current_user: current_user %></p>
+          </div>
+        </div>
+      </div>
+    <% end %>
+  </div>
+
+   

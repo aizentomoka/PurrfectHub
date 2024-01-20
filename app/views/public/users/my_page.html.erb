@@ -18,3 +18,12 @@
   <% if current_user != @user && current_user.following?(@user) && @user.following?(current_user) %>
     <%= link_to 'chatを始める', chat_path(@user), class: "ml-3" %>
   <% end %>
+  
+  
+   <%= link_to "日記一覧", diaries_user_path(@user), class: "btn btn-danger" %>
+    <%= link_to "里親募集一覧", rescued_cats_user_path(@user), class: "btn btn-danger" %>
+     <%= link_to "ブックマーク一覧", bookmarks_user_path(@user), class: "btn btn-danger" %>
+      <%= link_to "いいね一覧", favorites_user_path(@user),  class: "btn btn-danger" %>
+       <%= link_to "日記を書く", new_diary_path, class: "btn btn-danger" %>
+        <%= link_to "里親を募集", new_rescued_cat_path, class: "btn btn-danger" %>
+         <%= link_to "会員詳細へ", user_path(@user), class: "btn btn-danger" %>

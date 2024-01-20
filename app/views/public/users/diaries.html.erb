@@ -1,24 +1,12 @@
-<h1>日記一覧</h1>
+<div class="container mt-5">
 
-
- 
-<% @diaries.each do |diary| %>
-
+  <h1 class="text-center">日記一覧</h1>
   
-   <% if diary.images.attached? %>
-     <%= image_tag diary.images.first, size: "200x200" %>
-   <% end %>
-
-   <%= link_to diary_path(diary.id) do %>
-    <p><%= diary.title %></p>
-   <% end %>
+    <%= render 'public/diaries/diaries', diary: @diary %>
    
-  　
-   <p>体重</p>
-   <%= diary.weight %>
-   
- 
- <p>コメント件数：<%= diary.diary_comments.count %></p>
- <p><%= render 'public/diaries/favorite', diary: diary %></p>
-
-<% end %>
+     <div class="row justify-content-center">
+       <div class="col-4">
+         <%= paginate @diaries %>
+       </div>
+     </div>
+</div>

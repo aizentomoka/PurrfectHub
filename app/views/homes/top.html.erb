@@ -80,7 +80,7 @@
                     <div class="card mb-4">
                         <% if diary.images.attached? %>
                            <%= link_to diary_path(diary.id) do %>
-                              <%= image_tag diary.images.first, class: "card-img-top", alt: "Diary Image" %>
+                              <%= image_tag diary.images.first, class: "card-img-top", alt: "Diary Image", size: "150x300" %>
                            <% end %>
                         <% end %>
                         <div class="card-body">

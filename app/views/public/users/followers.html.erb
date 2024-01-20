@@ -9,7 +9,7 @@
     </tr>
   </thead>
   <tbody>
-    <% @user.each do |user| %>
+    <% @users.each do |user| %>
       <tr>
         <td>
           <%= link_to user_path(user) do %>
@@ -18,8 +18,8 @@
         </td>
         <td><%= user.nickname %></td>
         <td>
-          <%= link_to follows_user_path(user) do %>
-            <p>フォロー<%= user.followers.count %></p>
+          <%= link_to  diaries_user_path(user) do %>
+            <p>投稿日記<%= user.diaries.count %>件</p>
           <% end %>
         </td>
         <td>  
@@ -27,7 +27,17 @@
             <p>フォロワー<%= user.followeds.count %></p>
           <% end %>
         </td>
-      </tr>
-    <% end %>
+    
+      
+       <td>  
+      <% if current_user != user && current_user.following?(user) && user.following?(current_user) %>
+          <%= link_to 'チャットルームへ', chat_path(user), class: "ml-3" %>
+      <% end %>
+         </td> 
+           </tr>
+      <% end %>
+       
+    
+    
   </tbody>
 </table> 

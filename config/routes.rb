@@ -45,7 +45,7 @@ Rails.application.routes.draw do
     
     scope module: :public do
      
-      get 'users/confirm_withdraw' => 'users#confirm_withdraw'
+      get '/users/:id/confirm_withdraw', to: 'public/users#confirm_withdraw', as: 'confirm_withdraw'
       patch 'users/withdraw' => 'users#withdraw'
       
       resources :users, only: [:show, :edit, :update] do
@@ -60,7 +60,7 @@ Rails.application.routes.draw do
            resource :relationships, only: [:create, :destroy]
       end
       
-      resources :chats, only: [:show, :create]
+      resources :chats, only: [:show, :create, :destroy]
       resources :cats, only: [:new, :create, :index, :update, :show, :edit] 
       
       resources :diaries do
