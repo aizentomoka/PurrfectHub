@@ -1,4 +1,5 @@
 class Public::RescuedCatsController < ApplicationController
+  before_action :authenticate_user!, except: [:index]
   before_action :ensure_guest_user, only: [:new, :edit, :destroy]
   
   def new

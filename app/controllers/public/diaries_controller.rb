@@ -1,5 +1,5 @@
 class Public::DiariesController < ApplicationController
-  before_action :authenticate_user!, except: [:index, :show]
+  before_action :authenticate_user!, except: [:index]
   before_action :ensure_guest_user, only: [:new, :edit, :destroy]
   
   def new
@@ -70,7 +70,7 @@ class Public::DiariesController < ApplicationController
   # 検索機能
   def search
     if params[:keyword].present?
-      @diaries = Diary.where('body LIKE ?', "%#{params[:keyword]}%")
+      @diaries = Diary.where('body LIKE ?', "%#{params[:keyword]}%").page(params[:page]).order(created_at: :desc)
       @keyword = params[:keyword]
     else
       @diaries = Diary.all
@@ -80,7 +80,7 @@ class Public::DiariesController < ApplicationController
   # タグ検索機能
   def tag_search
      @tag_name = params[:name]
-     @diaries = Diary.joins(:tags).where(tags: { name: @tag_name })
+     @diaries = Diary.joins(:tags).where(tags: { name: @tag_name }).page(params[:page]).order(created_at: :desc)
   end 
   
   

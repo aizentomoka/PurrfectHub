@@ -1,21 +1,28 @@
-<h1>My Cat 編集</h1>
+<div class="container">
+  <h1 class="text-center">My Cat 編集</h1>
+  <div class="d-flex justify-content-center align-items-center">
+    <%= image_tag @cat.get_image, size: "200x200", class: "rounded-circle" %>
+  </div>
+  <%= form_with model: @cat, html: { class: 'text-center' } do |f| %>
+    <h4>画像</h4>
+    <%= f.file_field :image, accept: "image/*", class: 'form-control' %>
+    
+    <h4>name</h4>
+    <%= f.text_field :name, class: 'form-control' %>
 
+    <h4>性別</h4>
+    <%= f.text_field :sex, class: 'form-control' %>
 
-<%= form_with model: @cat do |f| %>
-  <h4>画像</h4>
-  <%= f.file_field :image, accept: "image/*" %>
-  <h4>name</h4>
-  <%= f.text_field :name %>
-  <h4>性別</h4>
-  <%= f.text_field :sex %>
-  <h4>誕生日</h4>
-  <%= f.date_select(
-        :birth_date,
-        use_month_numbers: true,
-        start_year: 1990,
-        end_year: (Time.now.year),
-        default: Date.new(1990, 1, 1),
-        date_separator: '/') %>
-        
-  <%= f.submit '変更保存' %>
-<% end %>
+    <h4>誕生日</h4>
+    <%= f.date_select(
+          :birthday,
+          use_month_numbers: true,
+          start_year: 1990,
+          end_year: (Time.now.year),
+          default: Date.new(1990, 1, 1),
+          date_separator: '/',
+          class: 'form-control') %>
+          
+   <p><%= f.submit '登録', class: 'btn btn-success mt-3' %></p>
+  <% end %>
+</div>

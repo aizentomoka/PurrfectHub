@@ -1,11 +1,16 @@
-<h1><%= @cat.name %></h1>
- 
-
-<div>
-
-<%= image_tag @cat.get_image, size: "200x200" %>
-
-  <p>性別：<%= @cat.sex %></p>
-  <p>誕生日：<%= @cat.birthday %></p>
-</div>
-  <h4><%= link_to "編集する", edit_cat_path(@cat), class: "btn btn-sm btn-info" %></h4>
+<div class="container">
+  <div class ="row flex align-items-center justify-content-center text-align-center">
+   
+     
+   
+    <div>
+      <h1><%= @cat.name %></h1>
+      <%= image_tag @cat.get_image, size: "200x200", class: " rounded-circle" %>
+      <p>性別：<%= @cat.sex %></p>
+      <p>誕生日：<%= @cat.birthday %></p>
+      
+       <%= link_to "編集する", edit_cat_path(@cat), class: "btn btn-sm btn-info mt-3" %>
+    </div>
+   
+  
+   

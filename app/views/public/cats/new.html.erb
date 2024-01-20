@@ -1,19 +1,26 @@
-<h1>My Cat 新規登録</h1>
-<%= form_with model: @cat do |f| %>
-  <h4>画像</h4>
-  <%= f.file_field :image, accept: "image/*" %>
-  <h4>name</h4>
-  <%= f.text_field :name %>
-  <h4>性別</h4>
-  <%= f.text_field :sex %>
-  <h4>誕生日</h4>
-  <%= f.date_select(
-        :birthday,
-        use_month_numbers: true,
-        start_year: 1990,
-        end_year: (Time.now.year),
-        default: Date.new(1990, 1, 1),
-        date_separator: '/') %>
-        
-  <%= f.submit '登録' %>
-<% end %>
+<div class="container">
+  <h1 class="text-center">My Cat 新規登録</h1>
+  <%= form_with model: @cat, html: { class: 'text-center' } do |f| %>
+    <h4>画像</h4>
+    <%= f.file_field :image, accept: "image/*", class: 'form-control' %>
+    
+    <h4>name</h4>
+    <%= f.text_field :name, class: 'form-control' %>
+
+    <h4>性別</h4>
+    <%= f.text_field :sex, class: 'form-control' %>
+
+    <h4>誕生日</h4>
+    <div class = "height-auto">
+    <%= f.date_select(
+          :birthday,
+          use_month_numbers: true,
+          start_year: 1990,
+          end_year: (Time.now.year),
+          default: Date.new(1990, 1, 1),
+          date_separator: '/',
+          class: 'form-control') %>
+    </div>     
+   <p><%= f.submit '登録', class: 'btn btn-success mt-3' %></p>
+  <% end %>
+</div>

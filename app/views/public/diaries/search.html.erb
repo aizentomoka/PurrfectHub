@@ -1,27 +1,41 @@
- <h2>検索結果 "<%= @keyword %>"</h2>
- 
- 
-  <% @diaries.each do |diary| %>
+<div class="container mt-5">
 
-   <%= image_tag diary.user.get_profile_image(100,100) %>
-   <%= link_to my_page_user_path(diary.user.id) do %>
-    <p><%= diary.user.nickname %></p>
-   <% end %>
-  
-  
-   <% if diary.images.attached? %>
-     <%= image_tag diary.images.first, size: "200x200" %>
-   <% end %>
+  <h1 class="mb-4"><%= @keyword %>の日記</h1>
 
-   <p><%= render 'public/diaries/tag', diary: diary %></p> 
-
-   <%= link_to diary_path(diary.id) do %>
-    <p><%= diary.title %></p>
-   <% end %>
+    
+    <div class="row">
+       <% @diaries.each do |diary| %>
+         <div class="col-md-3 mb-4">
+           <div class="card">
+             <div class="card-header text-center">
+               <%= link_to diary_path(diary.id), class: "card-title" do %>
+                 <%= diary.title %>
+               <% end %>
+             </div>
    
+             <% if diary.images.attached? %>
+               <%= link_to diary_path(diary.id) do %>
+                 <%= image_tag diary.images.first, class: "card-img-top", alt: "Cat Image", size: "100x200" %>
+               <% end %>
+             <% end %>
    
- 
- <p>コメント件数：<%= diary.diary_comments.count %></p>
- <p><%= render 'public/diaries/favorite', diary: diary %></p>
-
-<% end %>
+             <div class="card-body">
+               <p><%= render 'public/diaries/tag', diary: diary %></p>
+               <%= link_to my_page_user_path(diary.user.id) do %>
+                 <%= image_tag diary.user.get_profile_image(100,100), class: "mr-3 rounded-circle" %>
+               <% end %>   
+               <p><%= diary.user.nickname %></p>
+               <p><i class="far fa-comment"></i> <%= diary.diary_comments.count %></p>
+               <p><%= render 'public/diaries/favorite', diary: diary %></p>
+             </div>
+           </div>
+         </div>
+       <% end %>
+     </div>
+   
+     <div class="row justify-content-center">
+       <div class="col-4">
+         <!--< %= paginate @diaries %>-->
+       </div>
+     </div>
+</div>

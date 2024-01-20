@@ -1,40 +1,72 @@
-<h1>日記一覧</h1>
-<!--キーワード検索-->
-<div class="search-window d-flex justify-content-end mr-4">
-<%= form_with url: search_diaries_path, local: true, method: :get do |f| %>
-    <%= f.text_field :keyword %>
-    <%= f.submit "検索" %>
-<% end %>
-<!--タグ検索-->
-<%= form_with url: tag_search_diaries_path, local: true, method: :get do |f| %>
-    <%= f.text_field :name %>
-    <%= f.submit "タグ検索" %>
-<% end %>
+<div class="container mt-5">
+
+  <h1 class="mb-4">日記一覧</h1>
+
+  <!-- キーワード検索フォーム -->
+  <%= form_with url: search_diaries_path, local: true, method: :get, class: "mb-3" do |f| %>
+    <div class="input-group">
+      <%= f.text_field :keyword, class: "form-control", placeholder: "キーワード検索" %>
+      <div class="input-group-append">
+        <%= f.button :submit, class: "btn btn-outline-secondary" do %>
+          <i class="fas fa-search"></i>
+        <% end %>
+      </div>
+    </div>
+  <% end %>
+
+  <!-- タグ検索フォーム -->
+  <%= form_with url: tag_search_diaries_path, local: true, method: :get, class: "mb-3" do |f| %>
+    <div class="input-group">
+      <%= f.text_field :name, class: "form-control", placeholder: "タグ検索" %>
+      <div class="input-group-append">
+        <%= f.button :submit, class: "btn btn-outline-secondary" do %>
+          <i class="fas fa-search"></i>
+        <% end %>
+      </div>
+    </div>
+  <% end %>
+
+  <!-- 並び替えボタン -->
+  <div class="btn-group mb-3" role="group" aria-label="Sort Diaries">
+    <%= link_to '新着順', diaries_path(latest: "true"), class: "btn btn-outline-secondary" %>
+    <%= link_to '古い順', diaries_path(old: "true"), class: "btn btn-outline-secondary" %>
+    <%= link_to 'いいね順', diaries_path(most_favorited: "true"), class: "btn btn-outline-secondary" %>
+  </div>
+
+  <div class="row">
+    <% @diaries.each do |diary| %>
+      <div class="col-md-3 mb-4">
+        <div class="card">
+          <div class="card-header text-center">
+            <%= link_to diary_path(diary.id), class: "card-title" do %>
+              <%= diary.title %>
+            <% end %>
+          </div>
+
+          <% if diary.images.attached? %>
+            <%= link_to diary_path(diary.id) do %>
+              <%= image_tag diary.images.first, class: "card-img-top", alt: "Cat Image", size: "100x200" %>
+            <% end %>
+          <% end %>
+
+          <div class="card-body">
+            <p><%= render 'public/diaries/tag', diary: diary %></p>
+            <%= link_to my_page_user_path(diary.user.id) do %>
+              <%= image_tag diary.user.get_profile_image(100,100), class: "mr-3 rounded-circle" %>
+            <% end %>   
+            <p><%= diary.user.nickname %></p>
+            <p><i class="far fa-comment"></i> <%= diary.diary_comments.count %></p>
+            <p><%= render 'public/diaries/favorite', diary: diary %></p>
+          </div>
+        </div>
+      </div>
+    <% end %>
+  </div>
+
+  <div class="row justify-content-center">
+    <div class="col-4">
+      <!--< %= paginate @diaries %>-->
+    </div>
+  </div>
+
 </div>
-
-<%= link_to '新着順', diaries_path(latest: "true") %>
-<%= link_to '古い順', diaries_path(old: "true") %>
-<%= link_to 'いいね順', diaries_path(most_favorited: "true") %>
- 
-<% @diaries.each do |diary| %>
-
-   <%= image_tag diary.user.get_profile_image(100,100) %>
-   <%= link_to my_page_user_path(diary.user.id) do %>
-    <p><%= diary.user.nickname %></p>
-   <% end %>
-  
-   <% if diary.images.attached? %>
-     <%= image_tag diary.images.first, size: "200x200" %>
-   <% end %>
-
-   <%= link_to diary_path(diary.id) do %>
-    <p><%= diary.title %></p>
-   <% end %>
-   
-   <p><%= render 'public/diaries/tag', diary: diary %></p> 
-  
- 
- <p>コメント件数：<%= diary.diary_comments.count %></p>
- <p><%= render 'public/diaries/favorite', diary: diary %></p>
-
-<% end %>

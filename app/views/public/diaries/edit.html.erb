@@ -1,22 +1,40 @@
-<h1>日記 編集</h1>
+<div class="container mt-5">
+  <h1 class="text-center">日記　編集</h1>
 
+  <%= form_with model: @diary, multipart: true, class: "mt-4" do |f| %>
+    <div class="form-group">
+      <h4>猫ちゃん</h4>
+       <%= f.collection_select :cat_id, @cats, :id, :name, prompt: '選択してください', class: "form-control" %>
+    </div>
 
-<%= form_with model: @diary, multipart: true do |f| %>
+    <div class="form-group">
+      <h4>画像（複数投稿できます）</h4>
+      <%= f.file_field :images, multiple: true, class: "form-control" %>
+    </div>
 
-　<h4>猫ちゃん</h4>
-  <%= f.collection_select :cat_id, @cats, :id, :name, prompt: '選択してください' %>
+    <div class="form-group">
+      <h4>タグ(“/”で複数個登録できます)</h4>
+      <%= f.text_field :name, value: @diary.tags.pluck(:name).join('/') , class: "form-control" %>
+    </div>
 
-  <h4>画像</h4>
-  <%= f.file_field :images, multiple: true %>
-  <%= f.label :tags, "タグ(“/”で複数個登録できます)"  %>
-  <%= f.text_field :name, value: @diary.tags.pluck(:name).join('/') %>
-  <h4>タイトル</h4>
-  <%= f.text_field :title %>
-  <h4>本文</h4>
-  <%= f.text_area :body %>
-  <h4>体重</h4>
-   <%= f.text_field :weight %>
- 
-  <%= f.submit '変更保存' %>
-  
-<% end %>
+    <div class="form-group">
+      <h4>タイトル</h4>
+      <%= f.text_field :title, class: "form-control" %>
+    </div>
+
+    <div class="form-group">
+      <h4>本文</h4>
+      <%= f.text_area :body, class: "form-control", rows: 15, cols: 50 %>
+    </div>
+
+    <div class="form-group">
+      <h4>体重</h4>
+      <%= f.text_field :weight, autofocus: true, class: "form-control" %>
+    </div>
+
+    
+    <div class="form-group text-center">
+      <%= f.submit '変更を保存', class: "btn btn-success" %>
+    </div>
+  <% end %>
+</div>

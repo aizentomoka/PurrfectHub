@@ -44,7 +44,7 @@
 
       <!-- ブックマークとコメント -->
       <p><%= render 'public/rescued_cats/bookmark', rescued_cat: @rescued_cat %></p>
-      <p>コメント件数：<%= @rescued_cat.rescued_cat_comments.count %></p>
+      <p><i class="far fa-comment"></i> <%= @rescued_cat.rescued_cat_comments.count %></p>
       <% @rescued_cat.rescued_cat_comments.each do |rescued_cat_comment| %>
      <div class="comment">
         <%= link_to my_page_user_path(rescued_cat_comment.user) do %>
