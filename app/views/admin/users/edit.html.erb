@@ -1,71 +1,63 @@
-<div class="container-fluid mt-2">
-   <div class="row mt-3 mx-auto">
-    
-    <h5 class="font-weight-bold w-25 text-center ml-5">会員情報編集</h5>
-    
-    
-    <%= form_with model:@user, url: admin_user_path, method: :patch  do |f| %>
-
-     <table class="table-borderless mt-5">
-          <tr>
-            <td class="py-2">ニックネーム</td>
-            <td class="py-2"><%= f.text_field :nickname %></td>
-            <td></td>
-          </tr>
-           <tr>
-            <td class="py-2">氏名</td>
-            <td class="py-2"><%= f.text_field :last_name %></td>
-            <td class="py-2"><%= f.text_field :first_name %></td>
-          </tr>
-          <tr>
-            <td class="py-2">フリガナ</td>
-            <td class="py-2"><%= f.text_field :last_name_kana %></td>
-            <td class="py-2"><%= f.text_field :first_name_kana %></td>
-          </tr>
-          <tr>
-            <td class="py-2">郵便番号</td>
-            <td class="py-2"><%= f.text_field :post_code %></td>
-            <td></td>
-          </tr>
-          <tr>
-            <td class="py-2">住所</td>
-            <td colspan="2" class="py-2"><%= f.text_field :address, style: 'width: 500px;' %></td>
-          </tr>
-          <tr>
-            <td class="py-2">電話番号</td>
-            <td class="py-2"><%= f.text_field :telephone_number %></td>
-            <td></td>
-          </tr>
-          <tr>
-            <td class="py-2">メールアドレス</td>
-            <td class="py-2"><%= f.text_field :email %></td>
-            <td></td>
-          </tr>
-         
-         
-          <tr>
-            <td class="py-2">会員ステータス</td>
-            <td>
-         　  <%= f.radio_button :is_active, "true" %>
-            <%= f.label :is_active_true, "有効" %>
-            
-            <%= f.radio_button :is_active, "false" %>
-            <%= f.label :is_active_false, "退会" %>
-            </td>
-          </tr>
-         
-         
-         
-         
-          <tr>
-            <td class="py-2"><%= f.submit "変更を保存", class: "btn btn-info" %></td>
-            <td></td>
-          </tr>
-       
-     </table>
+   <div class="row mt-3 mx-auto ">
+       <div class=" mx-auto  ">
+        <h4  class = "text-center">登録情報</h4>
      
-     
-      
-    <% end %>
+    
+        
+        <%= form_with model:@user, url: admin_user_path, method: :patch  do |f| %>
+    
+         <table class="table-borderless mt-5" >
+              <tr>
+                <td class="py-2">ニックネーム</td>
+                <td class="py-2"><%= f.text_field :nickname %></td>
+                <td></td>
+              </tr>
+               <tr>
+                <td class="py-2">氏名</td>
+                <td class="py-2"><%= f.text_field :last_name %></td>
+                <td class="py-2"><%= f.text_field :first_name %></td>
+              </tr>
+              <tr>
+                <td class="py-2">フリガナ</td>
+                <td class="py-2"><%= f.text_field :last_name_kana %></td>
+                <td class="py-2"><%= f.text_field :first_name_kana %></td>
+              </tr>
+              <tr>
+                <td class="py-2">郵便番号</td>
+                <td class="py-2"><%= f.text_field :post_code %></td>
+                <td></td>
+              </tr>
+              <tr>
+                <td class="py-2">住所</td>
+                <td colspan="2" class="py-2"><%= f.text_field :address, style: 'width: 500px;' %></td>
+              </tr>
+              <tr>
+                <td class="py-2">電話番号</td>
+                <td class="py-2"><%= f.text_field :telephone_number %></td>
+                <td></td>
+              </tr>
+              <tr>
+                <td class="py-2">メールアドレス</td>
+                <td class="py-2"><%= f.text_field :email %></td>
+                <td></td>
+              </tr>
+             
+             
+              <tr>
+                <td class="py-2">会員ステータス</td>
+                <td>
+             　  <%= f.radio_button :is_active, "true" %>
+                <%= f.label :is_active_true, "有効" %>
+                
+                <%= f.radio_button :is_active, "false" %>
+                <%= f.label :is_active_false, "退会" %>
+                </td>
+              </tr>
+         </table>
+         
+          <div class = "text-center">   
+            <%= f.submit "変更を保存", class: "btn btn-info" %>
+          </div>
+        <% end %>
   </div>
 </div>

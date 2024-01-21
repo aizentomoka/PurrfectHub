@@ -1,5 +1,7 @@
 class Public::CatsController < ApplicationController
+  before_action :authenticate_user!, except: [ :index]
   before_action :ensure_guest_user, only: [:new, :create, :edit]
+  before_action :is_matching_login_user, only: [:edit, :update]
   
   def new
     @cat = Cat.new
@@ -54,4 +56,11 @@ class Public::CatsController < ApplicationController
       redirect_to request.referer
     end
   end   
+  
+  def is_matching_login_user
+    user = User.find(params[:id])
+    unless user.id == current_user.id 
+      redirect_to root_path
+    end
+  end
 end

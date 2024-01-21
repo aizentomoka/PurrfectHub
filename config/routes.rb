@@ -45,7 +45,7 @@ Rails.application.routes.draw do
     
     scope module: :public do
      
-      get '/users/:id/confirm_withdraw', to: 'public/users#confirm_withdraw', as: 'confirm_withdraw'
+      get 'users/confirm_withdraw' => 'users#confirm_withdraw'
       patch 'users/withdraw' => 'users#withdraw'
       
       resources :users, only: [:show, :edit, :update] do

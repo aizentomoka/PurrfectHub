@@ -1,7 +1,8 @@
 class Admin::RescuedCatsController < ApplicationController
   def index
-    @rescued_cats = RescuedCat.all
+    @rescued_cats = RescuedCat.page(params[:page])
   end
+  
 
   def destroy
     rescued_cat = RescuedCat.find(params[:id])

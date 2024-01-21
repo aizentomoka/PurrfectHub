@@ -1,6 +1,7 @@
 class Public::RescuedCatsController < ApplicationController
-  before_action :authenticate_user!, except: [:index]
+  before_action :authenticate_user!, except: [ :index]
   before_action :ensure_guest_user, only: [:new, :edit, :destroy]
+  before_action :is_matching_login_user, only: [:edit, :update]
   
   def new
     @rescued_cat = RescuedCat.new
@@ -85,11 +86,17 @@ class Public::RescuedCatsController < ApplicationController
       params.require(:rescued_cat).permit(:name)
   end
   
-   def ensure_guest_user
+  def ensure_guest_user
     if current_user.email == "guest@example.com"
       flash.now[:alert] = "会員登録が必要です。"
       redirect_to request.referer  
     end
-   end  
-
+  end  
+  
+  def is_matching_login_user
+    user = User.find(params[:id])
+    unless user.id == current_user.id 
+      redirect_to root_path
+    end
+  end
 end

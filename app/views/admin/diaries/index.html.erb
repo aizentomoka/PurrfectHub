@@ -1,29 +1,56 @@
-<h1>日記一覧</h1>
-<%= link_to "コメント一覧へ", admin_diary_diary_comments_path(:diary_id), class: "btn btn-sm btn-info" %>
+<div class="container mt-5">
 
-<%= link_to '新着順', admin_diaries_path(latest: "true") %>
-<%= link_to '古い順', admin_diaries_path(old: "true") %>
-<%= link_to 'いいね順', admin_diaries_path(most_favorited: "true") %>
- 
-<% @diaries.each do |diary| %>
-
-   <%= image_tag diary.user.get_profile_image(100,100) %>
-   <%= link_to admin_user_path(diary.user.id) do %>
-    <p><%= diary.user.nickname %></p>
-   <% end %>
+  <h1 class="text-center">日記一覧</h1>
   
+   <!-- 並び替えボタン -->
+    <div class="btn-group mb-3" role="group" aria-label="Sort Diaries">
+      <%= link_to '新着順', diaries_path(latest: "true"), class: "btn btn-outline-secondary" %>
+      <%= link_to '古い順', diaries_path(old: "true"), class: "btn btn-outline-secondary" %>
+      <%= link_to 'いいね順', diaries_path(most_favorited: "true"), class: "btn btn-outline-secondary" %>
+    </div>
+    <h3 class = "text-right mb-3">
+      <%= link_to "コメント一覧へ", admin_diary_diary_comments_path(:diary_id), class: "btn btn-sm btn-info" %>
+    </h3>
+   <div class="row">
+    <% @diaries.each do |diary| %>
+      <div class="col-md-3 mb-4">
+        <div class="card">
+          <div class="card-header text-center">
+            <%= link_to diary_path(diary.id), class: "card-title" do %>
+              <%= diary.title %>
+            <% end %>
+          </div>
+
+          <% if diary.images.attached? %>
+            <%= link_to diary_path(diary.id) do %>
+              <%= image_tag diary.images.first, class: "card-img-top", alt: "Cat Image", size: "100x200" %>
+            <% end %>
+          <% end %>
+
+          <div class="card-body">
+            <p><%= image_tag diary.user.get_profile_image(50,50), class: "mr-3 rounded-circle" %>
+              <%= link_to admin_user_path(diary.user.id) do %>
+                <%= diary.user.nickname %>
+               <% end %>
+            </p>
+            <small><%= diary.body %></small>
+            <p class = "justify-content-end">
+             <%= link_to "削除", admin_diary_path(diary), method: :delete, class: "btn btn-danger", "data-confirm" => "本当に削除しますか？" %>
+            </p>
+          </div>
+        </div>
+      </div>
+    <% end %>
+  </div>
   
-   <% if diary.images.attached? %>
-     <%= image_tag diary.images.first, size: "200x200" %>
-   <% end %>
 
-   
-    <p><%= diary.title %></p>
-    <p><%= diary.body %></p>
- 
- <p>コメント：<%= diary.diary_comments.count %>件</p>
- <i class="fa-solid fa-heart like-btn" ><%= diary.favorites.count %>件</i>
- 
-  <%= link_to "削除", admin_diary_path(diary.id), method: :delete, class: "btn btn-danger", "data-confirm" => "本当に削除しますか？" %>
 
-<% end %>
+    <div class="row justify-content-center">
+      <div class="col-4">
+        <!--< %= paginate @diaries %>-->
+      </div>
+    </div>
+
+</div>
+ 
+

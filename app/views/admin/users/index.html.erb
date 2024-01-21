@@ -1,9 +1,5 @@
 <div class="container" style="margin-bottom: 50px;">
-       <div class="row">
-         <div class="col-2 text-center mt-5 mb-3" style="font-family: 'Playfair Display', serif; background-color:#faf0e6;">
-              <h4>会員一覧</h4>
-         </div>
-        </div> 
+       <h1 class="text-center">会員一覧</h1>
  
   <div class="row mt-3 mx-auto">
   <div class="col mx-auto">
@@ -24,7 +20,7 @@
              
                  <% @users.each do |user| %>
                       <tr>
-                        <td> <%= image_tag user.get_profile_image(100,100) %></td> 
+                        <td> <%= image_tag user.get_profile_image(100,100), class: "mr-3 rounded-circle"  %></td> 
                         <td><%= user.id %></td>
                         <td>
                             <%= link_to user.nickname, admin_user_path(user) %> 
@@ -48,9 +44,12 @@
       
       </div>
    </div>
-   <div class = "row justify-content-center" >
-    
+   <div class="row justify-content-center">
+      <div class="col-4">
+        <%= paginate @users %>
+      </div>
+    </div>
 </div>
-        
+
         
         

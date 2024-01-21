@@ -1,5 +1,7 @@
 class Public::UsersController < ApplicationController
-  before_action :ensure_guest_user, only: [:edit, :withdraw]
+  before_action :authenticate_user!
+  before_action :ensure_guest_user, only: [:edit, :confirm_withdraw]
+  before_action :is_matching_login_user, only: [:edit, :update, :show]
   
   
   def show
@@ -87,14 +89,18 @@ class Public::UsersController < ApplicationController
   private
    
    def ensure_guest_user
-    @user = User.find(params[:id])
-    if @user.guest_user?
+    if current_user.email == "guest@example.com"
       flash.now[:alert] = "ゲストユーザーはプロフィール編集画面へ遷移できません。"
       redirect_to root_path
     end
    end  
   
-  
+  def is_matching_login_user
+    user = User.find(params[:id])
+    unless user.id == current_user.id 
+      redirect_to request.referer
+    end
+  end
   
    def user_params
       params.require(:user).permit(:nickname, :last_name, :first_name, :last_name_kana, :first_name_kana, :post_code, :address, :telephone_number, :email, :profile_image)

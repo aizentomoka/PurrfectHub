@@ -1,6 +1,7 @@
 class Public::DiariesController < ApplicationController
-  before_action :authenticate_user!, except: [:index]
+  before_action :authenticate_user!, except: [ :index]
   before_action :ensure_guest_user, only: [:new, :edit, :destroy]
+  before_action :is_matching_login_user, only: [:edit, :update]
   
   def new
     @diary = Diary.new
@@ -70,7 +71,7 @@ class Public::DiariesController < ApplicationController
   # 検索機能
   def search
     if params[:keyword].present?
-      @diaries = Diary.where('body LIKE ?', "%#{params[:keyword]}%").page(params[:page]).order(created_at: :desc)
+      @diaries = Diary.where('body LIKE ?', "%#{params[:keyword]}%").order(created_at: :desc).page(params[:page])
       @keyword = params[:keyword]
     else
       @diaries = Diary.all
@@ -97,10 +98,15 @@ class Public::DiariesController < ApplicationController
   end
  
   def ensure_guest_user
-    if current_user.guest_user?
+    if current_user.email == "guest@example.com"
       flash.now[:alert] = "ゲストユーザーはプロフィール編集画面へ遷移できません。"
       redirect_to root_path
     end
   end  
-  
+  def is_matching_login_user
+    user = User.find(params[:id])
+    unless user.id == current_user.id 
+      redirect_to root_path
+    end
+  end
 end

@@ -1,43 +1,54 @@
-<h2>Followers</h2>
-<table class='table'>
-  <thead>
-    <tr>
-      <th>Image</th>
-      <th>name</th>
-      <th></th>
-      <th></th>
-    </tr>
-  </thead>
-  <tbody>
-    <% @users.each do |user| %>
+<h2 1 class="text-center">フォロワー</h2>
+
+<div class="table-responsive"> 
+  <table class="table mt-3" style="background-color: #ffffe0;">
+    <thead>
       <tr>
-        <td>
-          <%= link_to user_path(user) do %>
-            <%= image_tag user.get_profile_image(50,50) %>
-          <% end %>
-        </td>
-        <td><%= user.nickname %></td>
-        <td>
-          <%= link_to  diaries_user_path(user) do %>
-            <p>投稿日記<%= user.diaries.count %>件</p>
-          <% end %>
-        </td>
-        <td>  
-          <%= link_to followers_user_path(user) do %>
-            <p>フォロワー<%= user.followeds.count %></p>
-          <% end %>
-        </td>
-    
-      
-       <td>  
-      <% if current_user != user && current_user.following?(user) && user.following?(current_user) %>
-          <%= link_to 'チャットルームへ', chat_path(user), class: "ml-3" %>
+        <th></th>
+        <th>ニックネーム</th>
+        <th>フォロー</th>
+        <th>フォロワー</th>
+        <th>日記</th>
+        <th>里親募集</th>
+        <th></th>
+      </tr>
+    </thead>
+    <tbody>
+      <% @users.each do |user| %>
+        <tr>
+          <td>
+            <%= link_to user_path(user) do %>
+              <%= image_tag user.get_profile_image(50, 50), class: "mr-3 rounded-circle" %>
+            <% end %>
+          </td>
+          <td><%= user.nickname %></td>
+          <td>
+            <%= link_to follows_user_path(user) do %>
+              <p> <%= user.followers.count %></p>
+            <% end %>
+          </td>
+          <td>
+            <%= link_to followers_user_path(user) do %>
+              <p> <%= user.followeds.count %></p>
+            <% end %>
+          </td>
+          <td>
+            <%= link_to diaries_user_path(user) do %>
+              <p><%= user.diaries.count %>件</p>
+            <% end %>
+          </td>
+          <td>
+            <%= link_to rescued_cats_user_path(user) do %>
+              <p><%= user.rescued_cats.count %>件</p>
+            <% end %>
+          </td>
+          <td>
+            <% if current_user != user && current_user.following?(user) && user.following?(current_user) %>
+              <%= link_to 'チャットルームへ', chat_path(user), class: "ml-3" %>
+            <% end %>
+          </td>
+        </tr>
       <% end %>
-         </td> 
-           </tr>
-      <% end %>
-       
-    
-    
-  </tbody>
-</table> 
+    </tbody>
+  </table>
+</div>
