@@ -18,12 +18,6 @@ class Public::CatsController < ApplicationController
       render :new
     end
   end
- 
- 
-  def index
-    @user = current_user
-    @cats = @user.cats
-  end
 
   def show
     @cat = Cat.find(params[:id])

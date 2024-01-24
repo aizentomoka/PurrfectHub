@@ -5,11 +5,11 @@ class Public::UsersController < ApplicationController
   
   
   def show
-    @user = current_user
+    @user = User.find(params[:id])
   end
 
   def edit
-    @user = current_user
+    @user = User.find(params[:id])
   end
   
   def update
@@ -52,19 +52,24 @@ class Public::UsersController < ApplicationController
     @bookmark_rescued_cats = @rescued_cats
   end
   
-  # ログインユーザーの日記一覧
+  # ユーザーの日記一覧
   def diaries
-    @user = current_user
+    @user = User.find(params[:id])
     @diaries = @user.diaries.page(params[:page]).order(created_at: :desc)
   end
   
-   # ログインユーザーの里親募集一覧
+   # ユーザーの里親募集一覧
   def rescued_cats
-    @user = current_user
+    @user = User.find(params[:id])
     @rescued_cats = @user.rescued_cats.page(params[:page]).order(created_at: :desc)
   end
   
-  # ログインユーザーのマイページ
+  def cats
+    @user = User.find(params[:id])
+    @cats = @user.cats
+  end
+  
+  # ユーザーのマイページ
   def my_page
     @user = User.find(params[:id])
     @following_users = @user.following_users
@@ -82,9 +87,7 @@ class Public::UsersController < ApplicationController
     user = User.find(params[:id])
     @users = user.follower_users
   end
-  
  
-  
   
   private
    
@@ -98,7 +101,7 @@ class Public::UsersController < ApplicationController
   def is_matching_login_user
     user = User.find(params[:id])
     unless user.id == current_user.id 
-      redirect_to request.referer
+      redirect_to root_path
     end
   end
   

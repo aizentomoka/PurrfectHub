@@ -8,6 +8,7 @@ class Admin::RescuedCatCommentsController < ApplicationController
  
   def destroy
     RescuedCatComment.find(params[:id]).destroy
+    flash[:notice] = "コメントを削除しました。"
     redirect_to admin_rescued_cat_rescued_cat_comments_path
   end
 

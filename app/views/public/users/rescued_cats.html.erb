@@ -1,12 +1,13 @@
-<div class="container mt-5">
-  <h1 class="text-center">里親募集の投稿</h1>
-
+<div class="container mt-3">
+  <div class="row d-flex justify-content-end">
+       <%= link_to "新しく募集する", new_rescued_cat_path, class: "btn btn-info mb-3 " %>
+  </div>
+  <h1 class= "text-center mb-5">里親募集の投稿</h1>
     <%= render 'public/rescued_cats/rescued_cats', rescued_cat: @rescued_cat %>
-
-       <div class="row justify-content-center ">
-        <div class="col-4 ">
-          <%= paginate @rescued_cats %>
-        </div>
+    <div class="row justify-content-center ">
+      <div class="col-4 ">
+        <%= paginate @rescued_cats %>
       </div>
-
+    </div>
+     <%= link_to "Back",my_page_user_path(@user), class: "row d-flex justify-content-end" %>
 </div>

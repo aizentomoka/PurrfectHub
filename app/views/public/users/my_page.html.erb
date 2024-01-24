@@ -1,29 +1,78 @@
-   <h1><%= @user.nickname %>のMy Page</h1>
-  <%= link_to follows_user_path(@user) do %>
-     <h6>フォロー数<%= @user.followers.count %></h6>
-  <% end %> 
+<div class="container" style = "background-color: #faf0e6;">
+    <div class = "row  d-flex align-items-center justify-content-center">
+      <h1 class = "mt-3">マイページ</h1>
+    </div>
+    <div class = "row  d-flex align-items-center justify-content-center mt-4">
+    <%= image_tag @user.get_profile_image(100, 100), class: "rounded-circle" %>
+    </div>
+    
+    <h3 class = "text-center mt-2"><%= @user.nickname %></h3>
+    <h3 class = "text-center mt-2">
+      <% unless @user == current_user %>
+        <% if current_user != @user %>
+          <% if current_user.following?(@user) %>
+          <%= link_to "フォロー外す", user_relationships_path(@user), method: :delete, class: "btn btn-danger" %>
+          <% else %>
+          <%= link_to "フォローする", user_relationships_path(@user), method: :post, class:"btn btn-success" %>
+          <% end %>
+        <% end %>
+      <% end %>
+    </h3>
+    
+    <div class="d-flex text-center mt-3">
+      <div class="flex-fill ">
+        <%= link_to follows_user_path(@user) do %>
+          <h5>フォロー数<%= @user.followers.count %></h5>
+        <% end %>
+      </div>
+    
+      <div class="flex-fill">
+        <%= link_to followers_user_path(@user) do %>
+          <h5>フォロワー数<%= @user.followeds.count %></h5>
+        <% end %>
+      </div>
+    
+      <div class="flex-fill">
+        <h5><%= link_to "ブックマーク一覧", bookmarks_user_path(@user) %></h5>
+      </div>
+    
+      <div class="flex-fill">
+        <h5><%= link_to "いいね一覧", favorites_user_path(@user) %></h5>
+      </div>
+    </div>
 
-  <%= link_to followers_user_path(@user) do %>
-    <h6>フォロワー数<%= @user.followeds.count %></h6>
-  <% end %>
-  
-  <% if current_user != @user %>
-    <% if current_user.following?(@user) %>
-      <%= link_to "フォロー外す", user_relationships_path(@user), method: :delete, class: "btn btn-danger" %>
-    <% else %>
-      <%= link_to "フォローする", user_relationships_path(@user), method: :post, class:"btn btn-success" %>
-    <% end %>
-  <% end %>
-  
-  <% if current_user != @user && current_user.following?(@user) && @user.following?(current_user) %>
-    <%= link_to 'chatを始める', chat_path(@user), class: "ml-3" %>
-  <% end %>
-  
-  
-   <%= link_to "日記一覧", diaries_user_path(@user), class: "btn btn-danger" %>
-    <%= link_to "里親募集一覧", rescued_cats_user_path(@user), class: "btn btn-danger" %>
-     <%= link_to "ブックマーク一覧", bookmarks_user_path(@user), class: "btn btn-danger" %>
-      <%= link_to "いいね一覧", favorites_user_path(@user),  class: "btn btn-danger" %>
-       <%= link_to "日記を書く", new_diary_path, class: "btn btn-danger" %>
-        <%= link_to "里親を募集", new_rescued_cat_path, class: "btn btn-danger" %>
-         <%= link_to "会員詳細へ", user_path(@user), class: "btn btn-danger" %>
+
+    <div class = "row d-flex align-items-center justify-content-center mt-5">
+        <%= link_to(diaries_user_path(@user)) do %>
+          <%= image_tag('diary.png', size: "400x400", class: "img-fluid mr-5") %>
+        <% end %>
+        
+        <%= link_to(rescued_cats_user_path(@user)) do %>
+          <%= image_tag('satooya.png', size: "400x400", class: "img-fluid") %>
+        <% end %>
+    </div>
+    <div class = "row d-flex align-items-center justify-content-center">    
+        <%= link_to(new_diary_path) do %>
+          <%= image_tag('newdiary.png', size: "400x400", class: "img-fluid mr-5") %>
+        <% end %>
+        
+        <%= link_to(cats_user_path(@user)) do %>
+          <%= image_tag('mycat.png', size: "400x400", class: "img-fluid") %>
+        <% end %>
+    </div>
+     <div class="row d-flex justify-content-center">
+      <% if @user == current_user %>
+        <%= link_to "会員詳細へ", user_path(@user), class: "btn btn-info mb-3 " %>
+      <% end %>
+    </div>
+
+  </div>
+        
+       
+         
+         
+         
+         
+         
+         
+         

@@ -1,6 +1,6 @@
-<div class="container mt-5">
+<div class="container mt-3">
 
-  <h1 class="text-center">日記一覧</h1>
+  <h1 class="text-center mb-5">日記一覧</h1>
   
     <%= render 'public/diaries/diaries', diary: @diary %>
    
@@ -9,4 +9,5 @@
          <%= paginate @diaries %>
        </div>
      </div>
+      <%= link_to "Back",my_page_user_path(@user), class: "row d-flex justify-content-end" %>
 </div>

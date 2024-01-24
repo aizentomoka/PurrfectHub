@@ -14,6 +14,7 @@ class Admin::DiariesController < ApplicationController
   def destroy
     diary = Diary.find(params[:id])
     diary.destroy
+    flash[:notice] = "投稿を削除しました。"
     redirect_to admin_diaries_path
   end
 

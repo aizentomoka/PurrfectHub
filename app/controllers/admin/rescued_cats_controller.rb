@@ -7,6 +7,7 @@ class Admin::RescuedCatsController < ApplicationController
   def destroy
     rescued_cat = RescuedCat.find(params[:id])
     rescued_cat.destroy
+    flash[:notice] = "投稿を削除しました。"
     redirect_to admin_rescued_cats_path
   end
   

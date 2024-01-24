@@ -53,6 +53,7 @@ Rails.application.routes.draw do
            get :favorites 
            get :bookmarks
            get :diaries
+           get :cats
            get :rescued_cats
            get :my_page
            get :follows, :followers
@@ -61,7 +62,8 @@ Rails.application.routes.draw do
       end
       
       resources :chats, only: [:show, :create, :destroy]
-      resources :cats, only: [:new, :create, :index, :update, :show, :edit] 
+      resources :cats, only: [:new, :create, :update, :show, :edit] 
+      
       
       resources :diaries do
          resource :favorite, only: [:create, :destroy]

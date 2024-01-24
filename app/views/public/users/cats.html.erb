@@ -1,0 +1,24 @@
+<div class="container">
+  <h1 class="text-center mb-4">My Cats</h1>
+  <div class="row d-flex justify-content-center align-items-center">
+    <% @cats.each do |cat| %>
+      <div class="col-md-4 mb-4 d-flex justify-content-center align-items-center">
+        <div class="card bg-transparent border-0">
+          <%= link_to cat_path(cat.id) do %>
+            <%= image_tag cat.get_image, class: "card-img-top img-fluid rounded-circle", style: "width: 200px; height: 200px;", alt: "#{cat.name}の画像" %>
+          <% end %>
+          <div class="card-body">
+            <h5 class="card-title">名前：<%= cat.name %></h5>
+            <p class="card-text">性別：<%= cat.sex %></p>
+            <% if cat.birthday %>
+              <p class="card-text">誕生日：<%= cat.birthday.strftime("%Y/%-m/%-d") %></p>
+            <% else %>
+              <p class="card-text">誕生日：未設定</p>
+            <% end %>
+          </div>
+        </div>
+      </div>
+    <% end %>
+  </div>
+   <%= link_to "Back",my_page_user_path(@user), class: "row d-flex justify-content-end" %>
+</div>

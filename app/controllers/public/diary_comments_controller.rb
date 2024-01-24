@@ -12,6 +12,7 @@ class Public::DiaryCommentsController < ApplicationController
 
   def destroy
     DiaryComment.find(params[:id]).destroy
+    flash[:notice] = "コメントを削除しました。"
     redirect_to diary_path(params[:diary_id])
   end
 

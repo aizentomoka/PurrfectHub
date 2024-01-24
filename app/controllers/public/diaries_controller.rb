@@ -29,7 +29,9 @@ class Public::DiariesController < ApplicationController
      elsif params[:old]
        @diaries = Diary.old   #古い順
      elsif params[:most_favorited]   #人気順
-       @diaries = Diary.most_favorited
+      @diaries = Diary.most_favorited
+      # array = Diary.page(params[:page]).most_favorited
+      # @diaries = Kaminari.paginate_array(array).page(params[:page])
      else
        @diaries = Diary.all
      end
