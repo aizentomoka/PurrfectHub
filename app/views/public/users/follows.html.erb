@@ -18,7 +18,7 @@
       <% @users.each do |user| %>
         <tr>
           <td>
-            <%= link_to user_path(user) do %>
+            <%= link_to my_page_user_path(user) do %>
               <%= image_tag user.get_profile_image(50, 50), class: "mr-3 rounded-circle" %>
             <% end %>
           </td>
@@ -63,5 +63,5 @@
       <% end %>
     </tbody>
   </table>
-   <%= link_to "Back",my_page_user_path(current_user.id), class: "row d-flex justify-content-center" %>
+   <%= link_to "Back", request.referrer, class: "row d-flex justify-content-center" %>
 </div>

@@ -18,7 +18,7 @@ class Public::DiariesController < ApplicationController
       flash[:notice] = "投稿に成功しました。"
       redirect_to diary_path(@diary)
     else
-      flash.now[:alert] = "投稿に失敗しました。" 
+      flash.now[:alert] = @diary.errors.full_messages.join(', ') 
       render :new
     end
   end
@@ -55,7 +55,7 @@ class Public::DiariesController < ApplicationController
         flash[:notice] = "編集に成功しました。"
         redirect_to request.referer
      else
-        flash.now[:alert] = "投稿に失敗しました。" 
+        flash[:alert] = @diary.errors.full_messages.join(', ') 
         render :edit
      end
   end 
@@ -99,13 +99,13 @@ class Public::DiariesController < ApplicationController
  
   def ensure_guest_user
     if current_user.email == "guest@example.com"
-      flash.now[:alert] = "ゲストユーザーはプロフィール編集画面へ遷移できません。"
-      redirect_to root_path
+      flash[:alert] = "会員登録が必要です"
+      redirect_to request.referer
     end
   end  
   def is_matching_login_user
-    user = User.find(params[:id])
-    unless user.id == current_user.id 
+     @diary = Diary.find(params[:id])
+    unless  @diary.user.id == current_user.id 
       redirect_to root_path
     end
   end

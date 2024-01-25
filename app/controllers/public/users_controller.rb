@@ -1,6 +1,6 @@
 class Public::UsersController < ApplicationController
   before_action :authenticate_user!
-  before_action :ensure_guest_user, only: [:edit, :confirm_withdraw]
+  before_action :ensure_guest_user, only: [:show, :edit, :confirm_withdraw]
   before_action :is_matching_login_user, only: [:edit, :update, :show]
   
   
@@ -18,8 +18,8 @@ class Public::UsersController < ApplicationController
       flash[:notice] = "編集を保存しました"
       redirect_to user_path(@user)
     else
-      flash.now[:alert] = "編集に失敗しました。"
-      render :edit_user_path
+      flash[:alert] = user.errors.full_messages.join(', ')
+      render :edit
     end
   end 
 
@@ -93,8 +93,8 @@ class Public::UsersController < ApplicationController
    
    def ensure_guest_user
     if current_user.email == "guest@example.com"
-      flash.now[:alert] = "ゲストユーザーはプロフィール編集画面へ遷移できません。"
-      redirect_to root_path
+      flash[:alert] = "会員登録が必要です。"
+      redirect_to request.referer
     end
    end  
   

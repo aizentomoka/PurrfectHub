@@ -1,16 +1,15 @@
 <div class="container">
   <div class ="row flex align-items-center justify-content-center text-align-center">
-   
-     
-   
     <div>
-      <h1><%= @cat.name %></h1>
+      <h1 class = "text-center"><%= @cat.name %></h1>
       <%= image_tag @cat.get_image, size: "200x200", class: " rounded-circle" %>
-      <p>性別：<%= @cat.sex %></p>
-      <p>誕生日：<%= @cat.birthday %></p>
-      
-       <%= link_to "編集する", edit_cat_path(@cat), class: "btn btn-sm btn-info mt-3" %>
+      <p  class = "text-center mt-3">性別：<%= @cat.sex %></p>
+      <p  class = "text-center">誕生日：<%= @cat.birthday %></p>
+      <div class = "d-flex justify-content-center">
+       <%= link_to "編集する", edit_cat_path(@cat), class: "btn btn-info mt-3" %>
+      </div>
     </div>
-   
-  
+  </div>
+  <%= link_to "一覧へ", cats_user_path(@user), class: "row d-flex justify-content-center" %>
+</div>  
    

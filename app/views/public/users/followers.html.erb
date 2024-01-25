@@ -63,5 +63,5 @@
       <% end %>
     </tbody>
   </table>
-   <%= link_to "Back",my_page_user_path(current_user.id), class: "row d-flex justify-content-center" %>
+   <%= link_to "Back", request.referrer, class: "row d-flex justify-content-center" %>
 </div>

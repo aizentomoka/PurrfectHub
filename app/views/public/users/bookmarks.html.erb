@@ -6,5 +6,5 @@
           <%= paginate @rescued_cats %>
         </div>
       </div>
-       <%= link_to "Back",my_page_user_path(@user), class: "row d-flex justify-content-center" %>
+       <%= link_to "Back", request.referrer, class: "row d-flex justify-content-center" %>
 </div>

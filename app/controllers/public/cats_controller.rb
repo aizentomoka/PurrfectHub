@@ -1,5 +1,5 @@
 class Public::CatsController < ApplicationController
-  before_action :authenticate_user!, except: [ :index]
+  before_action :authenticate_user!
   before_action :ensure_guest_user, only: [:new, :create, :edit]
   before_action :is_matching_login_user, only: [:edit, :update]
   
@@ -12,15 +12,16 @@ class Public::CatsController < ApplicationController
     @cat.user_id = current_user.id
     if @cat.save
       flash[:notice] = "登録に成功しました。"
-      redirect_to cats_path
+      redirect_to cats_user_path( @cat.user_id)
     else
-      flash.now[:alert] = "登録に失敗しました。"   
+      flash.now[:alert] = @cat.errors.full_messages.join(', ')  
       render :new
     end
   end
 
   def show
     @cat = Cat.find(params[:id])
+    @user = @cat.user.id
   end
 
   def edit
@@ -46,14 +47,14 @@ class Public::CatsController < ApplicationController
   
   def ensure_guest_user
     if current_user.email == "guest@example.com"
-      flash.now[:alert] = "会員登録が必要です。"
+      flash[:alert] = "会員登録が必要です。"
       redirect_to request.referer
     end
   end   
   
   def is_matching_login_user
-    user = User.find(params[:id])
-    unless user.id == current_user.id 
+    @cat = Cat.find(params[:id])
+    unless @cat.user.id == current_user.id 
       redirect_to root_path
     end
   end

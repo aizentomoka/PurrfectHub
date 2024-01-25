@@ -1,4 +1,5 @@
 class Public::BookmarksController < ApplicationController
+  before_action :authenticate_user!
   
   def create
     rescued_cat = RescuedCat.find(params[:rescued_cat_id])
@@ -14,5 +15,12 @@ class Public::BookmarksController < ApplicationController
    redirect_to request.referer
   end
   
+
+
+
+
+
+
+
 
 end

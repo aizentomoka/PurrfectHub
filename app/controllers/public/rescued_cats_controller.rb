@@ -16,7 +16,7 @@ class Public::RescuedCatsController < ApplicationController
       flash[:notice] = "投稿に成功しました。"
       redirect_to rescued_cat_path(@rescued_cat)
     else
-      flash.now[:alert] = "投稿に失敗しました。"
+      flash[:alert] = @rescued_cat.errors.full_messages.join(', ')
       render :new
     end
   end
@@ -41,9 +41,9 @@ class Public::RescuedCatsController < ApplicationController
         input_labels = params[:rescued_cat][:label_name].split('/')
         @rescued_cat.update_labels(input_labels) # udpate_labelsはrescued_cat.rbに記述している
         flash[:notice] = "編集に成功しました。"
-        redirect_to request.referer
+        redirect_to rescued_cat_path(@rescued_cat)
      else
-        flash.now[:alert] = "編集に失敗しました。" 
+        flash.now[:alert] = @rescued_cat.errors.full_messages.join(', ')
         render :edit
      end
   end 
@@ -53,7 +53,7 @@ class Public::RescuedCatsController < ApplicationController
     rescued_cat = RescuedCat.find(params[:id])
     rescued_cat.destroy
     flash[:notice] = "投稿を削除しました。"
-    redirect_to rescued_cats_path
+    redirect_to rescued_cats_user_path(current_user)
   end
   
   # 検索機能
@@ -88,14 +88,14 @@ class Public::RescuedCatsController < ApplicationController
   
   def ensure_guest_user
     if current_user.email == "guest@example.com"
-      flash.now[:alert] = "会員登録が必要です。"
+      flash[:alert] = "会員登録が必要です。"
       redirect_to request.referer  
     end
   end  
   
   def is_matching_login_user
-    user = User.find(params[:id])
-    unless user.id == current_user.id 
+    @rescued_cat = RescuedCat.find(params[:id])
+    unless  @rescued_cat.user.id == current_user.id 
       redirect_to root_path
     end
   end

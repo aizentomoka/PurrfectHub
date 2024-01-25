@@ -21,7 +21,7 @@ class Diary < ApplicationRecord
  
  validates :title, length: {maximum: 30}, presence: true
  validates :body, length: {maximum: 3000}, presence: true
-
+ 
  
  
   def favorited_by?(user)
@@ -32,8 +32,10 @@ class Diary < ApplicationRecord
 
   def create_tags(input_tags)
     input_tags.each do |tag|                     # splitで分けたtagをeach文で取得する
-      new_tag = Tag.find_or_create_by(name: tag) # tagモデルに存在していれば、そのtagを使用し、なければ新規登録する
-      tags << new_tag                            # 登録するdiaryのtagに紐づける（中間テーブルにも反映される）
+     if tag.length <= 6  #6文字以内で作成 
+        new_tag = Tag.find_or_create_by(name: tag) # tagモデルに存在していれば、そのtagを使用し、なければ新規登録する
+        tags << new_tag 
+     end# 登録するdiaryのtagに紐づける（中間テーブルにも反映される）
     end
   end
   
@@ -44,9 +46,11 @@ class Diary < ApplicationRecord
      destroy_tags = registered_tags - input_tags # 削除されたタグ
     
      new_tags.each do |tag| # 新しいタグをモデルに追加
-      new_tag = Tag.find_or_create_by(name: tag)
-      tags << new_tag
-     end
+      if tag.length <= 6  #6文字以内で作成
+        new_tag = Tag.find_or_create_by(name: tag)
+        tags << new_tag
+      end
+    end
     
      destroy_tags.each do |tag| # 削除されたタグを中間テーブルから削除
        tag_id = Tag.find_by(name: tag)
@@ -54,12 +58,6 @@ class Diary < ApplicationRecord
        destroy_tagging.destroy
      end
   end
-
-
-
-
-
-
 
 
 

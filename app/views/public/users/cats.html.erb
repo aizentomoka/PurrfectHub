@@ -1,4 +1,9 @@
 <div class="container">
+  <div class="row d-flex justify-content-end">
+    <% if @user == current_user %>
+       <%= link_to "新しく登録する", new_cat_path, class: "btn btn-info mb-3 " %>
+    <% end %>
+  </div>
   <h1 class="text-center mb-4">My Cats</h1>
   <div class="row d-flex justify-content-center align-items-center">
     <% @cats.each do |cat| %>
@@ -20,5 +25,5 @@
       </div>
     <% end %>
   </div>
-   <%= link_to "Back",my_page_user_path(@user), class: "row d-flex justify-content-center" %>
+   <%= link_to "Back", my_page_user_path(@user), class: "row d-flex justify-content-center" %>
 </div>
