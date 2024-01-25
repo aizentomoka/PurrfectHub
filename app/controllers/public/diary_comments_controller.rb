@@ -4,15 +4,18 @@ class Public::DiaryCommentsController < ApplicationController
     diary = Diary.find(params[:diary_id])
     comment = current_user.diary_comments.new(diary_comment_params)
     comment.diary_id = diary.id
-    comment.save
-    redirect_to diary_path(diary)
+    if comment.save
+      redirect_to diary_path(diary)
+    else
+      flash[:alert] = comment.errors.full_messages.join(', ')
+      redirect_to request.referer
+    end
   end
 
 
 
   def destroy
     DiaryComment.find(params[:id]).destroy
-    flash[:notice] = "コメントを削除しました。"
     redirect_to diary_path(params[:diary_id])
   end
 

@@ -3,6 +3,7 @@
     <div class="text-center">
       <h2>会員 ログイン</h2>
       <%= form_for(resource, as: resource_name, url: session_path(resource_name), class: "mt-4") do |f| %>
+        <%= render "public/shared/error_messages", resource: resource %>
         <div class="field ">
           <%= f.label :メールアドレス %><br />
           <%= f.email_field :email, autofocus: true, autocomplete: "email", class: "form-control mt-1 " %>

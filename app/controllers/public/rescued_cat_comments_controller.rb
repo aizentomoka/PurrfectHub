@@ -4,8 +4,12 @@ class Public::RescuedCatCommentsController < ApplicationController
     rescued_cat = RescuedCat.find(params[:rescued_cat_id])
     comment = current_user.rescued_cat_comments.new(rescued_cat_comment_params)
     comment.rescued_cat_id = rescued_cat.id
-    comment.save
-    redirect_to rescued_cat_path(rescued_cat)
+    if comment.save
+      redirect_to rescued_cat_path(rescued_cat)
+    else
+      flash[:alert] = comment.errors.full_messages.join(', ')
+      redirect_to request.referer
+    end
   end
 
 

@@ -6,6 +6,7 @@
       <tr>
         <th></th>
         <th>ニックネーム</th>
+        <th></th>
         <th>フォロー</th>
         <th>フォロワー</th>
         <th>日記</th>
@@ -22,6 +23,17 @@
             <% end %>
           </td>
           <td><%= user.nickname %></td>
+          <td>
+            <% unless user == current_user %>
+              <% if current_user != user %>
+                <% if current_user.following?(user) %>
+                <%= link_to "フォロー外す", user_relationships_path(user), method: :delete, class: "btn btn-danger" %>
+                <% else %>
+                <%= link_to "フォローする", user_relationships_path(user), method: :post, class:"btn btn-success" %>
+                <% end %>
+              <% end %>
+            <% end %>
+          </td>
           <td>
             <%= link_to follows_user_path(user) do %>
               <p> <%= user.followers.count %></p>
@@ -51,5 +63,5 @@
       <% end %>
     </tbody>
   </table>
-   <%= link_to "Back",my_page_user_path(@user), class: "row d-flex justify-content-end" %>
+   <%= link_to "Back",my_page_user_path(current_user.id), class: "row d-flex justify-content-center" %>
 </div>
