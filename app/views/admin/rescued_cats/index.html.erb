@@ -26,7 +26,7 @@
                   <%= rescued_cat.user.nickname %>
                  <% end %>
               </p>
-               <small><%= rescued_cat.body %></small>
+               <small><%= truncate(rescued_cat.body, :length => 30) %></small>
               <p class = "justify-content-end">
                <%= link_to "削除", admin_rescued_cat_path(rescued_cat), method: :delete, class: "btn btn-danger", "data-confirm" => "本当に削除しますか？" %>
               </p>

@@ -15,10 +15,10 @@ class Public::DiariesController < ApplicationController
     input_tags = tag_params[:name].split('/')  # tag_paramsをsplitメソッドを用いて配列に変換
     @diary.create_tags(input_tags)  # create_tagsはtopic.rbにメソッドを記載
     if @diary.save
-      flash[:notice] = "投稿に成功しました。"
+      flash[:notice] = "投稿に成功しました"
       redirect_to diary_path(@diary)
     else
-      flash.now[:alert] = @diary.errors.full_messages.join(', ') 
+      flash.now[:alert] = "投稿に失敗しました"
       render :new
     end
   end
@@ -52,10 +52,10 @@ class Public::DiariesController < ApplicationController
      if @diary.update(diary_params)
         input_tags = tag_params[:name].split('/')
         @diary.update_tags(input_tags) # udpate_tagsはtopic.rbに記述している
-        flash[:notice] = "編集に成功しました。"
+        flash[:notice] = "編集に成功しました"
         redirect_to request.referer
      else
-        flash[:alert] = @diary.errors.full_messages.join(', ') 
+        flash[:alert] = "編集に失敗しました" 
         render :edit
      end
   end 
@@ -64,7 +64,7 @@ class Public::DiariesController < ApplicationController
   def destroy
     diary = Diary.find(params[:id])
     diary.destroy
-    flash[:notice] = "投稿を削除しました。"
+    flash[:notice] = "投稿を削除しました"
     redirect_to diaries_path
   end
   

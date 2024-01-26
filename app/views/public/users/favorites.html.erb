@@ -1,10 +1,8 @@
 <div class="container mt-3">
   <h2 class = "text-center mb-5">いいねした日記</h2>
     <%= render 'public/diaries/diaries', diary: @diaries %>
-     <div class="row justify-content-center">
-       <div class="col-4">
-         <%= paginate @diaries %>
-       </div>
-     </div>
-     <%= link_to "Back", request.referrer, class: "row d-flex justify-content-center" %>
+    <div class="row justify-content-center ">
+      <%= paginate @diaries %>
+   </div>
+   <%= link_to "Back", request.referrer, class: "row d-flex justify-content-center" %>
 </div>

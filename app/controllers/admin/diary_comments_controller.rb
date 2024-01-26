@@ -8,6 +8,7 @@ class Admin::DiaryCommentsController < ApplicationController
  
   def destroy
     DiaryComment.find(params[:id]).destroy
+    flash[:notice] = "コメントを削除しました。"
     redirect_to admin_diary_diary_comments_path
   end
 

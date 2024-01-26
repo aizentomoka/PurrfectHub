@@ -1,6 +1,6 @@
 class Admin::RescuedCatsController < ApplicationController
   def index
-    @rescued_cats = RescuedCat.page(params[:page])
+    @rescued_cats = RescuedCat.page(params[:page]).order(created_at: :desc)
   end
   
 

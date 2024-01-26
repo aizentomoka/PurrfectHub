@@ -14,10 +14,12 @@ class Admin::UsersController < ApplicationController
   def update
     @user = User.find(params[:id])
     if @user.update(user_params)
-      redirect_to admin_users_path, notice: "編集に成功しました"
+      flash[:notice] = "編集に成功しました。"
+      redirect_to admin_users_path
     else
+      flash[:notice] = "編集に失敗しました。"
       @user = User.find(params[:id])
-      render :edit_admin_user_path
+      render :edit
     end
   end 
   

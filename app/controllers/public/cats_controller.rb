@@ -14,7 +14,7 @@ class Public::CatsController < ApplicationController
       flash[:notice] = "登録に成功しました。"
       redirect_to cats_user_path( @cat.user_id)
     else
-      flash.now[:alert] = @cat.errors.full_messages.join(', ')  
+      flash.now[:alert] = "登録に失敗しました"
       render :new
     end
   end
@@ -32,8 +32,10 @@ class Public::CatsController < ApplicationController
   def update
      @cat = Cat.find(params[:id])
      if @cat.update(cat_params)
+        flash[:notice] = "編集に成功しました。"
         redirect_to cat_path(@cat)
      else
+        flash.now[:alert] ="編集に失敗しました"
         render :edit
      end
   end 

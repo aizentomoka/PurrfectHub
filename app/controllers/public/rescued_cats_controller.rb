@@ -16,7 +16,7 @@ class Public::RescuedCatsController < ApplicationController
       flash[:notice] = "投稿に成功しました。"
       redirect_to rescued_cat_path(@rescued_cat)
     else
-      flash[:alert] = @rescued_cat.errors.full_messages.join(', ')
+      flash[:alert] = "投稿に失敗しました"
       render :new
     end
   end
@@ -43,7 +43,7 @@ class Public::RescuedCatsController < ApplicationController
         flash[:notice] = "編集に成功しました。"
         redirect_to rescued_cat_path(@rescued_cat)
      else
-        flash.now[:alert] = @rescued_cat.errors.full_messages.join(', ')
+        flash.now[:alert] = "編集に失敗しました"
         render :edit
      end
   end 

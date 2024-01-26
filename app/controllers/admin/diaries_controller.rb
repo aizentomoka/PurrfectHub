@@ -1,14 +1,6 @@
 class Admin::DiariesController < ApplicationController
   def index
-     if params[:latest]
-      @diaries = Diary.latest   #新着順
-     elsif params[:old]
-       @diaries = Diary.old   #古い順
-     elsif params[:most_favorited]   #人気順
-       @diaries = Diary.most_favorited
-     else
-       @diaries = Diary.all
-     end
+       @diaries = Diary.page(params[:page]).order(created_at: :desc)
   end
 
   def destroy

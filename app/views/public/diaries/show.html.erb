@@ -33,7 +33,8 @@
       <!-- 詳細情報 -->
       <p><%= render 'public/diaries/tag', diary: @diary %></p> 
       <p class="font-weight-bold"><%= @diary.title %></p>
-      <p><%= @diary.body %></p>
+      <!--本文を改行ありで表示-->
+      <p><%=safe_join(@diary.body.split("\n"),tag(:br))%></p>
       <p>体重： <%= @diary.weight %> kg</p>
      
       <!-- ブックマークとコメント -->

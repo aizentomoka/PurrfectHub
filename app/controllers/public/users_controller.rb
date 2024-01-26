@@ -18,7 +18,7 @@ class Public::UsersController < ApplicationController
       flash[:notice] = "編集を保存しました"
       redirect_to user_path(@user)
     else
-      flash[:alert] = user.errors.full_messages.join(', ')
+      flash[:alert] = "編集に失敗しました"
       render :edit
     end
   end 
