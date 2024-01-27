@@ -14,7 +14,7 @@
                    
                         <div class="card-header text-center">
                           <%= link_to rescued_cat_path(rescued_cat.id) do %>
-                            <p class="card-title"><%= rescued_cat.title %></p>
+                            <p class="card-title"><%= truncate(rescued_cat.title, :length => 12) %></p>
                           <% end %>
                         </div>
                     
@@ -52,8 +52,8 @@
                     <% @diary_questions.each do |diary| %>
                     <div class="card mb-4">
                         <div class="card-body">
-                            <h6 class="card-title"><%= diary.title %></h5>
-                            <h8 class="card-body"><%= diary.body %></h8>
+                            <h6 class="card-title"><%= truncate(diary.title, :length => 12) %></h5>
+                            <h8 class="card-body"><%= truncate(diary.body, :length => 30) %></h8>
                             <p class="card-text"><%= diary.user.nickname %>さんの投稿</p>
                         </div>
                         <div class="card-footer d-flex justify-content-between align-items-center">
@@ -84,12 +84,12 @@
                            <% end %>
                         <% end %>
                         <div class="card-body">
-                            <h5 class="card-title"><%= diary.title %></h5>
+                            <h5 class="card-title"><%= truncate(diary.title, :length => 12) %></h5>
                             <p class="card-text"><%= diary.user.nickname %>さんの投稿</p>
                         </div>
                         <div class="card-footer d-flex ml-1">
                                 <p><i class="far fa-comment"></i><%= diary.diary_comments.count %></p>
-                                <p><i class="fas fa-heart"></i><%= diary.favorites.count %></p>
+                                <p><%= render 'public/diaries/favorite', diary: diary, current_user: current_user %></p>
                         </div>
                     </div>
                     <% end %>
@@ -108,12 +108,12 @@
                                 <% end %>
                             <% end %>
                             <div class="card-body">
-                                <h6 class="card-title"><%= diary.title %></h5>
+                                <h6 class="card-title"><%= truncate(diary.title, :length => 12) %></h5>
                                 <p class="card-text"><%= diary.user.nickname %>さんの投稿</p>
                             </div>
                             <div class="card-footer d-flex ml-1">
                                     <p><i class="far fa-comment"></i><%= diary.diary_comments.count %></p>
-                                    <p><i class="fas fa-heart"></i><%= diary.favorites.count %></p>
+                                    <p><%= render 'public/diaries/favorite', diary: diary, current_user: current_user %></p>
                             </div>
                         </div>
                         <% end %>

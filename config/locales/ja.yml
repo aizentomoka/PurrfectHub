@@ -15,6 +15,7 @@ ja:
     name: 名前
     sex: 性別
     age: 年齢
+    vaccine: ワクチン
     created_at: 作成日
     updated_at: 更新日
     

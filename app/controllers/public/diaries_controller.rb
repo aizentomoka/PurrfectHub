@@ -27,11 +27,11 @@ class Public::DiariesController < ApplicationController
      if params[:latest]
       @diaries = Diary.latest   #新着順
      elsif params[:old]
-       @diaries = Diary.old   #古い順
+      @diaries = Diary.old   #古い順
      elsif params[:most_favorited]   #人気順
       @diaries = Diary.most_favorited
      else
-       @diaries = Diary.all
+      @diaries = Diary.all
      end
   end
 
@@ -53,7 +53,7 @@ class Public::DiariesController < ApplicationController
         input_tags = tag_params[:name].split('/')
         @diary.update_tags(input_tags) # udpate_tagsはtopic.rbに記述している
         flash[:notice] = "編集に成功しました"
-        redirect_to request.referer
+        redirect_to diary_path(@diary)
      else
         flash[:alert] = "編集に失敗しました" 
         render :edit
@@ -65,7 +65,7 @@ class Public::DiariesController < ApplicationController
     diary = Diary.find(params[:id])
     diary.destroy
     flash[:notice] = "投稿を削除しました"
-    redirect_to diaries_path
+    redirect_to diaries_user_path(current_user)
   end
   
   # 検索機能

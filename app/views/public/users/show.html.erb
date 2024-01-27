@@ -46,5 +46,5 @@
               <%= link_to "編集する",edit_user_path(@user), class: "btn btn-success" %>
             <% end %>
         </div>
-        <%= link_to "Back", request.referrer, class: "row d-flex justify-content-center" %>
+        <%= link_to "Back", my_page_user_path(current_user), class: "row d-flex justify-content-center" %>
  </div>
