@@ -14,10 +14,4 @@ class Public::FavoritesController < ApplicationController
     redirect_to request.referer
   end
   
-  
- 
-    
-    
-    
-    
 end

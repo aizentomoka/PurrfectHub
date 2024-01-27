@@ -6,8 +6,8 @@
 #   movies = Movie.create([{ name: 'Star Wars' }, { name: 'Lord of the Rings' }])
 #   Character.create(name: 'Luke', movie: movies.first)
 Admin.create!(
-  email: "aaa@aaa",
-  password: "aaaaaa"
+  email: "admin@user",
+  password: "adminuser"
 )
 
 
@@ -43,7 +43,11 @@ end
     title: "日記テスト投稿#{n + 1}",
     body: "日記テスト投稿#{n + 1}",
     weight: "2",
-  )
+    images: ActiveStorage::Blob.create_and_upload!(
+                io: File.open("#{Rails.root}/app/assets/images/no_image.jpg"),
+                filename: "no_image.jpg"
+               )   
+  )   
 end
 
 10.times do |n|
@@ -57,6 +61,9 @@ end
     is_completion: "false",
     vaccine: "未接種",
     is_castration: "false",
-
+    images: ActiveStorage::Blob.create_and_upload!(
+                io: File.open("#{Rails.root}/app/assets/images/no_image.jpg"),
+                filename: "no_image.jpg"
+               )   
   )
 end

@@ -1,6 +1,6 @@
 <%= render 'layouts/errors', obj: @diary %>
 <div class="container mt-5">
-  <h1 class="text-center">日記　新規投稿</h1>
+  <h1 class="text-center">日記新規投稿</h1>
 
   <%= form_with model: @diary, multipart: true, class: "mt-4" do |f| %>
     <div class="form-group">
@@ -15,27 +15,27 @@
 
     <div class="form-group">
       <h4>タグ(“/”で複数個登録できます)</h4>
-      <%= f.text_field :name, autofocus: true, placeholder: "三毛猫/保護猫", class: "form-control" %>
+      <%= f.text_field :name, autofocus: true, placeholder: "三毛猫/保護猫/おなやみ   お悩み相談は[おなやみ]タグをつけて投稿してください！ ", class: "form-control" %>
     </div>
 
     <div class="form-group">
       <h4>タイトル</h4>
-      <%= f.text_field :title, class: "form-control" %>
+      <%= f.text_field :title, placeholder: "こちらがタイトルです。", class: "form-control" %>
     </div>
 
     <div class="form-group">
       <h4>本文</h4>
-      <%= f.text_area :body, class: "form-control", rows: 15, cols: 50 %>
+      <%= f.text_area :body, placeholder: "こちらが本文です。\r\n猫のことに限らずお好きに日記を書いてみてください！\r\n日記は後から編集・削除できます。", class: "form-control", rows: 15, cols: 50 %>
     </div>
 
     <div class="form-group">
       <h4>体重</h4>
-      <%= f.text_field :weight, autofocus: true, class: "form-control" %>
+      <%= f.text_field :weight, placeholder: "例：3.5", autofocus: true, class: "form-control" %>
     </div>
 
     
     <div class="form-group text-center">
-      <%= f.submit '投稿', class: "btn btn-success" %>
+      <%= f.submit '投稿', class: "btn btn-success" %>   
     </div>
   <% end %>
 </div>

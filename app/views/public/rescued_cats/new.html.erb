@@ -15,22 +15,38 @@
 
     <div class="form-group">
       <h4>タイトル</h4>
-      <%= f.text_field :title, class: "form-control" %>
+      <%= f.text_field :title, placeholder: "こちらがタイトルです。　例：おてんばで甘えん坊な茶トラの男の子です", class: "form-control" %>
     </div>
 
     <div class="form-group">
       <h4>本文</h4>
-      <%= f.text_area :body, class: "form-control", rows: 15, cols: 50 %>
+      <%= f.text_area :body, placeholder: "こちらが本文です。\r\n
+        例：\r\n
+        好奇心と食欲旺盛で元気いっぱいです。たくさんお話してくれます！\r\n
+        愛情と責任を持って終生手放さず家族として大切にしてくださる方を募集します。\r\n
+        <応募条件>  \r\n
+        ・ペット飼育可の住宅にお住まいであること。\r\n
+        ・完全室内飼いで脱走防止を徹底してくださること。\r\n
+        ・ご家族がおられる場合、全員が猫アレルギーではなく飼育に同意していること。\r\n
+        ・喫煙者ではないこと。またご家族にも喫煙者がいないこと。\r\n
+        ・60歳以上の高齢者が飼育者の場合、もしもの時お世話を引き継いでくださる方がおられること。\r\n
+        ・経済的に自立した方であること。\r\n
+        ・動画や写真付きでときどき近況報告をしてくださること。\r\n
+        ・年1回のワクチンと日頃の健康管理をお願いします。\r\n
+        ・未成年の方は必ず保護者の方がお問い合わせをしてください。\r\n
+        ・お渡しの際、契約書に記入、身分証明書の提示をお願いいたします。\r\n
+        ※半径40km以内の方希望です。\r\n  
+        ", class: "form-control", rows: 15, cols: 50 %>
     </div>
 
     <div class="form-group">
       <h4>名前</h4>
-      <%= f.text_field :name, autofocus: true, class: "form-control" %>
+      <%= f.text_field :name, placeholder: "例：にゃん子(仮名)", autofocus: true, class: "form-control" %>
     </div>
 
     <div class="form-group">
       <h4>年齢</h4>
-      <%= f.text_field :age, autofocus: true, class: "form-control" %>
+      <%= f.text_field :age, placeholder: "例：2才3ヶ月", autofocus: true, class: "form-control" %>
     </div>
 
     <div class="form-group">
@@ -39,8 +55,8 @@
     </div>
 
     <div class="form-group">
-      <h4>ワクチン</h4>
-      <%= f.text_area :vaccine, autofocus: true, placeholder: "接種済みワクチンまたは未接種と記入してください。", class: "form-control", rows: 4, cols: 50 %>
+      <h4>ワクチン・ウイルス検査</h4>
+      <%= f.text_area :vaccine, autofocus: true, placeholder: "未接種または接種済みワクチンを記入してください。\r\n例：三種混合ワクチン2回接種\r\n　　猫エイズ・白血病検査　陰性", class: "form-control", rows: 4, cols: 50 %>
     </div>
 
     <div class="form-group">

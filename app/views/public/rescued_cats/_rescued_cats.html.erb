@@ -4,7 +4,9 @@
         <div class="card">
           <div class="card-header text-center">
             <%= link_to rescued_cat_path(rescued_cat.id) do %>
-              <p class="card-title"><%= rescued_cat.title %></p>
+              <p class="card-title">
+                <%= truncate(rescued_cat.title, :length => 12) %>
+              </p>
             <% end %>
           </div>
 

@@ -1,2 +1,22 @@
-$('.message').append("<span class="bg-primary text-white p-2 rounded mr-3"><%= @chat.message %></span>");
-$('input[type=text]').val("")
+let messageHtml = `<p class="text-right"><span class="bg-primary text-white p-2 rounded mr-3">
+                   <%= j @chat.message %>
+                   </span>
+                   <%= image_tag(@chat.user.get_profile_image(50, 50), class: "mr-3 rounded-circle") %>
+                   <small class="d-block text-right">
+                   <%= j @chat.created_at.strftime("%H:%M") %>
+                   <%= link_to("削除", chat_path(@chat), method: :delete) %>
+                   </small>
+                   </p>`;
+
+$('.message').append(messageHtml);
+$('input[type=text]').val('');
+
+
+<!--'let'キーワードを使用して、'messageHtml'という変数を宣言-->
+<!--HTMLの '<p>' タグと '<span>' タグを定義-->
+<!--'< %= j %>'ヘルパーメソッドを使用して、'@chat.message'の値を正しくエスケープ-->
+<!--ヘルパーメソッドによって生成された画像要素を埋めこむ-->
+<!--'<small>' タグを定義-->
+<!--'@chat.created_at'の値を指定のフォーマットに変換して挿入-->
+<!--' link_to'でリンクを挿入-->
+<!--'messageHtml'を'.message'クラスの要素に追加。そして、'$('input[type=text]').val('');'を使って、テキスト入力フィールドをクリア-->

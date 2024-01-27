@@ -37,7 +37,7 @@
       <p><%=safe_join(@diary.body.split("\n"),tag(:br))%></p>
       <p>体重： <%= @diary.weight %> kg</p>
      
-      <!-- ブックマークとコメント -->
+      <!-- いいねとコメント -->
       <p><%= render 'public/diaries/favorite', diary: @diary %></p>
       <p><i class="far fa-comment"></i> <%=@diary.diary_comments.count %></p>
       <% @diary.diary_comments.each do |diary_comment| %>

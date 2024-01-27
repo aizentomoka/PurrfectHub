@@ -59,6 +59,8 @@ gem 'devise'
 
 gem 'kaminari'
 
+gem 'jquery-rails'
+
 gem 'dotenv-rails'
 group :production do
   gem 'mysql2'

@@ -4,7 +4,7 @@
         <div class="card">
           <div class="card-header text-center">
             <%= link_to diary_path(diary.id), class: "card-title" do %>
-              <%= diary.title %>
+              <%= truncate(diary.title, :length => 12) %>
             <% end %>
           </div>
 
