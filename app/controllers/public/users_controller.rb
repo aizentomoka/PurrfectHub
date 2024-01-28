@@ -58,12 +58,13 @@ class Public::UsersController < ApplicationController
     @diaries = @user.diaries.page(params[:page]).order(created_at: :desc)
   end
   
-   # ユーザーの里親募集一覧
+  # ユーザーの里親募集一覧
   def rescued_cats
     @user = User.find(params[:id])
     @rescued_cats = @user.rescued_cats.page(params[:page]).order(created_at: :desc)
   end
   
+  # ユーザーの猫一覧
   def cats
     @user = User.find(params[:id])
     @cats = @user.cats
@@ -78,14 +79,14 @@ class Public::UsersController < ApplicationController
   
   # フォロー一覧
   def follows
-    user = User.find(params[:id])
-    @users = user.following_users
+    @user = User.find(params[:id])
+    @users = @user.following_users
   end
   
   # フォロワー一覧
   def followers
-    user = User.find(params[:id])
-    @users = user.follower_users
+    @user = User.find(params[:id])
+    @users = @user.follower_users
   end
  
   

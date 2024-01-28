@@ -24,11 +24,11 @@ class Public::ChatsController < ApplicationController
     render :validater unless @chat.save #エラー文を返す
   end
 
- def destroy
-  chat = Chat.find(params[:id])
-  chat.destroy
-  redirect_to request.referer
- end
+  def destroy
+    chat = Chat.find(params[:id])
+    chat.destroy
+    redirect_to request.referer
+  end
   
   
   
