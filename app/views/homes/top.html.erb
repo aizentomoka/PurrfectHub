@@ -5,7 +5,10 @@
             <p class="lead">Purrfect Hub（パーフェクトハブ）は猫好きのための里親募集・日記投稿のできるコミュニティサイトです。</p>
         </div>
     </div>
-  <h3>里親募集中！</h3>
+  <h3 class = "text-center">里親募集中！</h3>
+    <div class="col-12 text-right mt-4">
+        <%= link_to "保護猫をさがす➡", rescued_cats_path, class: "btn btn-secondary" %>
+    </div>
     <div class="row mt-4">
         
         <% @rescued_cats.each do |rescued_cat| %>
@@ -39,9 +42,6 @@
                 </div>
             </div>
         <% end %>
-        <div class="col-12 text-center mt-4">
-            <%= link_to "保護猫をさがす➡", rescued_cats_path, class: "btn btn-secondary" %>
-        </div>
     </div>
 
 
@@ -52,27 +52,23 @@
                     <% @diary_questions.each do |diary| %>
                     <div class="card mb-4">
                         <div class="card-body">
-                            <h6 class="card-title"><%= truncate(diary.title, :length => 12) %></h5>
+                            <h5 class="card-title"><%= truncate(diary.title, :length => 12) %></h5>
                             <h8 class="card-body"><%= truncate(diary.body, :length => 30) %></h8>
-                            <p class="card-text"><%= diary.user.nickname %>さんの投稿</p>
                         </div>
-                        <div class="card-footer d-flex justify-content-between align-items-center">
-                            <div class="iine">
-                                <p><i class="far fa-comment"></i><%= diary.diary_comments.count %></p>
-                                <p><i class="fas fa-heart"></i><%= diary.favorites.count %></p>
-                            </div>
-                            <div class="ml-auto">
-                                <%= link_to "詳細を見る➡", diary_path(diary.id), class: "btn btn-primary" %>
-                            </div>
+                        <div class="card-footer">
+                          <small class="text-left"><%= diary.user.nickname %>さんの投稿</small>
+                          <div class="d-flex justify-content-end">
+                            <p> <i class="far fa-comment "><%= diary.diary_comments.count %></i> </p>
+                            <p class = "ml-3"><%= render 'public/diaries/favorite', diary: diary, current_user: current_user %></p>
+                          </div>
+                          <%= link_to "詳細を見る➡", diary_path(diary.id), class: "btn btn-primary" %>
                         </div>
                     </div>
                     <% end %>
-                    <div class="ml-auto">
-                        <%= link_to "みんなのお悩み相談➡", tag_search_diaries_path(name: "おなやみ"), method: :get ,class: "btn btn-secondary" %>
-                    </div>      
-                    
-                </div>
-                
+                <div class="ml-auto">
+                    <%= link_to "みんなのお悩み相談➡", tag_search_diaries_path(name: "おなやみ"), method: :get ,class: "btn btn-secondary" %>
+                </div>      
+            </div>
                 
                <div class="col-md-6 diaries">
                    <div class="text-center h3">注目の日記</div>
@@ -84,23 +80,24 @@
                            <% end %>
                         <% end %>
                         <div class="card-body">
-                            <h5 class="card-title"><%= truncate(diary.title, :length => 12) %></h5>
-                            <p class="card-text"><%= diary.user.nickname %>さんの投稿</p>
+                            <%= link_to diary_path(diary.id) do %>
+                              <h5 class="card-title"><%= truncate(diary.title, :length => 12) %></h5>
+                            <% end %>
                         </div>
-                        <div class="card-footer d-flex ml-1">
-                                <p><i class="far fa-comment"></i><%= diary.diary_comments.count %></p>
-                                <p><%= render 'public/diaries/favorite', diary: diary, current_user: current_user %></p>
+                        <div class="card-footer">
+                            <small class="text-left"><%= diary.user.nickname %>さんの投稿</small>
+                            <div class="d-flex justify-content-end">
+                               <p> <i class="far fa-comment "><%= diary.diary_comments.count %></i> </p>
+                               <p class = "ml-3"><%= render 'public/diaries/favorite', diary: diary, current_user: current_user %></p>
+                            </div>
                         </div>
                     </div>
                     <% end %>
-                    <div class="text-center mt-3">
-                        <%= link_to "みんなの日記を見る➡", diaries_path, class: "btn btn-secondary" %>
-                    </div>
             </div>
             
                 <div class="col-3 md-4 question">
                     <div class="text-center h4">新しい投稿</div>
-                       <%@newdiaries.each do |diary| %>
+                       <% @newdiaries.each do |diary| %>
                         <div class="card mb-4">
                             <% if diary.images.attached? %>
                                 <%= link_to diary_path(diary.id) do %>
@@ -108,15 +105,22 @@
                                 <% end %>
                             <% end %>
                             <div class="card-body">
-                                <h6 class="card-title"><%= truncate(diary.title, :length => 12) %></h5>
-                                <p class="card-text"><%= diary.user.nickname %>さんの投稿</p>
+                                <%= link_to diary_path(diary.id) do %>
+                                  <h6 class="card-title"><%= truncate(diary.title, :length => 12) %></h5>
+                                <% end %>
                             </div>
-                            <div class="card-footer d-flex ml-1">
-                                    <p><i class="far fa-comment"></i><%= diary.diary_comments.count %></p>
-                                    <p><%= render 'public/diaries/favorite', diary: diary, current_user: current_user %></p>
+                            <div class="card-footer">
+                              <small class="text-left"><%= diary.user.nickname %>さんの投稿</small>
+                                <div class="d-flex justify-content-end">
+                                   <p> <i class="far fa-comment "><%= diary.diary_comments.count %></i> </p>
+                                   <p class = "ml-3"><%= render 'public/diaries/favorite', diary: diary, current_user: current_user %></p>
+                                </div>
                             </div>
                         </div>
                         <% end %>
+                    <div class="text-center mt-3">
+                        <%= link_to "みんなの日記を見る➡", diaries_path, class: "btn btn-secondary" %>
+                    </div>
                 </div>
     </div>
 </div>
