@@ -31,11 +31,11 @@ class Diary < ApplicationRecord
 
 
   def create_tags(input_tags)
-    input_tags.each do |tag|                     # splitで分けたtagをeach文で取得する
-     if tag.length <= 6  #6文字以内で作成 
-        new_tag = Tag.find_or_create_by(name: tag) # tagモデルに存在していれば、そのtagを使用し、なければ新規登録する
-        tags << new_tag 
-     end# 登録するdiaryのtagに紐づける（中間テーブルにも反映される）
+    input_tags.each do |tag|     # splitで分けたtagをeach文で取得する
+     if tag.length <= 6      #6文字以内で作成 
+        new_tag = Tag.find_or_create_by(name: tag)     # tagモデルに存在していれば、そのtagを使用し、なければ新規登録する
+        tags << new_tag     # 登録するdiaryのtagに紐づける（中間テーブルにも反映される）
+     end
     end
   end
   

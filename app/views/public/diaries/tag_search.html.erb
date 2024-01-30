@@ -1,12 +1,4 @@
- <div class="container mt-5">
-
-  <h1 class="mb-4"><%= @tag_name %>の日記</h1>
-
+<div class="container mt-5">
+  <h1 class="text-ccenter"><%= @tag_name %>の日記</h1>
   <%= render 'public/diaries/diaries', diary: @diary %>
-   
-     <div class="row justify-content-center">
-       <div class="col-4">
-         <!--< %= paginate @diaries %>-->
-       </div>
-     </div>
 </div>

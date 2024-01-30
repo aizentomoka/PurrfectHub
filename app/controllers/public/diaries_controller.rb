@@ -13,7 +13,7 @@ class Public::DiariesController < ApplicationController
     @diary = Diary.new(diary_params)
     @diary.user_id = current_user.id
     input_tags = tag_params[:name].split('/')  # tag_paramsをsplitメソッドを用いて配列に変換
-    @diary.create_tags(input_tags)  # create_tagsはtopic.rbにメソッドを記載
+    @diary.create_tags(input_tags)  # create_tagsはdiary.rbにメソッドを記載
     if @diary.save
       flash[:notice] = "投稿に成功しました"
       redirect_to diary_path(@diary)
@@ -51,7 +51,7 @@ class Public::DiariesController < ApplicationController
      @cats = current_user.cats
      if @diary.update(diary_params)
         input_tags = tag_params[:name].split('/')
-        @diary.update_tags(input_tags) # udpate_tagsはtopic.rbに記述している
+        @diary.update_tags(input_tags) # udpate_tagsはdiary.rbに記述している
         flash[:notice] = "編集に成功しました"
         redirect_to diary_path(@diary)
      else
