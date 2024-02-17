@@ -1,0 +1,1 @@
+$("#diaries_favorite_<%= @diary.id %>").html("<%= j(render 'public/diaries/favorite', diary: @diary, current_user: current_user) %>");

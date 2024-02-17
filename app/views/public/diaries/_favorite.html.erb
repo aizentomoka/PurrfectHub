@@ -1,9 +1,9 @@
  <% if diary.favorited_by?(current_user) %>
-  <%= link_to diary_favorite_path(diary), method: :delete do %>
+  <%= link_to diary_favorite_path(diary), method: :delete, remote: true do %>
    <i class="fa-solid fa-heart like-btn" ><%= diary.favorites.count %></i>
   <% end %>
 <% else %>
-  <%= link_to diary_favorite_path(diary), method: :post do %>
+  <%= link_to diary_favorite_path(diary), method: :post, remote: true do %>
    <i class="fa-solid fa-heart unlike-btn"><%= diary.favorites.count %></i>
   <% end %>
 <% end %>

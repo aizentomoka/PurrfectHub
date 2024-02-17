@@ -22,7 +22,9 @@
                <% end %>
             </p>
             <p><i class="far fa-comment"></i> <%= diary.diary_comments.count %></p>
-            <p><%= render 'public/diaries/favorite', diary: diary, current_user: current_user %></p>
+            <div id="diaries_favorite_<%= diary.id %>">
+              <p><%= render 'public/diaries/favorite', diary: diary, current_user: current_user %></p>
+            </div>
           </div>
         </div>
       </div>

@@ -38,7 +38,9 @@
       <p>体重： <%= @diary.weight %> kg</p>
      
       <!-- いいねとコメント -->
-      <p><%= render 'public/diaries/favorite', diary: @diary %></p>
+      <div id="diaries_favorite_<%= @diary.id %>">
+        <p><%= render 'public/diaries/favorite', diary: @diary %></p>
+      </div>
       <p><i class="far fa-comment"></i> <%=@diary.diary_comments.count %></p>
       <% @diary.diary_comments.each do |diary_comment| %>
           <div class="comment">
