@@ -99,7 +99,7 @@ class Public::DiariesController < ApplicationController
  
   def ensure_guest_user
     if current_user.email == "guest@example.com"
-      flash[:alert] = "会員登録が必要です"
+      flash[:alert] = "ログインが必要です"
       redirect_to request.referer
     end
   end  

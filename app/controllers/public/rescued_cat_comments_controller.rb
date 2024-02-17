@@ -4,9 +4,8 @@ class Public::RescuedCatCommentsController < ApplicationController
     rescued_cat = RescuedCat.find(params[:rescued_cat_id])
     comment = current_user.rescued_cat_comments.new(rescued_cat_comment_params)
     comment.rescued_cat_id = rescued_cat.id
-    if comment.save
-      redirect_to rescued_cat_path(rescued_cat)
-    else
+    comment.save
+    unless comment.save
       flash[:alert] = comment.errors.full_messages.join(', ')
       redirect_to request.referer
     end
@@ -16,7 +15,6 @@ class Public::RescuedCatCommentsController < ApplicationController
 
   def destroy
     RescuedCatComment.find(params[:id]).destroy
-    redirect_to rescued_cat_path(params[:rescued_cat_id])
   end
 
 

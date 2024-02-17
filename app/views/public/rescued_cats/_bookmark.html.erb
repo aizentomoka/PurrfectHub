@@ -1,12 +1,12 @@
  <% if rescued_cat.bookmarked_by?(current_user) %>
     <p>
-      <%= link_to rescued_cat_bookmark_path(rescued_cat), method: :delete do %>
+      <%= link_to rescued_cat_bookmark_path(rescued_cat), method: :delete, remote: true do %>
        <i class="fa-solid fa-star bookmark-btn"></i><%= rescued_cat.bookmarks.count %></i>
       <% end %>
     </p>
     <% else %>
     <p>
-      <%= link_to rescued_cat_bookmark_path(rescued_cat), method: :post do %>
+      <%= link_to rescued_cat_bookmark_path(rescued_cat), method: :post, remote: true do %>
        <i class="fa-solid fa-star unbookmark-btn"></i><%= rescued_cat.bookmarks.count %></i>
       <% end %>
     </p>

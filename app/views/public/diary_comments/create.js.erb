@@ -1,0 +1,3 @@
+$("#comment_counter").html("<%= j(render 'public/diary_comments/counter', diary: @diary) %>");
+$("#comment_index").html("<%= j(render 'public/diary_comments/index', diary: @diary) %>");
+$("#comment_textarea").val("");

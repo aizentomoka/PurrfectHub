@@ -1,0 +1,12 @@
+<% diary.diary_comments.each do |diary_comment| %>
+  <div class="comment">
+    <%= link_to my_page_user_path(diary_comment.user) do %>
+      <%= diary_comment.user.nickname %>
+    <% end %>
+    <%= diary_comment.created_at.strftime('%Y/%m/%d') %>
+    <%= diary_comment.comment %>
+    <% if diary_comment.user == current_user %>
+      <%= link_to "削除", diary_diary_comment_path(diary_comment.diary, diary_comment), method: :delete, remote: true %>
+    <% end %>
+  </div>
+<% end %>

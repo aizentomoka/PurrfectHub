@@ -25,7 +25,9 @@
             <% end %>
             <p>性別：<%= rescued_cat.sex %></p>
             <p><i class="far fa-comment"></i> <%= rescued_cat.rescued_cat_comments.count %></p>
-            <p><%= render 'public/rescued_cats/bookmark', rescued_cat: rescued_cat, current_user: current_user %></p>
+            <div id="rescued_cat_bookmark_<%= rescued_cat.id %>">
+              <p><%= render 'public/rescued_cats/bookmark', rescued_cat: rescued_cat, current_user: current_user %></p>
+            </div>
           </div>
         </div>
       </div>

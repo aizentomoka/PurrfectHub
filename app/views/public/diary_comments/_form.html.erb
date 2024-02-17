@@ -1,0 +1,4 @@
+<%= form_with model: [diary, diary_comment], local: false do |f| %>
+     <%= f.text_area :comment, rows: '5', placeholder: "コメントをここに", class: "form-control mb-2", id: "comment_textarea" %>
+     <%= f.submit "送信する", class: "btn btn-primary text-right" %>
+<% end %>

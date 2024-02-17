@@ -10,9 +10,9 @@ class HomesController < ApplicationController
       }.reverse
        .take(3)
  
-    @newdiaries = Diary.order(created_at: :desc).take(4)
+    @newdiaries = Diary.order(created_at: :desc).take(4) #新規順の投稿
     @tag_name = "おなやみ"
-    @diary_questions = Diary.joins(:tags).where(tags: { name: @tag_name }).limit(4)
+    @diary_questions = Diary.joins(:tags).where(tags: { name: @tag_name }).limit(4) #おなやみ相談の投稿
   end
   
   

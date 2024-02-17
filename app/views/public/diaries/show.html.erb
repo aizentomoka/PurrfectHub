@@ -41,26 +41,16 @@
       <div id="diaries_favorite_<%= @diary.id %>">
         <p><%= render 'public/diaries/favorite', diary: @diary %></p>
       </div>
-      <p><i class="far fa-comment"></i> <%=@diary.diary_comments.count %></p>
-      <% @diary.diary_comments.each do |diary_comment| %>
-          <div class="comment">
-            <%= link_to my_page_user_path(diary_comment.user) do %>
-              <%= diary_comment.user.nickname %>
-            <% end %>
-            <%= diary_comment.created_at.strftime('%Y/%m/%d') %>
-            <%= diary_comment.comment %>
-            <% if diary_comment.user == current_user %>
-              <%= link_to "削除", diary_diary_comment_path(diary_comment.diary, diary_comment), method: :delete %>
-            <% end %>
-          </div>
-      <% end %>
-
+      <div id="comment_counter">
+        <p><%= render 'public/diary_comments/counter', diary: @diary %></p>
+      </div>
+      <div id="comment_index">
+        <p><%= render 'public/diary_comments/index', diary: @diary %></p>
+      </div>
+      
       <!-- コメントフォーム -->
      <div class="mt-3">
-       <%= form_with model: [@diary, @diary_comment], class: "mb-3" do |f| %>
-         <%= f.text_area :comment, rows: '5', placeholder: "コメントをここに", class: "form-control mb-2" %>
-         <%= f.submit "送信する", class: "btn btn-primary text-right" %>
-       <% end %>
+        <p><%= render 'public/diary_comments/form', diary: @diary, diary_comment: @diary_comment %></p>
      </div>
 
       <!-- 編集・削除ボタン -->

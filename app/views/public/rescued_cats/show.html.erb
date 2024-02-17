@@ -43,7 +43,9 @@
       <p>譲渡先：<%= @rescued_cat.is_completion ? "譲渡先決定！" : "募集中" %></p>
 
       <!-- ブックマークとコメント -->
-      <p><%= render 'public/rescued_cats/bookmark', rescued_cat: @rescued_cat %></p>
+      <div id="rescued_cat_bookmark_<%= @rescued_cat.id %>">
+        <p><%= render 'public/rescued_cats/bookmark', rescued_cat: @rescued_cat %></p>
+      </div>
       <p><i class="far fa-comment"></i> <%= @rescued_cat.rescued_cat_comments.count %></p>
       <% @rescued_cat.rescued_cat_comments.each do |rescued_cat_comment| %>
      <div class="comment">
