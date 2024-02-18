@@ -46,26 +46,16 @@
       <div id="rescued_cat_bookmark_<%= @rescued_cat.id %>">
         <p><%= render 'public/rescued_cats/bookmark', rescued_cat: @rescued_cat %></p>
       </div>
-      <p><i class="far fa-comment"></i> <%= @rescued_cat.rescued_cat_comments.count %></p>
-      <% @rescued_cat.rescued_cat_comments.each do |rescued_cat_comment| %>
-     <div class="comment">
-        <%= link_to my_page_user_path(rescued_cat_comment.user) do %>
-          <%= rescued_cat_comment.user.nickname %>
-        <% end %>
-        <%= rescued_cat_comment.created_at.strftime('%Y/%m/%d') %>
-        <%= rescued_cat_comment.comment %>
-        <% if rescued_cat_comment.user == current_user %>
-          <%= link_to "削除", rescued_cat_rescued_cat_comment_path(rescued_cat_comment.rescued_cat, rescued_cat_comment), method: :delete %>
-        <% end %>
+      <div id="comment_counter">
+        <p><%= render 'public/rescued_cat_comments/counter', rescued_cat: @rescued_cat %></p>
       </div>
-      <% end %>
+      <div id="comment_index">
+        <p><%= render 'public/rescued_cat_comments/index', rescued_cat: @rescued_cat %></p>
+      </div>
 
       <!-- コメントフォーム -->
      <div class="mt-3">
-       <%= form_with model: [@rescued_cat, @rescued_cat_comment], class: "mb-3" do |f| %>
-         <%= f.text_area :comment, rows: '5', placeholder: "コメントをここに", class: "form-control mb-2" %>
-         <%= f.submit "送信する", class: "btn btn-primary text-right" %>
-       <% end %>
+       <p><%= render 'public/rescued_cat_comments/form', rescued_cat: @rescued_cat, rescued_cat_comment: @rescued_cat_comment %></p>
      </div>
 
       <!-- 編集・削除ボタン -->

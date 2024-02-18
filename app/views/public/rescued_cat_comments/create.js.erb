@@ -1,0 +1,3 @@
+$("#comment_counter").html("<%= j(render 'public/rescued_cat_comments/counter', rescued_cat: @rescued_cat) %>");
+$("#comment_index").html("<%= j(render 'public/rescued_cat_comments/index', rescued_cat: @rescued_cat) %>");
+$("#comment_textarea").val("");

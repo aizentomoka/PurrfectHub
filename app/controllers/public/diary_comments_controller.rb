@@ -2,17 +2,23 @@ class Public::DiaryCommentsController < ApplicationController
   
   def create
     @diary = Diary.find(params[:diary_id])
-    comment = current_user.diary_comments.new(@diary_comment_params)
+    comment = current_user.diary_comments.new(diary_comment_params)
     comment.diary_id = @diary.id
-    comment.save
-    unless comment.save
-      flash[:alert] = comment.errors.full_messages.join(', ')
+    if comment.save
+    else
       redirect_to request.referer
+      flash[:alert] = comment.errors.full_messages.join(', ')
     end
   end
 
   def destroy
-    DiaryComment.find(params[:id]).destroy
+    @diary = Diary.find(params[:diary_id])
+    comment = @diary.diary_comments.find(params[:id])
+    if comment.destroy
+    else
+      redirect_to request.referer
+      flash[:alert] = comment.errors.full_messages.join(', ')
+    end  
   end
 
   private

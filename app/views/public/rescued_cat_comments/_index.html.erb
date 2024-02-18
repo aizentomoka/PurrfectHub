@@ -1,0 +1,12 @@
+ <% rescued_cat.rescued_cat_comments.each do |rescued_cat_comment| %>
+   <div class="comment">
+      <%= link_to my_page_user_path(rescued_cat_comment.user) do %>
+        <%= rescued_cat_comment.user.nickname %>
+      <% end %>
+      <%= rescued_cat_comment.created_at.strftime('%Y/%m/%d') %>
+      <%= rescued_cat_comment.comment %>
+      <% if rescued_cat_comment.user == current_user %>
+        <%= link_to "削除", rescued_cat_rescued_cat_comment_path(rescued_cat_comment.rescued_cat, rescued_cat_comment), method: :delete, remote: true %>
+      <% end %>
+    </div>
+<% end %>

@@ -57,14 +57,6 @@
                         </div>
                         <div class="card-footer">
                           <small class="text-left"><%= diary.user.nickname %>さんの投稿</small>
-                          <div class="d-flex justify-content-end">
-                            <p> <i class="far fa-comment "><%= diary.diary_comments.count %></i> </p>
-                            <p class = "ml-3">
-                              <div id="diaries_favorite_<%= diary.id %>">
-                                <%= render 'public/diaries/favorite', diary: diary, current_user: current_user %>
-                              </div>
-                            </p>
-                          </div>
                           <%= link_to "詳細を見る➡", diary_path(diary.id), class: "btn btn-primary" %>
                         </div>
                     </div>
@@ -90,14 +82,6 @@
                         </div>
                         <div class="card-footer">
                             <small class="text-left"><%= diary.user.nickname %>さんの投稿</small>
-                            <div class="d-flex justify-content-end">
-                               <p> <i class="far fa-comment "><%= diary.diary_comments.count %></i> </p>
-                               <p class = "ml-3">
-                                 <div id="diaries_favorite_<%= diary.id %>">
-                                   <%= render 'public/diaries/favorite', diary: diary, current_user: current_user %>
-                                 </div>
-                               </p>
-                            </div>
                         </div>
                     </div>
                     <% end %>
@@ -119,14 +103,6 @@
                             </div>
                             <div class="card-footer">
                               <small class="text-left"><%= diary.user.nickname %>さんの投稿</small>
-                                <div class="d-flex justify-content-end">
-                                   <p> <i class="far fa-comment "><%= diary.diary_comments.count %></i> </p>
-                                   <p class = "ml-3">
-                                     <div id="diaries_favorite_<%= diary.id %>">
-                                       <%= render 'public/diaries/favorite', diary: diary, current_user: current_user %>
-                                     </div>
-                                   </p>
-                                </div>
                             </div>
                         </div>
                         <% end %>

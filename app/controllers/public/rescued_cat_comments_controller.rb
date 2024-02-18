@@ -1,20 +1,24 @@
 class Public::RescuedCatCommentsController < ApplicationController
     
   def create
-    rescued_cat = RescuedCat.find(params[:rescued_cat_id])
+    @rescued_cat = RescuedCat.find(params[:rescued_cat_id])
     comment = current_user.rescued_cat_comments.new(rescued_cat_comment_params)
-    comment.rescued_cat_id = rescued_cat.id
-    comment.save
-    unless comment.save
-      flash[:alert] = comment.errors.full_messages.join(', ')
+    comment.rescued_cat_id = @rescued_cat.id
+    if comment.save
+    else
       redirect_to request.referer
+      flash[:alert] = comment.errors.full_messages.join(', ')
     end
   end
 
-
-
   def destroy
-    RescuedCatComment.find(params[:id]).destroy
+    @rescued_cat = RescuedCat.find(params[:rescued_cat_id])
+    comment = @rescued_cat.rescued_cat_comments.find(params[:id])
+    if comment.destroy
+    else
+      redirect_to request.referer
+      flash[:alert] = comment.errors.full_messages.join(', ')
+    end  
   end
 
 
