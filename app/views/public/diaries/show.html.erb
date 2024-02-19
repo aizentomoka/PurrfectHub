@@ -38,7 +38,7 @@
       <p>体重： <%= @diary.weight %> kg</p>
      
       <!-- いいねとコメント -->
-      <div id="diaries_favorite_<%= @diary.id %>">
+      <div class="diaries_favorite_<%= @diary.id %>">
         <p><%= render 'public/diaries/favorite', diary: @diary %></p>
       </div>
       <div id="comment_counter">
