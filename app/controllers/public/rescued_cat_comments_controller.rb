@@ -1,5 +1,6 @@
 class Public::RescuedCatCommentsController < ApplicationController
-    
+  before_action :is_matching_login_user, only: [:edit, :update, :destroy]  
+  
   def create
     @rescued_cat = RescuedCat.find(params[:rescued_cat_id])
     comment = current_user.rescued_cat_comments.new(rescued_cat_comment_params)
@@ -29,24 +30,12 @@ class Public::RescuedCatCommentsController < ApplicationController
   def rescued_cat_comment_params
     params.require(:rescued_cat_comment).permit(:comment)
   end
-
+  
+  def is_matching_login_user
+    @rescued_cat = RescuedCat.find(params[:id])
+    unless  @rescued_cat.user.id == current_user.id 
+      redirect_to root_path
+    end
+  end
  
-    
-    
-    
-    
-    
-    
-    
-    
-    
-    
-    
-    
-    
-    
-    
-    
-    
-    
 end

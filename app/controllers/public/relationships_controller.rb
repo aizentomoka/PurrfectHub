@@ -1,5 +1,7 @@
 class Public::RelationshipsController < ApplicationController
   before_action :ensure_guest_user, only: [:create, :destroy]
+  
+  
   # フォローするとき
   def create
     current_user.follow(params[:user_id])

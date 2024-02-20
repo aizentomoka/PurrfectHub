@@ -1,7 +1,7 @@
 class Public::RescuedCatsController < ApplicationController
   before_action :authenticate_user!, except: [ :index]
   before_action :ensure_guest_user, only: [:new, :edit, :destroy]
-  before_action :is_matching_login_user, only: [:edit, :update]
+  before_action :is_matching_login_user, only: [:edit, :update, :destroy]
   
   def new
     @rescued_cat = RescuedCat.new

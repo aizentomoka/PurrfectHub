@@ -1,4 +1,5 @@
 class Public::DiaryCommentsController < ApplicationController
+  before_action :is_matching_login_user, only: [:destroy]
   
   def create
     @diary = Diary.find(params[:diary_id])
@@ -26,6 +27,12 @@ class Public::DiaryCommentsController < ApplicationController
   def diary_comment_params
     params.require(:diary_comment).permit(:comment)
   end
-
+  
+  def is_matching_login_user
+     @diary = Diary.find(params[:id])
+    unless  @diary.user.id == current_user.id 
+      redirect_to root_path
+    end
+  end
  
 end
