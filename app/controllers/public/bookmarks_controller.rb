@@ -5,7 +5,7 @@ class Public::BookmarksController < ApplicationController
       @rescued_cat = RescuedCat.find(params[:rescued_cat_id])
       bookmark = current_user.bookmarks.new(rescued_cat_id: @rescued_cat.id)
       bookmark.save
-     else
+    else
       flash[:alert] = "ログインもしくはアカウント登録してください。"
       redirect_to new_user_session_path # ログイン画面へのリダイレクト
     end  

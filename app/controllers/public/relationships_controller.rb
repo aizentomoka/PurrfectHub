@@ -1,6 +1,6 @@
 class Public::RelationshipsController < ApplicationController
   before_action :ensure_guest_user, only: [:create, :destroy]
-  
+  before_action :is_matching_login_user, only: [:create, :destroy]
   
   # フォローするとき
   def create

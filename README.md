@@ -26,6 +26,12 @@
 - 猫の飼い方や病気についての情報を集めたい時
 
 ## 設計書
+- <a href="https://docs.google.com/spreadsheets/d/12IXomDmmSEy_YFUpN_cJsEAosxGcfRhUfP7_jcK0rUA/edit?usp=sharing" target="_blank">インフラ設計書</a>
+- <a href="https://drive.google.com/file/d/1hbRBXo8R0xL6d0ZR6Wq_9hNG4P-MQFwp/view?usp=sharing" target="_blank">AWS構成図</a>
+- <a href="https://docs.google.com/spreadsheets/d/1rurvoqe87QFCCqwtwlkxSmOsC_fJgUyyBWTzxojXDHI/edit?usp=sharing" target="_blank">実装機能リスト</a>
+- <a href="https://docs.google.com/spreadsheets/d/1S0cuHevk8dJLI2mTyfTz18sXgpHN8zQnHq_dq94LSKg/edit?usp=sharing" target="_blank">アプリケーション詳細設計</a>
+- <a href="https://drive.google.com/file/d/1YvtlVUD2eJvCxlBqpLREXskoQSAePcS0/view?usp=sharing" target="_blank">ER図</a>
+
 ​
 ## 開発環境
 - OS：Amazon Linux 2
