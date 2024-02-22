@@ -42,12 +42,10 @@ class Public::DiariesController < ApplicationController
   end
 
   def edit
-    @diary = Diary.find(params[:id])
     @cats = current_user.cats
   end
   
   def update
-     @diary = Diary.find(params[:id])
      @cats = current_user.cats
      if @diary.update(diary_params)
         input_tags = tag_params[:name].split('/')
@@ -62,8 +60,7 @@ class Public::DiariesController < ApplicationController
   
   
   def destroy
-    diary = Diary.find(params[:id])
-    diary.destroy
+    @diary.destroy
     flash[:notice] = "投稿を削除しました"
     redirect_to diaries_user_path(current_user)
   end

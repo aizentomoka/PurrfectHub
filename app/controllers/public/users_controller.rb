@@ -1,19 +1,16 @@
 class Public::UsersController < ApplicationController
   before_action :authenticate_user!
-  before_action :ensure_guest_user, only: [:show, :edit, :confirm_withdraw]
-  before_action :is_matching_login_user, only: [:edit, :update, :show]
-  
+  before_action :ensure_guest_user, only: [:show, :edit, :confirm_withdraw, :withdraw]
+  before_action :is_matching_login_user, only: [:edit, :update, :show, :confirm_withdraw, :withdraw]
+  before_action :set_user , only: [:favorites, :bookmarks, :diaries, :rescued_cats, :cats, :mypage, :follows, :followers]
   
   def show
-    @user = User.find(params[:id])
   end
 
   def edit
-    @user = User.find(params[:id])
   end
   
   def update
-    @user = User.find(params[:id])
     if @user.update(user_params)
       flash[:notice] = "編集を保存しました"
       redirect_to user_path(@user)
@@ -38,7 +35,6 @@ class Public::UsersController < ApplicationController
   
   # いいねした日記一覧
   def favorites 
-    @user = User.find(params[:id])
     favorites = Favorite.where(user_id: @user.id).pluck(:diary_id)
     @diaries = Diary.where(id: favorites).page(params[:page]).order(created_at: :desc)
     @favorite_diaries = @diaries
@@ -46,7 +42,6 @@ class Public::UsersController < ApplicationController
   
   # ブックマークした里親募集一覧
   def bookmarks 
-    @user = User.find(params[:id])
     bookmarks = Bookmark.where(user_id: @user.id).pluck(:rescued_cat_id)
     @rescued_cats = RescuedCat.where(id: bookmarks).page(params[:page]).order(created_at: :desc)
     @bookmark_rescued_cats = @rescued_cats
@@ -54,38 +49,32 @@ class Public::UsersController < ApplicationController
   
   # ユーザーの日記一覧
   def diaries
-    @user = User.find(params[:id])
     @diaries = @user.diaries.page(params[:page]).order(created_at: :desc)
   end
   
   # ユーザーの里親募集一覧
   def rescued_cats
-    @user = User.find(params[:id])
     @rescued_cats = @user.rescued_cats.page(params[:page]).order(created_at: :desc)
   end
   
   # ユーザーの猫一覧
   def cats
-    @user = User.find(params[:id])
     @cats = @user.cats
   end
   
   # ユーザーのマイページ
   def my_page
-    @user = User.find(params[:id])
     @following_users = @user.following_users
     @follower_users = @user.follower_users
   end
   
   # フォロー一覧
   def follows
-    @user = User.find(params[:id])
     @users = @user.following_users
   end
   
   # フォロワー一覧
   def followers
-    @user = User.find(params[:id])
     @users = @user.follower_users
   end
  
@@ -100,17 +89,18 @@ class Public::UsersController < ApplicationController
    end  
   
   def is_matching_login_user
-    user = User.find(params[:id])
-    unless user.id == current_user.id 
+    @user = User.find(params[:id])
+    unless @user.id == current_user.id 
       redirect_to root_path
     end
   end
   
-   def user_params
-      params.require(:user).permit(:nickname, :last_name, :first_name, :last_name_kana, :first_name_kana, :post_code, :address, :telephone_number, :email, :profile_image)
-   end
-  
-  
-  
-  
+  def user_params
+     params.require(:user).permit(:nickname, :last_name, :first_name, :last_name_kana, :first_name_kana, :post_code, :address, :telephone_number, :email, :profile_image)
+  end
+      
+  def set_user
+     @user = User.find(params[:id])
+  end
+
 end
