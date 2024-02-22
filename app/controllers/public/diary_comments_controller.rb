@@ -13,7 +13,6 @@ class Public::DiaryCommentsController < ApplicationController
   end
 
   def destroy
-    @diary = Diary.find(params[:diary_id])
     comment = @diary.diary_comments.find(params[:id])
     if comment.destroy
     else
@@ -29,7 +28,7 @@ class Public::DiaryCommentsController < ApplicationController
   end
   
   def is_matching_login_user
-     @diary = Diary.find(params[:id])
+     @diary = Diary.find(params[:diary_id])
     unless  @diary.user.id == current_user.id 
       redirect_to root_path
     end

@@ -32,11 +32,9 @@ class Public::RescuedCatsController < ApplicationController
   end
 
   def edit
-   @rescued_cat = RescuedCat.find(params[:id])
   end
   
   def update
-     @rescued_cat = RescuedCat.find(params[:id])
      if @rescued_cat.update(rescued_cat_params)
         input_labels = params[:rescued_cat][:label_name].split('/')
         @rescued_cat.update_labels(input_labels) # udpate_labelsはrescued_cat.rbに記述している
@@ -50,7 +48,6 @@ class Public::RescuedCatsController < ApplicationController
   
   
   def destroy
-    rescued_cat = RescuedCat.find(params[:id])
     rescued_cat.destroy
     flash[:notice] = "投稿を削除しました。"
     redirect_to rescued_cats_user_path(current_user)

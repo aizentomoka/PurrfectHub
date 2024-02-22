@@ -1,5 +1,5 @@
 class Public::RescuedCatCommentsController < ApplicationController
-  before_action :is_matching_login_user, only: [:edit, :update, :destroy]  
+  before_action :is_matching_login_user, only: [:destroy]  
   
   def create
     @rescued_cat = RescuedCat.find(params[:rescued_cat_id])
@@ -13,7 +13,6 @@ class Public::RescuedCatCommentsController < ApplicationController
   end
 
   def destroy
-    @rescued_cat = RescuedCat.find(params[:rescued_cat_id])
     comment = @rescued_cat.rescued_cat_comments.find(params[:id])
     if comment.destroy
     else
@@ -23,8 +22,6 @@ class Public::RescuedCatCommentsController < ApplicationController
   end
 
 
-
-
   private
 
   def rescued_cat_comment_params
@@ -32,7 +29,7 @@ class Public::RescuedCatCommentsController < ApplicationController
   end
   
   def is_matching_login_user
-    @rescued_cat = RescuedCat.find(params[:id])
+    @rescued_cat = RescuedCat.find(params[:rescued_cat_id])
     unless  @rescued_cat.user.id == current_user.id 
       redirect_to root_path
     end

@@ -2,7 +2,7 @@ class Public::UsersController < ApplicationController
   before_action :authenticate_user!
   before_action :ensure_guest_user, only: [:show, :edit, :confirm_withdraw, :withdraw]
   before_action :is_matching_login_user, only: [:edit, :update, :show, :confirm_withdraw, :withdraw]
-  before_action :set_user , only: [:favorites, :bookmarks, :diaries, :rescued_cats, :cats, :mypage, :follows, :followers]
+  before_action :set_user , only: [:favorites, :bookmarks, :diaries, :rescued_cats, :cats, :my_page, :follows, :followers]
   
   def show
   end

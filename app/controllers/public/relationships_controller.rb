@@ -1,10 +1,14 @@
 class Public::RelationshipsController < ApplicationController
   before_action :ensure_guest_user, only: [:create, :destroy]
-  before_action :is_matching_login_user, only: [:create, :destroy]
+  
   
   # フォローするとき
   def create
-    current_user.follow(params[:user_id])
+    if current_user.following?(params[:user_id])
+      flash[:notice] = "既にフォロー済みです"
+    else
+      current_user.follow(params[:user_id])
+    end
     redirect_to request.referer
   end
   
