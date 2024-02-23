@@ -28,15 +28,20 @@ class User < ApplicationRecord
   has_many :chats
   has_many :rooms, through: :user_rooms
   
- validates :nickname, length: {maximum: 10}
- validates :first_name, presence: true
- validates :last_name, presence: true
- validates :first_name_kana, presence: true
- validates :last_name_kana, presence: true
- validates :post_code, presence: true
- validates :address, presence: true
- validates :telephone_number, presence: true
-
+  validates :nickname, length: {maximum: 10}
+  with_options presence: true, format: { with: /\A[ぁ-んァ-ン一-龥]+\z/, message: "は全角文字で入力してください" } do
+    validates :last_name
+    validates :first_name
+  end
+  with_options presence: true, format: { with: /\A[ァ-ヶー－]+\z/, message: "は全角カタカナで入力してください" } do
+    validates :last_name_kana
+    validates :first_name_kana
+  end
+  with_options presence: true, format: { with: /\A[0-9]+\z/, message: "は半角数字で入力してください" } do
+    validates :post_code
+    validates :telephone_number
+  end
+  validates :address, presence: true
   
   def get_profile_image(width, height)
     unless profile_image.attached?
@@ -75,12 +80,12 @@ class User < ApplicationRecord
     email == GUEST_MEMBER_EMAIL
   end
 
-  #　フォローしたときの処理
+  #フォローしたときの処理
   def follow(user_id)
     followers.create(followed_id: user_id)
   end
     
-  #　フォローを外すときの処理
+  #フォローを外すときの処理
   def unfollow(user_id)
     followers.find_by(followed_id: user_id).destroy
   end
