@@ -1,13 +1,12 @@
 class Public::RelationshipsController < ApplicationController
   before_action :ensure_guest_user, only: [:create, :destroy]
-  before_action :set_user 
+  before_action :set_user, only: [:create, :destroy]
   
   # フォローするとき
   def create
     if current_user.following?(params[:user_id])
       flash[:notice] = "既にフォロー済みです"
     else
-      
       current_user.follow(params[:user_id])
     end
   end
@@ -27,7 +26,7 @@ class Public::RelationshipsController < ApplicationController
   end  
        
   def set_user
-     @user = User.find(params[:id])
+     @user = User.find(params[:user_id])
   end
 
 end

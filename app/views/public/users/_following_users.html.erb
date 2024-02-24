@@ -22,25 +22,19 @@
           </td>
           <td><%= user.nickname %></td>
           <td>
-            <% unless user == current_user %>
-              <% if current_user != user %>
-                <% if current_user.following?(user) %>
-                <%= link_to "フォロー外す", user_relationships_path(user), method: :delete, class: "btn btn-danger" %>
-                <% else %>
-                <%= link_to "フォローする", user_relationships_path(user), method: :post, class:"btn btn-success" %>
-                <% end %>
-              <% end %>
-            <% end %>
+            <div id = "follow_btn_<%= user.id %>">
+              <%= render 'public/relationships/follow_btn', user: user %>
+            </div>
           </td>
           <td>
-            <%= link_to follows_user_path(user) do %>
-              <p> <%= user.followers.count %></p>
-            <% end %>
+            <div id = "followers_counter_<%= user.id %>">
+              <%= render 'public/relationships/followers_count', user: user %>
+            </div>
           </td>
           <td>
-            <%= link_to followers_user_path(user) do %>
-              <p> <%= user.followeds.count %></p>
-            <% end %>
+            <div id = "followeds_counter_<%= user.id %>">
+             <%= render 'public/relationships/followeds_count', user: user %>
+            </div>
           </td>
           <td>
             <%= link_to diaries_user_path(user) do %>
@@ -61,5 +55,5 @@
       <% end %>
     </tbody>
   </table>
-   <%= link_to "Back", request.referrer, class: "row d-flex justify-content-center" %>
+   <%= link_to "Back", my_page_user_path(@user), class: "row d-flex justify-content-center" %>
 </div>

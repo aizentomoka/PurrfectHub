@@ -60,7 +60,7 @@
                           <div class="d-flex justify-content-end">
                             <p> <i class="far fa-comment "><%= diary.diary_comments.count %></i> </p>
                             <p class = "ml-3">
-                              <div class ="diaries_favorite_<%= diary.id %>">
+                              <div class="diaries_favorite_<%= diary.id %>">
                                 <%= render 'public/diaries/favorite', diary: diary, current_user: current_user %>
                               </div>
                             </p>
@@ -93,7 +93,7 @@
                             <div class="d-flex justify-content-end">
                                <p> <i class="far fa-comment "><%= diary.diary_comments.count %></i> </p>
                                <p class = "ml-3">
-                                 <div class ="diaries_favorite_<%= diary.id %>">
+                                 <div class="diaries_favorite_<%= diary.id %>">
                                    <%= render 'public/diaries/favorite', diary: diary, current_user: current_user %>
                                  </div>
                                </p>

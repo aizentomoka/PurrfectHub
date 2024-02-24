@@ -1,4 +1,3 @@
-<!--$("#diaries_favorite_< %= @diary.id %>").html("< %= j(render 'public/diaries/favorite', diary: @diary, current_user: current_user) %>");-->
-$('.diaries_favorite_< %= @diary.id %>').each(function() {
+$('.diaries_favorite_<%= @diary.id %>').each(function() {
   $(this).html("<%= j(render "public/diaries/favorite", diary: @diary) %>");
 });

@@ -8,20 +8,22 @@
     
     <h3 class = "text-center mt-2"><%= @user.nickname %></h3>
     <h3 class = "text-center mt-2">
-      <%= render 'public/relationships/follow_btn', user: @user %>
+       <div id = "follow_btn_<%= @user.id %>">
+          <%= render 'public/relationships/follow_btn', user: @user %>
+       </div>
     </h3>
     
     <div class="d-flex text-center mt-3">
       <div class="flex-fill ">
-        <%= link_to follows_user_path(@user) do %>
-          <h5>フォロー数<%= @user.followers.count %></h5>
-        <% end %>
+        <div id = "followers_counter_<%= @user.id %>">
+          <%= render 'public/relationships/followers_count', user: @user %>
+        </div>
       </div>
     
       <div class="flex-fill">
-        <%= link_to followers_user_path(@user) do %>
-          <h5>フォロワー数<%= @user.followeds.count %></h5>
-        <% end %>
+        <div id = "followeds_counter_<%= @user.id %>">
+          <%= render 'public/relationships/followeds_count', user: @user %>
+        </div>
       </div>
     
       <div class="flex-fill">

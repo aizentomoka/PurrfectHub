@@ -1,10 +1,10 @@
 class HomesController < ApplicationController
   
   def top
-    @rescued_cats = RescuedCat.order(created_at: :desc).take(4)
-    to = Time.current.at_end_of_day #一週間のいいねがおおい順に表示
+    @rescued_cats = RescuedCat.order(created_at: :desc).take(4) #新規順
+    to = Time.current.at_end_of_day 
     from = (to - 6.day).at_beginning_of_day
-    @diaries = Diary.includes(:favorited_users).
+    @diaries = Diary.includes(:favorited_users).#一週間のいいねがおおい順に表示
       sort_by {|x|
         x.favorited_users.includes(:favorites).where(created_at: from...to).size
       }.reverse

@@ -37,8 +37,8 @@ class Public::DiariesController < ApplicationController
 
 
   def show
-    @user = 
     @diary = Diary.find(params[:id])
+    @user = @diary.user
     @diary_comment = DiaryComment.new
   end
 

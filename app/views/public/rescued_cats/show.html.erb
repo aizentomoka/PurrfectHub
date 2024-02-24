@@ -11,7 +11,9 @@
           <%= link_to my_page_user_path(@rescued_cat.user) do %>
             <p class="font-weight-bold mb-0"><%= @rescued_cat.user.nickname %></p>
           <% end %>
-          <%= render 'public/relationships/follow_btn', user: @rescued_cat.user %>
+         <div id="follow_btn_<%= @user.id %>">
+            <%= render 'public/relationships/follow_btn', user: @user %>
+         </div>
         </div>
       </div>
 
