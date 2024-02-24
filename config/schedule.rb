@@ -29,7 +29,7 @@ set :environment, rails_env
 set :output, "#{Rails.root}/log/cron.log"
 
 #2分に一度、data_resetメゾッドが実行される
-every 2.minute do
+every 30.minute do
   begin
     runner "Guestuser::DataGuest.data_reset"
   rescue => e
