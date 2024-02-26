@@ -28,11 +28,11 @@ class User < ApplicationRecord
   has_many :chats
   has_many :rooms, through: :user_rooms
   
+  has_many :notifications, dependent: :destroy 
+  
   validates :nickname, length: {maximum: 10}
-  with_options presence: true, format: { with: /\A[ぁ-んァ-ン一-龥]+\z/, message: "は全角文字で入力してください" } do
-    validates :last_name
-    validates :first_name
-  end
+  validates :last_name, presence: true
+  validates :first_name, presence: true
   with_options presence: true, format: { with: /\A[ァ-ヶー－]+\z/, message: "は全角カタカナで入力してください" } do
     validates :last_name_kana
     validates :first_name_kana
@@ -50,8 +50,6 @@ class User < ApplicationRecord
     end
     profile_image.variant(resize_to_limit: [width, height]).processed
   end
-  
-  
    
   def active_for_authentication?
     super && (is_active == true)
