@@ -22,7 +22,7 @@ class Notification < ApplicationRecord
     if notifiable_type === "DiaryComment"
       diary_path(notifiable.diary.id) # コメントに対する通知の場合は日記の詳細ページへ
     elsif notifiable_type === "RescuedCatComment"
-      rescued_cat_path(notifiable.rescued_cat.id) # コメントに対する通知の場合は里親募集の詳細ページへ
+      rescued_cat_path(notifiableyrescued_cat.id) # コメントに対する通知の場合は里親募集の詳細ページへ
     elsif notifiable_type === "Relationship"
       my_page_user_path(notifiable.followed.id) # フォローに対する通知の場合はフォローをしたUserのマイページへ
     else notifiable_type === "Chat"

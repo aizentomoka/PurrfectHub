@@ -1,4 +1,5 @@
 class RescuedCatComment < ApplicationRecord
+  
     
   belongs_to :user
   belongs_to :rescued_cat
@@ -10,5 +11,6 @@ class RescuedCatComment < ApplicationRecord
   after_create do
     notifications.create(user_id: rescued_cat.user_id)
   end
+  
   
 end
