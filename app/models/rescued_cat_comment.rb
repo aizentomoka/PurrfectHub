@@ -11,12 +11,4 @@ class RescuedCatComment < ApplicationRecord
     notifications.create(user_id: rescued_cat.user_id)
   end
   
-  def notification_message
-    "#{user.nickname}さんが#{rescued_cat.title}にコメントしました"
-  end
-
-  def notification_path
-     rescued_cat_path(rescued_cat.id) # コメントに対する通知の場合は里親募集の詳細ページへ
-  end
-  
 end

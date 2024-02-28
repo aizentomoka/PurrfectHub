@@ -12,12 +12,4 @@ class Chat < ApplicationRecord
     notifications.create(user_id: target_user_id)
   end
   
-  def notification_message
-      "#{user.nickname}さんからDMが届きました"
-  end
-
-  def notification_path
-      chat_path(user.id)# DMに対する通知の場合はDMをしたUserのマイページへ
-  end
-  
 end
