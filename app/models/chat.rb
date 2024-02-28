@@ -8,7 +8,16 @@ class Chat < ApplicationRecord
   validates :message, presence: true, length: { maximum: 150}
   
   after_create do
-    notifications.create(user_id: follower.id)
+    target_user_id= UserRoom.where(room_id: room_id).where.not(user_id: user_id).first.user_id
+    notifications.create(user_id: target_user_id)
+  end
+  
+  def notification_message
+      "#{user.nickname}さんからDMが届きました"
+  end
+
+  def notification_path
+      chat_path(user.id)# DMに対する通知の場合はDMをしたUserのマイページへ
   end
   
 end

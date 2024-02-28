@@ -4,7 +4,7 @@
             <a class="navbar" href="/"><span><%= image_tag 'logo.png', size: "300x100" %></span></a>
         </form>
 
-        <div class="d-flex justify-content-end">
+        <div>
             <% if user_signed_in? %>
                 <%= image_tag current_user.get_profile_image(100, 100), class: "rounded-circle" %>
             <% elsif admin_signed_in? %>
@@ -12,6 +12,11 @@
             <% else %>
             <% end %>
         </div>
+         <% if user_signed_in? %>
+           <div class = "ml-3">
+              <%= render 'layouts/notification' %>
+           </div>
+         <% end %>
     </div>
 </header>
   <nav class="py-1 bg-body-tertiary border-bottom sticky-top" style="background-color: #deb887;">

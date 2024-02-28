@@ -9,6 +9,8 @@ class RescuedCat < ApplicationRecord
  has_many :labelings, dependent: :destroy
  has_many :labels, through: :labelings
  
+ has_many :notifications, as: :notifiable, dependent: :destroy
+  
  validates :name, length: {maximum: 20}
  validates :age, length: {maximum: 3000}, presence: true
  validates :sex, presence: true

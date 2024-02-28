@@ -6,7 +6,15 @@ class Relationship < ApplicationRecord
   has_one :notification, as: :notifiable, dependent: :destroy
   
   after_create do
-    notifications.create(user_id: follower_id)
+    create_notification(user_id: follower_id)
+  end
+  
+  def notification_message
+     "#{followed.nickname}さんにフォローされました"
+  end
+
+  def notification_path
+     my_page_user_path(follower.id) # フォローに対する通知の場合はフォローをしたUserのマイページへ
   end
   
 end

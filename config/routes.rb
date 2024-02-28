@@ -63,7 +63,7 @@ Rails.application.routes.draw do
       
       resources :chats, only: [:show, :create, :destroy]
       resources :cats, only: [:new, :create, :update, :show, :edit] 
-      
+      resources :notifications, only: [:update]
       
       resources :diaries do
          resource :favorite, only: [:create, :destroy]

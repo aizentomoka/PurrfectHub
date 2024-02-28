@@ -14,6 +14,8 @@ class Diary < ApplicationRecord
  has_many :taggings, dependent: :destroy
  has_many :tags, through: :taggings
  
+ has_many :notifications, as: :notifiable, dependent: :destroy
+ 
  scope :latest, -> { order(created_at: :desc) }  #latest = 新着順, desc = 降順
  scope :old, -> { order(created_at: :asc) }  #old = 古い順, asc = 昇順
  scope :most_favorited, -> { includes(:favorited_users)
