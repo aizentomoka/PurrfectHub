@@ -8,7 +8,7 @@
         <% if current_user.notifications.where(read: false).any? %>
             <small class="dropdown-item disabled">直近5件の未読の通知を表示しています</small>
             <% current_user.notifications.where(read: false).limit(5).order(created_at: :desc).each do |notification| %>
-                <%= link_to notification.message, notification, method: :patch, class: "dropdown-item" %>
+                <%= link_to truncate(notification.message, :length => 12),notification, method: :patch, class: "dropdown-item" %>
             <% end %>
         <% else %>
             <span class="dropdown-item disabled">未読の通知はありません</span>
