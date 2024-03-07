@@ -10,7 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 2024_02_26_154235) do
+ActiveRecord::Schema.define(version: 2024_03_07_143225) do
 
   create_table "active_storage_attachments", force: :cascade do |t|
     t.string "name", null: false
@@ -84,6 +84,13 @@ ActiveRecord::Schema.define(version: 2024_02_26_154235) do
     t.float "weight"
     t.datetime "created_at", precision: 6, null: false
     t.datetime "updated_at", precision: 6, null: false
+    t.string "urine"
+    t.string "feces"
+    t.string "hydration_amount"
+    t.string "food"
+    t.string "vomiting"
+    t.integer "weather"
+    t.float "temperature"
   end
 
   create_table "diary_comments", force: :cascade do |t|

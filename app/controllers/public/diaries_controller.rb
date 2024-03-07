@@ -68,8 +68,8 @@ class Public::DiariesController < ApplicationController
   
   # 検索機能
   def search
-    if params[:keyword].present?
-      @diaries = Diary.where('body LIKE ?', "%#{params[:keyword]}%").order(created_at: :desc).page(params[:page])
+    if params[:keyword].present? #keywordが存在する場合
+      @diaries = Diary.where('body LIKE ?', "%#{params[:keyword]}%").order(created_at: :desc).page(params[:page])  #本文で部分一致する投稿を新規順で取り出す
       @keyword = params[:keyword]
     else
       @diaries = Diary.all
