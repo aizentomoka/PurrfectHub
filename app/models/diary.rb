@@ -24,7 +24,7 @@ class Diary < ApplicationRecord
  validates :title, length: {maximum: 30}, presence: true
  validates :body, length: {maximum: 3000}, presence: true
  
- 
+ enum weather: { sunny: 0, cloudy: 1, rainy: 2, snowy: 3, foggy: 4, typhoon: 5, thunder: 6 }
  
   def favorited_by?(user)
      return false if user.nil?

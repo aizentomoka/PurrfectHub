@@ -6,7 +6,18 @@ ja:
         restrict_dependent_destroy:
           has_one: "%{record}が存在しているので削除できません"
           has_many: "%{record}が存在しているので削除できません"
-      
+
+  enums:
+    diary:
+      weather:
+        sunny: "晴れ"
+        cloudy: "曇り"
+        rainy: "雨"
+        snowy: "雪"
+        foggy: "霧"
+        typhoon: "台風"
+        thunder: "雷"
+
   attributes:
     title: タイトル
     body: 本文
