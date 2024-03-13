@@ -34,9 +34,35 @@
     </div>
     
     <div class="form-group">
+      <h4><尿</h4>
+      <%= f.text_field :urine, placeholder: "例：3.5", autofocus: true, class: "form-control" %>
+    </div>
+    
+    <div class="form-group">
+      <h4>うんち</h4>
+      <%= f.text_field :faces, placeholder: "例：3.5", autofocus: true, class: "form-control" %>
+    </div>
+    
+    <div class="form-group">
+      <h4>水分摂取</h4>
+      <%= f.text_field :hydration_amount, placeholder: "例：3.5", autofocus: true, class: "form-control" %>
+    </div>
+    
+    <div class="form-group">
+      <h4>ごはん</h4>
+      <%= f.text_field :food, placeholder: "例：3.5", autofocus: true, class: "form-control" %>
+    </div>
+    
+    <div class="form-group">
+      <h4>嘔吐</h4>
+      <%= f.text_field :vomiting, placeholder: "例：3.5", autofocus: true, class: "form-control" %>
+    </div>
+    
+    <div class="form-group">
       <h4>天気</h4>
       <%= f.select :weather, Diary.weathers.keys.map { |k| [t("enum.diary.weather.#{k}"), k] }, { include_blank: "指定なし" }, class: "form-control" %>
-
+    </div>
+  
     
     <div class="form-group text-center">
       <%= f.submit '投稿', class: "btn btn-success" %>   
